@@ -15,32 +15,44 @@ const DisplayRestaurants = () => {
 
   const addedString = '?location=NYC&limit=40';
 
-  //   makes a fetch request to grab the restaurants from yelp matching the limits
-  useEffect(() => {
-    fetch(`${URL}${addedString}`, HEADER)
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((data) => {
-        // console.log('data retrieved: ', data);
-        // for (let i = 0; i < data.businesses.length; i++) {
-        //   console.log(data.businesses[i].name);
-        // }
-        restaurantList = data.businesses.map((element, id) => {
-          <li key={id}>element</li>;
-        });
-      });
-  }, []);
 
+
+  //   makes a fetch request to grab the restaurants from yelp matching the limits
+  //   useEffect(() => {
+  //     fetch(`${URL}${addedString}`, HEADER)
+  //       .then((res) => {
+  //         console.log(res);
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         // console.log('data retrieved: ', data);
+  //         // for (let i = 0; i < data.businesses.length; i++) {
+  //         //   console.log(data.businesses[i].name);
+  //         // }
+  //         console.log(data.businesses[0].name);
+  //         restaurantList = data.businesses.map((element, id) => {
+  //           return <li key={id}>{element.name}</li>;
+  //         });
   //       });
   //   }, []);
+  fetch(`${URL}${addedString}`, HEADER)
+    .then((res) => {
+      console.log(res);
+      return res.json();
+    })
+    .then((data) => {
+      // console.log('data retrieved: ', data);
+      // for (let i = 0; i < data.businesses.length; i++) {
+      //   console.log(data.businesses[i].name);
+      // }
+      //   console.log(data.businesses[0].name);
+      restaurantList = data.businesses.map((element, id) => {
+        console.log(element.name);
+        return <li key={id}>{element.name}</li>;
+      });
+    });
 
-  return (
-    <div>
-      <ul>{restaurantList}</ul>
-    </div>
-  );
+  return <ul>{restaurantList}</ul>;
 };
 
 export default DisplayRestaurants;
