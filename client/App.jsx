@@ -1,4 +1,5 @@
 import React from 'react';
+import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
 
 const App = () => {
   console.log('testing');
@@ -6,8 +7,8 @@ const App = () => {
 
   return (
     <div>
-      <h1>testing</h1>
-      <h2>testing number one</h2>
+      <h1>HERO DISPLAY WILL BE HERE</h1>
+      <DisplayRestaurants></DisplayRestaurants>
     </div>
   );
 };
