@@ -2,6 +2,22 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./authentication.js":
+/*!***************************!*\
+  !*** ./authentication.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   API_KEY: () => (/* binding */ API_KEY),
+/* harmony export */   URL: () => (/* binding */ URL)
+/* harmony export */ });
+var URL = 'https://api.yelp.com/v3/businesses/search';
+var API_KEY = 'OFL5601OUDsphFX4AJDXtkQpSm0831DAILCRCezIK01q_vGR14ADCsRtz-yFtypULMKbBbSWQYo1YngUReWMdyF1m7lm5X-LHyWqO7OTzJgZ9hbsn5OVMoMsNZZYZ3Yx';
+
+/***/ }),
+
 /***/ "./client/App.jsx":
 /*!************************!*\
   !*** ./client/App.jsx ***!
@@ -44,10 +60,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _authentication__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../authentication */ "./authentication.js");
+
+
 
 var DisplayRestaurants = function DisplayRestaurants() {
-  //will create cards from restaurants pulled from the public API 
+  //will create cards from restaurants pulled from the public API
   // const restaurantList =
+  var HEADER = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: "Bearer ".concat(_authentication__WEBPACK_IMPORTED_MODULE_1__.API_KEY)
+    }
+  };
+  var addedString = '?location=NYC&limit=40';
+
+  //makes a fetch request to grab the restaurants from yelp matching the limits
+  //   useEffect(() => {
+  //     fetch(`${URL}${addedString}`, HEADER)
+  //       .then((res) => {
+  //         console.log(res);
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         console.log('data retrieved: ', data);
+  //         for (let i = 0; i < data.businesses.length; i++) {
+  //           console.log(data.businesses[i].name);
+  //         }
+  //       });
+  //   }, []);
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Testing the cards that will be returned");
 };
@@ -88,25 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-var URL = 'https://api.yelp.com/v3/businesses/search?location=NYC&limit=40';
-var API_KEY = 'OFL5601OUDsphFX4AJDXtkQpSm0831DAILCRCezIK01q_vGR14ADCsRtz-yFtypULMKbBbSWQYo1YngUReWMdyF1m7lm5X-LHyWqO7OTzJgZ9hbsn5OVMoMsNZZYZ3Yx';
 var HeroSection = function HeroSection() {
-  var HEADER = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: "Bearer ".concat(API_KEY)
-    }
-  };
-  fetch(URL, HEADER).then(function (res) {
-    console.log(res);
-    res.json();
-  }).then(function (data) {
-    console.log('data retrieved: ', data);
-    for (var i = 0; i < data.businesses.length; i++) {
-      console.log(data.businesses[i].name);
-    }
-  });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "This will BE THE HERO SECTION"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeroSection);

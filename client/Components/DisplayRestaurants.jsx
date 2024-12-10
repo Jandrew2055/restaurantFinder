@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 const DisplayRestaurants = () => {
   //will create cards from restaurants pulled from the public API
-  // const restaurantList =
+  let restaurantList = undefined;
   const HEADER = {
     method: 'GET',
     headers: {
@@ -15,23 +15,32 @@ const DisplayRestaurants = () => {
 
   const addedString = '?location=NYC&limit=40';
 
+  //   makes a fetch request to grab the restaurants from yelp matching the limits
+  useEffect(() => {
+    fetch(`${URL}${addedString}`, HEADER)
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((data) => {
+        // console.log('data retrieved: ', data);
+        // for (let i = 0; i < data.businesses.length; i++) {
+        //   console.log(data.businesses[i].name);
+        // }
+        restaurantList = data.businesses.map((element, id) => {
+          <li key={id}>element</li>;
+        });
+      });
+  }, []);
 
-  //makes a fetch request to grab the restaurants from yelp matching the limits
-//   useEffect(() => {
-//     fetch(`${URL}${addedString}`, HEADER)
-//       .then((res) => {
-//         console.log(res);
-//         return res.json();
-//       })
-//       .then((data) => {
-//         console.log('data retrieved: ', data);
-//         for (let i = 0; i < data.businesses.length; i++) {
-//           console.log(data.businesses[i].name);
-//         }
-//       });
-//   }, []);
+  //       });
+  //   }, []);
 
-  return <div>Testing the cards that will be returned</div>;
+  return (
+    <div>
+      <ul>{restaurantList}</ul>
+    </div>
+  );
 };
 
 export default DisplayRestaurants;
