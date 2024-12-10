@@ -14,13 +14,122 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Components/DisplayRestaurants.jsx */ "./client/Components/DisplayRestaurants.jsx");
+/* harmony import */ var _Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/NavBar.jsx */ "./client/Components/NavBar.jsx");
+/* harmony import */ var _Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Footer.jsx */ "./client/Components/Footer.jsx");
+/* harmony import */ var _Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Hero.jsx */ "./client/Components/Hero.jsx");
+
+
+
+
 
 var App = function App() {
   console.log('testing');
   console.log(135);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "testing"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./client/Components/DisplayRestaurants.jsx":
+/*!**************************************************!*\
+  !*** ./client/Components/DisplayRestaurants.jsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var DisplayRestaurants = function DisplayRestaurants() {
+  //will create cards from restaurants pulled from the public API 
+  // const restaurantList =
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Testing the cards that will be returned");
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayRestaurants);
+
+/***/ }),
+
+/***/ "./client/Components/Footer.jsx":
+/*!**************************************!*\
+  !*** ./client/Components/Footer.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var FooterBar = function FooterBar() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "This will be the footer of my Page. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis exercitationem eos necessitatibus, est quae, officiis commodi excepturi beatae unde corporis ab sunt quos tenetur iusto saepe, maiores aperiam in fugit?"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FooterBar);
+
+/***/ }),
+
+/***/ "./client/Components/Hero.jsx":
+/*!************************************!*\
+  !*** ./client/Components/Hero.jsx ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var URL = 'https://api.yelp.com/v3/businesses/search?location=NYC&limit=40';
+var API_KEY = 'OFL5601OUDsphFX4AJDXtkQpSm0831DAILCRCezIK01q_vGR14ADCsRtz-yFtypULMKbBbSWQYo1YngUReWMdyF1m7lm5X-LHyWqO7OTzJgZ9hbsn5OVMoMsNZZYZ3Yx';
+var HeroSection = function HeroSection() {
+  var HEADER = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: "Bearer ".concat(API_KEY)
+    }
+  };
+  fetch(URL, HEADER).then(function (res) {
+    console.log(res);
+    res.json();
+  }).then(function (data) {
+    console.log('data retrieved: ', data);
+    for (var i = 0; i < data.businesses.length; i++) {
+      console.log(data.businesses[i].name);
+    }
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "This will BE THE HERO SECTION"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeroSection);
+
+/***/ }),
+
+/***/ "./client/Components/NavBar.jsx":
+/*!**************************************!*\
+  !*** ./client/Components/NavBar.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var NavBar = function NavBar() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Home Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Near Me"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "About")));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
 
 /***/ }),
 
@@ -44,8 +153,9 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `body {
-  background-color: lightblue;
-}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,2BAAA;AACF","sourcesContent":["body {\n  background-color: lightblue;\n}\n"],"sourceRoot":""}]);
+  background-color: burlywood;
+  color: white;
+}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,2BAAA;EACA,YAAA;AACF","sourcesContent":["body {\n  background-color: burlywood;\n  color: white;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

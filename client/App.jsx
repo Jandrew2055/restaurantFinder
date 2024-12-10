@@ -1,5 +1,8 @@
 import React from 'react';
 import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
+import NavBar from './Components/NavBar.jsx';
+import FooterBar from './Components/Footer.jsx';
+import HeroSection from './Components/Hero.jsx';
 
 const App = () => {
   console.log('testing');
@@ -7,8 +10,10 @@ const App = () => {
 
   return (
     <div>
-      <h1>HERO DISPLAY WILL BE HERE</h1>
+      <NavBar></NavBar>
+      <HeroSection></HeroSection>
       <DisplayRestaurants></DisplayRestaurants>
+      <FooterBar></FooterBar>
     </div>
   );
 };
