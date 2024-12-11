@@ -1,15 +1,9 @@
 import React, { useEffect } from 'react';
 
-
 const HeroSection = () => {
- 
-
-
-
-
   return (
     <div>
-      <h2>This will BE THE HERO SECTION</h2>
+      <h1>Jose EATS</h1>
     </div>
   );
 };

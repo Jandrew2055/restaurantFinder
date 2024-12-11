@@ -5,9 +5,6 @@ import FooterBar from './Components/Footer.jsx';
 import HeroSection from './Components/Hero.jsx';
 
 const App = () => {
-  console.log('testing');
-  console.log(135);
-
   return (
     <div>
       <NavBar></NavBar>

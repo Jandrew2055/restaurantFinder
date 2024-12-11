@@ -4,7 +4,7 @@ const NavBar = () => {
   return (
     <div>
       <ul>
-        <li>Home Page</li>
+        <button>Home Page</button>
         <li>Near Me</li>
         <li>About</li>
       </ul>

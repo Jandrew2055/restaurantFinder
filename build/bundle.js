@@ -61,12 +61,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authentication__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../authentication */ "./authentication.js");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
 var DisplayRestaurants = function DisplayRestaurants() {
   //will create cards from restaurants pulled from the public API
-  // const restaurantList =
+  //   let restaurantList = undefined;
+  //   const [restaurantList, setRestaurantList] = useState();
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    data = _useState2[0],
+    setData = _useState2[1];
+  // This is where the header lies (blueprint)
   var HEADER = {
     method: 'GET',
     headers: {
@@ -76,22 +88,53 @@ var DisplayRestaurants = function DisplayRestaurants() {
   };
   var addedString = '?location=NYC&limit=40';
 
-  //makes a fetch request to grab the restaurants from yelp matching the limits
-  //   useEffect(() => {
-  //     fetch(`${URL}${addedString}`, HEADER)
-  //       .then((res) => {
-  //         console.log(res);
-  //         return res.json();
-  //       })
-  //       .then((data) => {
-  //         console.log('data retrieved: ', data);
-  //         for (let i = 0; i < data.businesses.length; i++) {
-  //           console.log(data.businesses[i].name);
-  //         }
-  //       });
-  //   }, []);
+  //   makes a fetch request to grab the restaurants from yelp matching the limits
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetch("".concat(_authentication__WEBPACK_IMPORTED_MODULE_1__.URL).concat(addedString), HEADER).then(function (res) {
+      console.log(res);
+      return res.json();
+    }).then(function (data) {
+      console.log(data.businesses);
+      setData(data.businesses);
+      // console.log('data retrieved: ', data);
+      // for (let i = 0; i < data.businesses.length; i++) {
+      //   console.log(data.businesses[i].name);
+      // }
+      // console.log(data.businesses[0].name);
+      // restaurantList = data.businesses.map((element, id) => {
+      //   return <li key={id}>{element.name}</li>;
+      // });
+    })["catch"](function (err) {
+      console.log('err: ', err);
+    });
+  }, []);
+  //   console.log(data.businesses[0].name);
+  console.log(data.businesses);
+  var restaurantList = data.businesses.map(function (element) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      key: element.id
+    }, element.name);
+  });
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Testing the cards that will be returned");
+  //this is the one we want to use BELOWWWW
+  //   fetch(`${URL}${addedString}`, HEADER)
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       // console.log('data retrieved: ', data);
+  //       // for (let i = 0; i < data.businesses.length; i++) {
+  //       //   console.log(data.businesses[i].name);
+  //       // }
+  //       //   console.log(data.businesses[0].name);
+  //       restaurantList = data.businesses.map((element, id) => {
+  //         console.log(element.name);
+  //         setRestaurantList(<li key={id}>{element.name}</li>);
+  //       });
+  //     });
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList);
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayRestaurants);
 
