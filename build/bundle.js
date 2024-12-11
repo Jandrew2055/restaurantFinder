@@ -34,15 +34,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/NavBar.jsx */ "./client/Components/NavBar.jsx");
 /* harmony import */ var _Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Footer.jsx */ "./client/Components/Footer.jsx");
 /* harmony import */ var _Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Hero.jsx */ "./client/Components/Hero.jsx");
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 
 
 
 
 var App = function App() {
-  console.log('testing');
-  console.log(135);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    _useState2 = _slicedToArray(_useState, 2),
+    userLocation = _useState2[0],
+    setUserLocation = _useState2[1];
+
+  //grabs the user's location to then utilize the coordinates to get the restaurants near them
+  var getUserLocation = function getUserLocation() {
+    if (navigator.geolocation) {
+      console.log(navigator.geolocation.getCurrentPosition(function (position) {
+        // console.log(position);
+        var _position$coords = position.coords,
+          latitude = _position$coords.latitude,
+          longitude = _position$coords.longitude;
+        setUserLocation({
+          latitude: latitude,
+          longitude: longitude
+        });
+        console.log('Latitude: ', latitude);
+        console.log('Longitude: ', longitude);
+      }), function (err) {
+        console.warn({
+          code: err.code,
+          log: "ERROR: ".concat(err)
+        });
+      });
+    } else {
+      alert('Your browser does not support location');
+    }
+  };
+  console.log(userLocation);
+  // console.log(userLocation.latitude);
+  // console.log(userLocation.longitude);
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    getUserLocation: getUserLocation
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    userLocation: userLocation
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
@@ -61,6 +103,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _authentication__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../authentication */ "./authentication.js");
+function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -70,7 +113,8 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-var DisplayRestaurants = function DisplayRestaurants() {
+var DisplayRestaurants = function DisplayRestaurants(props) {
+  //   const { latitude, longitude } = props.us;
   //will create cards from restaurants pulled from the public API
   //   let restaurantList = undefined;
   //   const [restaurantList, setRestaurantList] = useState();
@@ -86,55 +130,51 @@ var DisplayRestaurants = function DisplayRestaurants() {
       Authorization: "Bearer ".concat(_authentication__WEBPACK_IMPORTED_MODULE_1__.API_KEY)
     }
   };
-  var addedString = '?location=NYC&limit=40';
+  var addedString = "?location=bronx&latitude=40.8&limit=10&sort_by=best_match";
 
-  //   makes a fetch request to grab the restaurants from yelp matching the limits
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    fetch("".concat(_authentication__WEBPACK_IMPORTED_MODULE_1__.URL).concat(addedString), HEADER).then(function (res) {
-      console.log(res);
-      return res.json();
-    }).then(function (data) {
-      console.log(data.businesses);
-      setData(data.businesses);
-      // console.log('data retrieved: ', data);
-      // for (let i = 0; i < data.businesses.length; i++) {
-      //   console.log(data.businesses[i].name);
-      // }
-      // console.log(data.businesses[0].name);
-      // restaurantList = data.businesses.map((element, id) => {
-      //   return <li key={id}>{element.name}</li>;
-      // });
-    })["catch"](function (err) {
-      console.log('err: ', err);
-    });
-  }, []);
-  //   console.log(data.businesses[0].name);
-  console.log(data.businesses);
-  var restaurantList = data.businesses.map(function (element) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
-      key: element.id
-    }, element.name);
-  });
+  //   console.log('latitude: ', latitude);
+  //   console.log('longitude: ', longitude);
 
-  //this is the one we want to use BELOWWWW
-  //   fetch(`${URL}${addedString}`, HEADER)
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       // console.log('data retrieved: ', data);
-  //       // for (let i = 0; i < data.businesses.length; i++) {
-  //       //   console.log(data.businesses[i].name);
-  //       // }
-  //       //   console.log(data.businesses[0].name);
-  //       restaurantList = data.businesses.map((element, id) => {
-  //         console.log(element.name);
-  //         setRestaurantList(<li key={id}>{element.name}</li>);
+  // //  this is the one we want to use BELOWWWW
+  //   useEffect(() => {
+  //     fetch(`${URL}${addedString}`, HEADER)
+  //       .then((res) => {
+  //         console.log(res);
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data.businesses[0].name);
+  //         setData(data.businesses);
   //       });
-  //     });
+  //   }, [props.userLocation]);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList);
+  //Here we are rendering all of the restaurant's information: name, price, address
+  var restaurantList = data.map(function (restaurant) {
+    var address = '';
+    var _iterator = _createForOfIteratorHelper(restaurant.location.display_address),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var location = _step.value;
+        address += " ".concat(location);
+      }
+
+      // * <p>
+      //       Allows for {restaurant.transactions[0]} and
+      //       {restaurant.transactions[1] ? restaurant.transactions[1] : ''}
+      //     </p> */
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+      key: restaurant.id
+    }, "Name:", restaurant.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      src: restaurant.image_url
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", restaurant.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", address));
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Restaurant list"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayRestaurants);
 
@@ -174,7 +214,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var HeroSection = function HeroSection() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "This will BE THE HERO SECTION"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Jose EATS"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HeroSection);
 
@@ -193,8 +233,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-var NavBar = function NavBar() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Home Page"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Near Me"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "About")));
+var NavBar = function NavBar(props) {
+  var getUserLocation = props.getUserLocation;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: getUserLocation
+  }, "Near Me"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "About")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
 
@@ -222,7 +265,14 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 ___CSS_LOADER_EXPORT___.push([module.id, `body {
   background-color: burlywood;
   color: white;
-}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,2BAAA;EACA,YAAA;AACF","sourcesContent":["body {\n  background-color: burlywood;\n  color: white;\n}\n"],"sourceRoot":""}]);
+  margin: 1rem 1rem;
+}
+
+img {
+  border-radius: 8px;
+  width: 350px;
+  height: auto;
+}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,2BAAA;EACA,YAAA;EACA,iBAAA;AACF;;AAEA;EACE,kBAAA;EACA,YAAA;EACA,YAAA;AACF","sourcesContent":["body {\n  background-color: burlywood;\n  color: white;\n  margin: 1rem 1rem;\n}\n\nimg {\n  border-radius: 8px;\n  width: 350px;\n  height: auto;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

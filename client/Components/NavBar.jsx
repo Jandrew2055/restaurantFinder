@@ -1,11 +1,12 @@
 import React from 'react';
 
-const NavBar = () => {
+const NavBar = (props) => {
+  const { getUserLocation } = props;
   return (
     <div>
       <ul>
-        <button>Home Page</button>
-        <li>Near Me</li>
+        <li>Home</li>
+        <button onClick={getUserLocation}>Near Me</button>
         <li>About</li>
       </ul>
     </div>
