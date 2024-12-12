@@ -55,7 +55,7 @@ var App = function App() {
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   var getUserLocation = function getUserLocation() {
     if (navigator.geolocation) {
-      console.log(navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition(function (position) {
         // console.log(position);
         var _position$coords = position.coords,
           latitude = _position$coords.latitude,
@@ -71,18 +71,22 @@ var App = function App() {
           code: err.code,
           log: "ERROR: ".concat(err)
         });
-      });
+      };
     } else {
       alert('Your browser does not support location');
     }
   };
-  console.log(userLocation);
-  // console.log(userLocation.latitude);
-  // console.log(userLocation.longitude);
-
+  var grabRestaurantInfo = function grabRestaurantInfo() {
+    fetch('http://localhost:8080').then(function (res) {
+      return res.json;
+    }).then(function (data) {
+      return console.log(data);
+    });
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     getUserLocation: getUserLocation
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    grabRestaurantInfo: grabRestaurantInfo,
     userLocation: userLocation
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
@@ -174,7 +178,9 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
       src: restaurant.image_url
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", restaurant.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", address));
   });
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Restaurant list"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Restaurant list"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: props.grabRestaurantInfo
+  }, "Refresh List of Restaurants"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayRestaurants);
 

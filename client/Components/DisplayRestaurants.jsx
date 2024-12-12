@@ -22,17 +22,17 @@ const DisplayRestaurants = (props) => {
   //   console.log('longitude: ', longitude);
 
   // //  this is the one we want to use BELOWWWW
-//   useEffect(() => {
-//     fetch(`${URL}${addedString}`, HEADER)
-//       .then((res) => {
-//         console.log(res);
-//         return res.json();
-//       })
-//       .then((data) => {
-//         console.log(data.businesses[0].name);
-//         setData(data.businesses);
-//       });
-//   }, [props.userLocation]);
+  //   useEffect(() => {
+  //     fetch(`${URL}${addedString}`, HEADER)
+  //       .then((res) => {
+  //         console.log(res);
+  //         return res.json();
+  //       })
+  //       .then((data) => {
+  //         console.log(data.businesses[0].name);
+  //         setData(data.businesses);
+  //       });
+  //   }, [props.userLocation]);
 
   //Here we are rendering all of the restaurant's information: name, price, address
   let restaurantList = data.map((restaurant) => {
@@ -59,6 +59,9 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant list</h1>
+      <button onClick={props.grabRestaurantInfo}>
+        Refresh List of Restaurants
+      </button>
       <ul>{restaurantList}</ul>
     </div>
   );

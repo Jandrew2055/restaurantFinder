@@ -11,33 +11,35 @@ const App = () => {
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = () => {
     if (navigator.geolocation) {
-      console.log(
-        navigator.geolocation.getCurrentPosition((position) => {
-          // console.log(position);
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ latitude, longitude });
-          console.log('Latitude: ', latitude);
-          console.log('Longitude: ', longitude);
-        }),
-
+      navigator.geolocation.getCurrentPosition((position) => {
+        // console.log(position);
+        const { latitude, longitude } = position.coords;
+        setUserLocation({ latitude, longitude });
+        console.log('Latitude: ', latitude);
+        console.log('Longitude: ', longitude);
+      }),
         (err) => {
           console.warn({ code: err.code, log: `ERROR: ${err}` });
-        }
-      );
+        };
     } else {
       alert('Your browser does not support location');
     }
   };
-
-  console.log(userLocation);
-  // console.log(userLocation.latitude);
-  // console.log(userLocation.longitude);
+  //this function will grab restaurant info when button is clicked with proper filters (if any)
+  const grabRestaurantInfo = () => {
+    fetch('/api')
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
 
   return (
     <div>
       <NavBar getUserLocation={getUserLocation}></NavBar>
       <HeroSection></HeroSection>
-      <DisplayRestaurants userLocation={userLocation}></DisplayRestaurants>
+      <DisplayRestaurants
+        grabRestaurantInfo={grabRestaurantInfo}
+        userLocation={userLocation}
+      ></DisplayRestaurants>
       <FooterBar></FooterBar>
     </div>
   );
