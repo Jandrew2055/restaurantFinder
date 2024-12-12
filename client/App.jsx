@@ -32,14 +32,28 @@ const App = () => {
       .then((data) => console.log(data));
   };
 
+  //this will add restaurant to list of favorites
+  const addToFavorites = () => {
+    fetch('/api/fav', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ testing: 'hello' }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  };
+
   return (
     <div>
       <NavBar getUserLocation={getUserLocation}></NavBar>
-      <HeroSection></HeroSection>
+      <HeroSection addToFavorites={addToFavorites}></HeroSection>
       <DisplayRestaurants
         grabRestaurantInfo={grabRestaurantInfo}
         userLocation={userLocation}
       ></DisplayRestaurants>
+
       <FooterBar></FooterBar>
     </div>
   );

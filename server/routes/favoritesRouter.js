@@ -3,9 +3,22 @@ const favoriteRestaurantController = require('../controllers/favoriteRestaurantC
 
 const router = express.Router();
 
-router.get('/', favoriteRestaurantController.addRestaurant, (req, res) => {
-  //router routes the requests to middleware function, and then back to frontend
-  return res.json(res.locals.testing);
-});
+//router routes the requests to middleware function, and then back to frontend
+router.get(
+  '/',
+  favoriteRestaurantController.getFavoriteRestaurants,
+  (req, res) => {
+    return res.json(res.locals.testing);
+  }
+);
+
+//router routes the requests to middleware function, and then back to frontend
+router.post(
+  '/',
+  favoriteRestaurantController.addFavoriteRestaurants,
+  (req, res) => {
+    return res.json(res.locals.testing);
+  }
+);
 
 module.exports = router;

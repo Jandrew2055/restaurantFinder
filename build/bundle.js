@@ -76,9 +76,10 @@ var App = function App() {
       alert('Your browser does not support location');
     }
   };
+  //this function will grab restaurant info when button is clicked with proper filters (if any)
   var grabRestaurantInfo = function grabRestaurantInfo() {
-    fetch('http://localhost:8080').then(function (res) {
-      return res.json;
+    fetch('/api').then(function (res) {
+      return res.json();
     }).then(function (data) {
       return console.log(data);
     });

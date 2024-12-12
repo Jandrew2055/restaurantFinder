@@ -1,7 +1,7 @@
 const restaurantController = {};
 
 restaurantController.getRestaurants = (req, res, next) => {
-  res.locals.restaurants = 'Testing new restaurants';
+  res.locals.restaurants = 'getting all restaurants';
   next();
 };
 
