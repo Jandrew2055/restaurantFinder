@@ -8,4 +8,27 @@ const PORT = process.env.NODE_env === 'development' ? 8080 : 3000;
 // if (process.env.NODE_env === 'development') {
 // }
 
+//parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
+
+//simple get request to the page return 200 status code
+app.get('/', (req, res) => {
+  return res.sendStatus(200);
+});
+
+//take care of unknown routes, always to be presented right before global error handler
+app.use((req, res) => res.sendStatus(404));
+
+//global error handler
+app.use((err, req, res, next) => {
+  //default error to use, template
+  const defaultError = {
+    log: 'caught unknown middleware error',
+    status: 500,
+    message: { err: 'An error has occurred, check the code.' },
+  };
+
+  //if actual error contains any other components it will replace current default template
+  const errorObj = Object.assign(defaultError, err);
+  return res.status(errorObj.status).json(errorObj.message);
+});
