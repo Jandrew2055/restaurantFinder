@@ -2,15 +2,23 @@ const path = require('path');
 const express = require('express');
 
 const app = express();
-const PORT = process.env.NODE_env === 'development' ? 8080 : 3000;
+const favoritesRouter = require('./routes/favoritesRouter');
+const restaurantRouter = require('./routes/restaurantRouter');
+// const PORT = process.env.NODE_env === 'development' ? 8080 : 3000;
 
-// const PORT = 8080;
+const PORT = 8080;
 //To be used for supporting extended features during development procedure
 // if (process.env.NODE_env === 'development') {
 // }
 
 //parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
+
+//make routes for app to make a request to that would route to the specific api
+app.use('/api/fav', favoritesRouter);
+
+//if requests are made to api, route them here
+app.use('/api', restaurantRouter);
 
 //simple get request to the page return 200 status code
 app.get('/', (req, res) => {
@@ -34,9 +42,8 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-
 app.listen(PORT, () => {
-    console.log(`Server listening on port: ${PORT}`);
-  });
+  console.log(`Server listening on port: ${PORT}`);
+});
 
-  module.exports = app;
+module.exports = app;
