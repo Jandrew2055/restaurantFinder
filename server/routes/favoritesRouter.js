@@ -8,7 +8,7 @@ router.get(
   '/',
   favoriteRestaurantController.getFavoriteRestaurants,
   (req, res) => {
-    return res.json(res.locals.testing);
+    return res.status(200).json(res.locals.testing);
   }
 );
 
@@ -17,7 +17,7 @@ router.post(
   '/',
   favoriteRestaurantController.addFavoriteRestaurants,
   (req, res) => {
-    return res.json(res.locals.testing);
+    return res.status(200).json(res.locals.newRestaurant);
   }
 );
 

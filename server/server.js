@@ -1,5 +1,9 @@
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv'); //access environment variables
+dotenv.config(); //and invoke dotenv.config() to read .env file
+const MONGO_URI = process.env.MONGO_URI; //grabs the mongo uri from the .env file
 
 const app = express();
 const favoritesRouter = require('./routes/favoritesRouter');
@@ -13,6 +17,15 @@ const PORT = 8080;
 
 //parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
+
+mongoose
+  .connect(MONGO_URI)
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.log('Error connecting to MongoDB: ', err);
+  });
 
 //make routes for app to make a request to that would route to the specific api
 app.use('/api/fav', favoritesRouter);

@@ -7,6 +7,7 @@ import HeroSection from './Components/Hero.jsx';
 
 const App = () => {
   const [userLocation, setUserLocation] = useState(null);
+  const [restaurantData, setRestaurantData] = useState(null);
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = () => {
@@ -29,8 +30,22 @@ const App = () => {
   const grabRestaurantInfo = () => {
     fetch('/api')
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        setRestaurantData(data);
+        console.log(data);
+      });
   };
+
+  //this is a test function for POST data
+  // const grabRestaurantInfo = () => {
+  //   fetch('/api/fav', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ name: 'Jose', restaurantName: 'McDonalds' }),
+  //   }).then((data) => console.log(data));
+  // };
 
   //this will add restaurant to list of favorites
   const addToFavorites = () => {
@@ -50,6 +65,7 @@ const App = () => {
       <NavBar getUserLocation={getUserLocation}></NavBar>
       <HeroSection addToFavorites={addToFavorites}></HeroSection>
       <DisplayRestaurants
+        restaurantData={restaurantData}
         grabRestaurantInfo={grabRestaurantInfo}
         userLocation={userLocation}
       ></DisplayRestaurants>

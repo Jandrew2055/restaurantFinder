@@ -3,7 +3,7 @@ import React from 'react';
 const NavBar = (props) => {
   const { getUserLocation } = props;
   return (
-    <div>
+    <div className='navigationBar'>
       <ul>
         <li>Home</li>
         <button onClick={getUserLocation}>Near Me</button>
