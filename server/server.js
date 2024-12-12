@@ -4,6 +4,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.NODE_env === 'development' ? 8080 : 3000;
 
+// const PORT = 8080;
 //To be used for supporting extended features during development procedure
 // if (process.env.NODE_env === 'development') {
 // }
@@ -32,3 +33,10 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign(defaultError, err);
   return res.status(errorObj.status).json(errorObj.message);
 });
+
+
+app.listen(PORT, () => {
+    console.log(`Server listening on port: ${PORT}`);
+  });
+
+  module.exports = app;
