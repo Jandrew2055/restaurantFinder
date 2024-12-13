@@ -12,15 +12,27 @@ const HeroSection = (props) => {
     <div>
       <h1>Jose EATS</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='firstName'>First Name</label>
-        <input type='text' id='firstName' name='firstName' required></input>
-        <label htmlFor='lastName'>Last Name</label>
-        <input type='text' id='lastName' name='lastName'></input>
-        <label htmlFor='favoriteRestaurant'>Favorite Restaurant</label>
+        <label htmlFor='firstName'>First Name </label>
+        <input
+          type='text'
+          id='firstName'
+          name='firstName'
+          placeholder='required'
+          required
+        ></input>
+        <label htmlFor='lastName'>Last Name </label>
+        <input
+          type='text'
+          id='lastName'
+          name='lastName'
+          placeholder='optional'
+        ></input>
+        <label htmlFor='favoriteRestaurant'>Favorite Restaurant </label>
         <input
           type='text'
           id='favoriteRestaurant'
           name='favoriteRestaurant'
+          placeholder='required'
           required
         ></input>
         <button type='submit'>Add to favorites</button>

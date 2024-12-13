@@ -4,9 +4,55 @@ body {
   margin: 1rem 1rem;
 }
 
-img {
-  border-radius: 8px;
-  width: 350px;
-  height: auto;
+.navigationBar {
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    padding: 0.5em 0em;
+  }
+  .navLink {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    color: black;
+  }
+  .navLink:hover {
+    text-decoration: none;
+    padding: 0.5em 1em;
+    color: white;
+    background-color: black;
+    border-radius: 5px;
+  }
 }
 
+#firstName {
+  margin: 0em 0.2em;
+}
+#lastName {
+  margin: 0em 0.2em;
+}
+#favoriteRestaurant {
+  margin: 0em 0.2em;
+}
+
+ul {
+  list-style: none;
+}
+
+.restaurant-Card {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.restaurant-Image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.restaurant-Details {
+  margin: 2em 2em;
+}

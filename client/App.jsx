@@ -11,6 +11,10 @@ const App = () => {
     longitude: -73.984,
   });
   const [restaurantData, setRestaurantData] = useState(null);
+  const [favoriteRestaurant, setFavoriteRestaurant] = useState({
+    name: null,
+    restaurantName: null,
+  });
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = () => {
@@ -61,12 +65,19 @@ const App = () => {
 
   //this will add restaurant to list of favorites
   const addToFavorites = () => {
+    //deconstruct the name and restaurant name to send in payload
+    const { name, restaurantName } = favoriteRestaurant;
+
+    //fetch request to the server to update in database favorite restaurant
     fetch('/api/fav', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ testing: 'hello' }),
+      body: JSON.stringify({
+        name: `${name}`,
+        restaurantName: `${restaurantName}`,
+      }),
     })
       .then((res) => res.json())
       .then((data) => console.log(data));
@@ -74,17 +85,14 @@ const App = () => {
 
   return (
     <div>
-      <NavBar getUserLocation={getUserLocation}></NavBar>
       <HeroSection addToFavorites={addToFavorites}></HeroSection>
-
       <DisplayRestaurants
+        getUserLocation={getUserLocation}
         restaurantData={restaurantData}
         grabRestaurantInfo={grabRestaurantInfo}
       ></DisplayRestaurants>
-
       <FooterBar></FooterBar>
     </div>
   );
 };
-
 export default App;

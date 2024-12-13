@@ -6,6 +6,10 @@ const restaurantSchema = new Schema({
   restaurantName: String,
 });
 
-const Restaurants = mongoose.model('Restaurants', restaurantSchema);
+const Restaurants = mongoose.model(
+  'Restaurants',
+  restaurantSchema,
+  'favoriteRestaurants'
+);
 
 module.exports = Restaurants;

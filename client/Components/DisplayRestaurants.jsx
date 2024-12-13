@@ -3,7 +3,7 @@ import { URL, API_KEY } from '../../authentication';
 import { useState, useEffect } from 'react';
 
 const DisplayRestaurants = (props) => {
-  const { restaurantData} = props;
+  const { restaurantData } = props;
   let restaurantList;
 
   //   this is the one we want to use BELOWWWW
@@ -24,17 +24,25 @@ const DisplayRestaurants = (props) => {
     restaurantList = restaurantData.businesses.map((restaurant) => {
       let address = '';
 
+      //organizes the address appropriately
       for (let location of restaurant.location.display_address) {
         address += ` ${location}`;
       }
 
       return (
-        <h2 key={restaurant.id}>
-          Name:{restaurant.name} <img src={restaurant.image_url}></img>
-          <p>Pricing: {restaurant.price}</p>
-          <p>Rating: {restaurant.rating}/5</p>
-          <p>Address: {address}</p>
-        </h2>
+        <li key={restaurant.id} className='restaurant-Card'>
+          <img
+            src={restaurant.image_url}
+            alt={restaurant.name}
+            className='restaurant-Image'
+          ></img>
+          <div className='restaurant-Details'>
+            <h3>Name:{restaurant.name}</h3>
+            <p>Pricing: {restaurant.price}</p>
+            <p>Rating: {restaurant.rating}/5</p>
+            <p>Address: {address}</p>
+          </div>
+        </li>
       );
     });
   }
@@ -42,6 +50,7 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant list</h1>
+      <button onClick={props.getUserLocation}> Near Me</button>
       <button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
       </button>

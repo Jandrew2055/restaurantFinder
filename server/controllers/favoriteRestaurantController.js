@@ -13,7 +13,8 @@ favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
   console.log(req.body);
   const { name, restaurantName } = req.body;
 
-  db.insertOne({ name, restaurantName })
+  //will create a new 'favorite restaurant on the database 
+  db.create({ name, restaurantName })
     .then((restaurant) => {
       res.locals.newRestaurant = restaurant;
       return next();
