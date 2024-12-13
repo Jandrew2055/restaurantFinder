@@ -52,24 +52,13 @@ const App = () => {
       });
   };
 
-  //this is a test function for POST data
-  // const grabRestaurantInfo = () => {
-  //   fetch('/api/fav', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ name: 'Jose', restaurantName: 'McDonalds' }),
-  //   }).then((data) => console.log(data));
-  // };
-
   //this will add restaurant to list of favorites
   const addToFavorites = () => {
     //deconstruct the name and restaurant name to send in payload
     const { name, restaurantName } = favoriteRestaurant;
 
     //fetch request to the server to update in database favorite restaurant
-    fetch('/api/fav', {
+    fetch('/favoriteForum', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -85,7 +74,10 @@ const App = () => {
 
   return (
     <div>
-      <HeroSection addToFavorites={addToFavorites}></HeroSection>
+      <HeroSection
+        favoriteRestaurant={favoriteRestaurant}
+        addToFavorites={addToFavorites}
+      ></HeroSection>
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}

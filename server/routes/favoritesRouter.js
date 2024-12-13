@@ -8,7 +8,7 @@ router.get(
   '/',
   favoriteRestaurantController.getFavoriteRestaurants,
   (req, res) => {
-    return res.status(200).json(res.locals.testing);
+    return res.status(200).json(res.locals.favoriteRestaurants);
   }
 );
 

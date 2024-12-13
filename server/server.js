@@ -28,7 +28,7 @@ mongoose
   });
 
 //make routes for app to make a request to that would route to the specific api
-app.use('/api/fav', favoritesRouter);
+app.use('/favoriteForum', favoritesRouter);
 
 //if requests are made to api, route them here
 app.use('/api', restaurantRouter);

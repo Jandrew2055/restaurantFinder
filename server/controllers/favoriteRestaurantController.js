@@ -4,8 +4,18 @@ const favoriteRestaurantController = {};
 
 //the middleware function for now will just be saving 'testing' to return to frontend
 favoriteRestaurantController.getFavoriteRestaurants = (req, res, next) => {
-  res.locals.testing = 'retrieving favorite restaurant';
-  return next();
+  db.find()
+    .then((restaurants) => {
+      console.log(restaurants);
+      res.locals.favoriteRestaurants = restaurants;
+    })
+    .then(() => {
+      return next();
+    });
+
+  //   (err, restaurants) => {
+  //     console.log(restaurants);
+  //   });
 };
 
 //the middleware function for now will just be saving 'testing' to return to frontend
@@ -13,7 +23,7 @@ favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
   console.log(req.body);
   const { name, restaurantName } = req.body;
 
-  //will create a new 'favorite restaurant on the database 
+  //will create a new 'favorite restaurant on the database
   db.create({ name, restaurantName })
     .then((restaurant) => {
       res.locals.newRestaurant = restaurant;
