@@ -37,7 +37,7 @@ const DisplayRestaurants = (props) => {
             className='restaurant-Image'
           ></img>
           <div className='restaurant-Details'>
-            <h3>Name:{restaurant.name}</h3>
+            <h3>Name: {restaurant.name}</h3>
             <p>Pricing: {restaurant.price}</p>
             <p>Rating: {restaurant.rating}/5</p>
             <p>Address: {address}</p>

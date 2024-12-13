@@ -109,17 +109,6 @@ var App = function App() {
     });
   };
 
-  //this is a test function for POST data
-  // const grabRestaurantInfo = () => {
-  //   fetch('/api/fav', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ name: 'Jose', restaurantName: 'McDonalds' }),
-  //   }).then((data) => console.log(data));
-  // };
-
   //this will add restaurant to list of favorites
   var addToFavorites = function addToFavorites() {
     //deconstruct the name and restaurant name to send in payload
@@ -127,7 +116,7 @@ var App = function App() {
       restaurantName = favoriteRestaurant.restaurantName;
 
     //fetch request to the server to update in database favorite restaurant
-    fetch('/api/fav', {
+    fetch('/favoriteForum', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -143,6 +132,7 @@ var App = function App() {
     });
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    favoriteRestaurant: favoriteRestaurant,
     addToFavorites: addToFavorites
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     getUserLocation: getUserLocation,
@@ -194,6 +184,8 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
   if (restaurantData) {
     restaurantList = restaurantData.businesses.map(function (restaurant) {
       var address = '';
+
+      //organizes the address appropriately
       var _iterator = _createForOfIteratorHelper(restaurant.location.display_address),
         _step;
       try {
@@ -206,11 +198,16 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
       } finally {
         _iterator.f();
       }
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-        key: restaurant.id
-      }, "Name:", restaurant.name, " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: restaurant.image_url
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", restaurant.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", address));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+        key: restaurant.id,
+        className: "restaurant-Card"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: restaurant.image_url,
+        alt: restaurant.name,
+        className: "restaurant-Image"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "restaurant-Details"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Name:", restaurant.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", restaurant.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", address)));
     });
   }
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Restaurant list"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -255,9 +252,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
 
 var Forum = function Forum() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Favorite Restaurants"));
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+    _useState2 = _slicedToArray(_useState, 2),
+    favoriteRestaurantList = _useState2[0],
+    setFavoriteRestaurantList = _useState2[1];
+  var favoritesList = null;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    fetch('/favoriteForum').then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      setFavoriteRestaurantList(data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Favorite Restaurants"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, favoriteRestaurantList.map(function (restaurant, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
+      key: restaurant.id
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, index + 1, ": Restaurant Name: ", restaurant.name));
+  })));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Forum);
 
@@ -366,10 +386,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-var chatBot = function chatBot() {
+var Chatbot = function Chatbot() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "AI CHATBOT"));
 };
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (chatBot);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Chatbot);
 
 /***/ }),
 
@@ -396,12 +416,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `body {
   background-color: rgb(250, 235, 215);
   color: black;
   margin: 1rem 1rem;
-}
-
-img {
-  border-radius: 8px;
-  width: 350px;
-  height: auto;
 }
 
 .navigationBar .nav-links {
@@ -433,7 +447,30 @@ img {
 
 #favoriteRestaurant {
   margin: 0em 0.2em;
-}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,oCAAA;EACA,YAAA;EACA,iBAAA;AACF;;AAEA;EACE,kBAAA;EACA,YAAA;EACA,YAAA;AACF;;AAGE;EACE,aAAA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;AAAJ;AAEE;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;AAAJ;AAEE;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,uBAAA;EACA,kBAAA;AAAJ;;AAIA;EACE,iBAAA;AADF;;AAGA;EACE,iBAAA;AAAF;;AAEA;EACE,iBAAA;AACF","sourcesContent":["body {\n  background-color: rgb(250, 235, 215);\n  color: black;\n  margin: 1rem 1rem;\n}\n\nimg {\n  border-radius: 8px;\n  width: 350px;\n  height: auto;\n}\n\n.navigationBar {\n  .nav-links {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    padding: 0.5em 0em;\n  }\n  .navLink {\n    text-decoration: none;\n    padding: 0.5em 1em;\n    color: black;\n  }\n  .navLink:hover {\n    text-decoration: none;\n    padding: 0.5em 1em;\n    color: white;\n    background-color: black;\n    border-radius: 5px;\n  }\n}\n\n#firstName {\n  margin: 0em 0.2em;\n}\n#lastName {\n  margin: 0em 0.2em;\n}\n#favoriteRestaurant {\n  margin: 0em 0.2em;\n}\n"],"sourceRoot":""}]);
+}
+
+ul {
+  list-style: none;
+}
+
+.restaurant-Card {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+}
+
+.restaurant-Image {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.restaurant-Details {
+  margin: 2em 2em;
+}`, "",{"version":3,"sources":["webpack://./client/styles/main.scss"],"names":[],"mappings":"AAAA;EACE,oCAAA;EACA,YAAA;EACA,iBAAA;AACF;;AAGE;EACE,aAAA;EACA,mBAAA;EACA,gBAAA;EACA,kBAAA;AAAJ;AAEE;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;AAAJ;AAEE;EACE,qBAAA;EACA,kBAAA;EACA,YAAA;EACA,uBAAA;EACA,kBAAA;AAAJ;;AAIA;EACE,iBAAA;AADF;;AAGA;EACE,iBAAA;AAAF;;AAEA;EACE,iBAAA;AACF;;AAEA;EACE,gBAAA;AACF;;AAEA;EACE,aAAA;EACA,mBAAA;EACA,mBAAA;EACA,mBAAA;EACA,sBAAA;AACF;;AAEA;EACE,YAAA;EACA,aAAA;EACA,iBAAA;EACA,mBAAA;AACF;;AACA;EACE,eAAA;AAEF","sourcesContent":["body {\n  background-color: rgb(250, 235, 215);\n  color: black;\n  margin: 1rem 1rem;\n}\n\n.navigationBar {\n  .nav-links {\n    display: flex;\n    flex-direction: row;\n    list-style: none;\n    padding: 0.5em 0em;\n  }\n  .navLink {\n    text-decoration: none;\n    padding: 0.5em 1em;\n    color: black;\n  }\n  .navLink:hover {\n    text-decoration: none;\n    padding: 0.5em 1em;\n    color: white;\n    background-color: black;\n    border-radius: 5px;\n  }\n}\n\n#firstName {\n  margin: 0em 0.2em;\n}\n#lastName {\n  margin: 0em 0.2em;\n}\n#favoriteRestaurant {\n  margin: 0em 0.2em;\n}\n\nul {\n  list-style: none;\n}\n\n.restaurant-Card {\n  display: flex;\n  align-items: center;\n  border-radius: 10px;\n  margin-bottom: 10px;\n  border: 1px solid #ddd;\n}\n\n.restaurant-Image {\n  width: 200px;\n  height: 200px;\n  object-fit: cover;\n  border-radius: 10px;\n}\n.restaurant-Details {\n  margin: 2em 2em;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38975,11 +39012,11 @@ root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElem
   path: "/",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+  path: "/aiChatBot",
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
   path: "/favoriteForum",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Forum_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-  path: "/aiChatBot",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("chatBot", null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
   path: "*",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Error, null)

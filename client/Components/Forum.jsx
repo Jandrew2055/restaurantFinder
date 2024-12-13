@@ -18,9 +18,9 @@ const Forum = () => {
       <h1>Favorite Restaurants</h1>
       <ul>
         {favoriteRestaurantList.map((restaurant, index) => (
-          <li key={restaurant.id}>
+          <li key={restaurant._id}>
             <h3>
-              {index + 1}: Restaurant Name: {restaurant.name}
+              {index + 1}: Restaurant Name: {restaurant.restaurantName}
             </h3>
           </li>
         ))}

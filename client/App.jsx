@@ -12,8 +12,8 @@ const App = () => {
   });
   const [restaurantData, setRestaurantData] = useState(null);
   const [favoriteRestaurant, setFavoriteRestaurant] = useState({
-    name: null,
-    restaurantName: null,
+    name: 'Jose',
+    restaurantName: 'Tao',
   });
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
