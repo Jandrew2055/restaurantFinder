@@ -2,9 +2,11 @@
 
 ## Description
 
-Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
-I set out to create my first official full stack app using the MERN tech stack. I built this project with interests in solving the issue of finding a good restaurant to eat when out and about in NYC. Since there is always a new trending restaurant on tiktok, this application would set out to implement the option to allow the user to favorite restaurants and they can then access a forum where users will be able to discuss restaurants they have been to and why they recommend. Building this project I learned a lot on React structure using useState
+- Provide a short description explaining the what, why, and how of your project. Use the following questions as a guide:
+I set out to create my first official full stack app using the MERN tech stack. I built this project with interests in solving the issue of finding a good restaurant to eat when out and about in NYC. Since there is always a new trending restaurant on tiktok, this application would set out to implement the option to allow the user to favorite restaurants and they can then access a forum where users will be able to discuss restaurants they have been to and why they recommend. 
+- Building this project I learned a lot on React structure using useState, useEffect. Managed to pull real data from the Yelp Api and Geolocation Api to provide the users with some real data from local restaurants. Learned how to connect to MongoDB and use mongoose to retrieve data from the database and create new data.
 
+  
 ## Table of Contents 
 - [Installation](#installation)
 - [Usage](#usage)
