@@ -17,6 +17,8 @@ npm install
 
 ## Usage
 
+(assets/images/restaurantWebpage.png)
+ ![alt text](assets/images/restaurantWebpage.png)
 
     ```md
     ![alt text](assets/images/restaurantWebpage.png)
