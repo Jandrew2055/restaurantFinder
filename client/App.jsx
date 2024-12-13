@@ -6,7 +6,10 @@ import FooterBar from './Components/Footer.jsx';
 import HeroSection from './Components/Hero.jsx';
 
 const App = () => {
-  const [userLocation, setUserLocation] = useState(null);
+  const [userLocation, setUserLocation] = useState({
+    latitude: 40.7549,
+    longitude: -73.984,
+  });
   const [restaurantData, setRestaurantData] = useState(null);
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
@@ -28,7 +31,16 @@ const App = () => {
   };
   //this function will grab restaurant info when button is clicked with proper filters (if any)
   const grabRestaurantInfo = () => {
-    fetch('/api')
+    fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        longitude: `${userLocation.longitude}`,
+        latitude: `${userLocation.latitude}`,
+      }),
+    })
       .then((res) => res.json())
       .then((data) => {
         setRestaurantData(data);
@@ -64,10 +76,10 @@ const App = () => {
     <div>
       <NavBar getUserLocation={getUserLocation}></NavBar>
       <HeroSection addToFavorites={addToFavorites}></HeroSection>
+
       <DisplayRestaurants
         restaurantData={restaurantData}
         grabRestaurantInfo={grabRestaurantInfo}
-        userLocation={userLocation}
       ></DisplayRestaurants>
 
       <FooterBar></FooterBar>

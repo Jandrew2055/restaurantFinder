@@ -3,11 +3,8 @@ import { URL, API_KEY } from '../../authentication';
 import { useState, useEffect } from 'react';
 
 const DisplayRestaurants = (props) => {
-  const { restaurantData } = props;
+  const { restaurantData} = props;
   let restaurantList;
-  //   const data = restaurantData.businesses;
-  //   console.log('latitude: ', latitude);
-  //   console.log('longitude: ', longitude);
 
   //   this is the one we want to use BELOWWWW
   //   useEffect(() => {

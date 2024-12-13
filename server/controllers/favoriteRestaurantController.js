@@ -1,4 +1,4 @@
-const Restaurants = require('../models/restaurantModel'); //model for CRUD
+const db = require('../models/restaurantModel'); //model for CRUD
 
 const favoriteRestaurantController = {};
 
@@ -13,7 +13,7 @@ favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
   console.log(req.body);
   const { name, restaurantName } = req.body;
 
-  Restaurants.create({ name, restaurantName })
+  db.insertOne({ name, restaurantName })
     .then((restaurant) => {
       res.locals.newRestaurant = restaurant;
       return next();
@@ -25,8 +25,6 @@ favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
         message: { err: 'Failed to add restaurant' },
       });
     });
-//   res.locals.testing = 'added a favorite restaurant';
-//   return next();
 };
 
 module.exports = favoriteRestaurantController;

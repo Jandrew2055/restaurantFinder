@@ -5,6 +5,7 @@ const restaurantController = {};
 
 restaurantController.getRestaurants = (req, res, next) => {
   // This is where the header lies (blueprint)
+  console.log(req.body);
   const HEADER = {
     method: 'GET',
     headers: {
@@ -13,7 +14,12 @@ restaurantController.getRestaurants = (req, res, next) => {
     },
   };
 
-  const addedString = `?location=bronx&latitude=40.8&limit=10&sort_by=best_match`;
+  const { latitude, longitude } = req.body; // grab the coordinates of user sending request
+  //if user has not chosen his own coordinates, the chosen coordinates will be NYC
+  console.log('serverLatitude: ', latitude);
+  console.log('serverLongitude: ', longitude);
+  //This will be the added portion to the fetch request to make it more accurate
+  const addedString = `?latitude=${latitude}&longitude=${longitude}&sort_by=best_match&limit=20`;
 
   fetch(`${URL}${addedString}`, HEADER)
     .then((res) => {
@@ -21,15 +27,12 @@ restaurantController.getRestaurants = (req, res, next) => {
       return res.json();
     })
     .then((data) => {
-      console.log(data.businesses[0].name);
+      console.log(data);
       res.locals.restaurants = data;
     })
     .then(() => {
       return next();
     });
-
-  //   res.locals.restaurants = 'getting all restaurants';
-  //   next();
 };
 
 module.exports = restaurantController;

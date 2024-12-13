@@ -47,7 +47,10 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 var App = function App() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+      longitude: 40.7549,
+      latitude: -73.984
+    }),
     _useState2 = _slicedToArray(_useState, 2),
     userLocation = _useState2[0],
     setUserLocation = _useState2[1];
@@ -82,7 +85,16 @@ var App = function App() {
   };
   //this function will grab restaurant info when button is clicked with proper filters (if any)
   var grabRestaurantInfo = function grabRestaurantInfo() {
-    fetch('/api').then(function (res) {
+    fetch('/api', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        longitude: "".concat(userLocation.longitude),
+        latitude: "".concat(userLocation.latitude)
+      })
+    }).then(function (res) {
       return res.json();
     }).then(function (data) {
       setRestaurantData(data);
@@ -123,8 +135,7 @@ var App = function App() {
     addToFavorites: addToFavorites
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     restaurantData: restaurantData,
-    grabRestaurantInfo: grabRestaurantInfo,
-    userLocation: userLocation
+    grabRestaurantInfo: grabRestaurantInfo
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
@@ -153,9 +164,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 var DisplayRestaurants = function DisplayRestaurants(props) {
   var restaurantData = props.restaurantData;
   var restaurantList;
-  //   const data = restaurantData.businesses;
-  //   console.log('latitude: ', latitude);
-  //   console.log('longitude: ', longitude);
 
   //   this is the one we want to use BELOWWWW
   //   useEffect(() => {

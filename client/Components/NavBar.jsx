@@ -6,7 +6,7 @@ const NavBar = (props) => {
     <div className='navigationBar'>
       <ul>
         <li>Home</li>
-        <button onClick={getUserLocation}>Near Me</button>
+        <li onClick={getUserLocation}>Near Me</li>
         <li>About</li>
       </ul>
     </div>
