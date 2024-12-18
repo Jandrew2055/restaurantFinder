@@ -6,24 +6,10 @@ const DisplayRestaurants = (props) => {
   const { restaurantData } = props;
   let restaurantList;
 
-  //   this is the one we want to use BELOWWWW
-  //   useEffect(() => {
-  //     fetch(`${URL}${addedString}`, HEADER)
-  //       .then((res) => {
-  //         console.log(res);
-  //         return res.json();
-  //       })
-  //       .then((data) => {
-  //         console.log(data.businesses[0].name);
-  //         setData(data.businesses);
-  //       });
-  //   }, [props.userLocation]);
-
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
     restaurantList = restaurantData.businesses.map((restaurant) => {
       let address = '';
-
       //organizes the address appropriately
       for (let location of restaurant.location.display_address) {
         address += ` ${location}`;
@@ -60,3 +46,16 @@ const DisplayRestaurants = (props) => {
 };
 
 export default DisplayRestaurants;
+
+//   this is the one we want to use BELOWWWW
+//   useEffect(() => {
+//     fetch(`${URL}${addedString}`, HEADER)
+//       .then((res) => {
+//         console.log(res);
+//         return res.json();
+//       })
+//       .then((data) => {
+//         console.log(data.businesses[0].name);
+//         setData(data.businesses);
+//       });
+//   }, [props.userLocation]);
