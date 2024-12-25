@@ -20,6 +20,7 @@
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
     "nodemon": "^3.1.7",
+    "react-hook-form": "^7.54.2",
     "sass": "^1.82.0",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",

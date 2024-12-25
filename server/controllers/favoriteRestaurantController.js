@@ -1,5 +1,6 @@
 const db = require('../models/restaurantModel'); //model for CRUD
 
+//controller object to hold separate middleware functions
 const favoriteRestaurantController = {};
 
 //the middleware function for now will just be saving 'testing' to return to frontend

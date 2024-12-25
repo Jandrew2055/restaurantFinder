@@ -1,11 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
+import { useForm } from 'react-hook-form';
 
 const HeroSection = (props) => {
-  const { addToFavorites } = props;
+  const { addToFavorites } = props; //function to add restaurant data from form to database
+  const { pending } = useFormStatus(); //keeps track of form status, pending true or false
+  const { register, reset } = useForm(); //
+  // const [firstName, setFirstName] = useState('');
+  // const [lastName, setLastName] = useState('');
+  // const [favoriteRestaurant, setFavoriteRestaurant] = useState('');
 
+  //handles submitting of form and sending favorite restaurant
   const handleSubmit = (event) => {
     event.preventDefault();
-    addToFavorites();
+    // setPending(true);
+    console.log(event.target.firstName.value);
+    reset();
+
+    // addToFavorites();
   };
 
   return (
@@ -17,6 +29,7 @@ const HeroSection = (props) => {
           type='text'
           id='firstName'
           name='firstName'
+          {...register('firstName')}
           placeholder='required'
           required
         ></input>
@@ -33,9 +46,12 @@ const HeroSection = (props) => {
           id='favoriteRestaurant'
           name='favoriteRestaurant'
           placeholder='required'
+          defaultValue={''}
           required
         ></input>
-        <button type='submit'>Add to favorites</button>
+        <button type='submit' disabled={pending}>
+          {pending ? 'adding to favorites' : 'Add to favorites'}
+        </button>
       </form>
     </div>
   );

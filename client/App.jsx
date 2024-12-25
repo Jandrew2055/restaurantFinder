@@ -9,12 +9,14 @@ const App = () => {
   const [userLocation, setUserLocation] = useState({
     latitude: 40.7549,
     longitude: -73.984,
-  });
-  const [restaurantData, setRestaurantData] = useState(null);
+  }); //have predefined location set to NYC midtown
+
+  const [restaurantData, setRestaurantData] = useState(null); //will hold all of the restaurant data that is retrieved from the API
+
   const [favoriteRestaurant, setFavoriteRestaurant] = useState({
     name: 'Jose',
     restaurantName: 'Tao',
-  });
+  }); //Holds the data for favorite restaurant chosen
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = () => {
@@ -33,6 +35,7 @@ const App = () => {
       alert('Your browser does not support location');
     }
   };
+
   //this function will grab restaurant info when button is clicked with proper filters (if any)
   const grabRestaurantInfo = () => {
     fetch('/api', {
@@ -52,7 +55,7 @@ const App = () => {
       });
   };
 
-  //this will add restaurant to list of favorites
+  //this will add restaurant to list of favorites in MongoDB
   const addToFavorites = () => {
     //deconstruct the name and restaurant name to send in payload
     const { name, restaurantName } = favoriteRestaurant;

@@ -1,10 +1,13 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
+//This is our forum page for users to be able to update favorite restaurants and talk about them
 const Forum = () => {
+  //this will contain the favorite restaurant list retrieved from the database 
   const [favoriteRestaurantList, setFavoriteRestaurantList] = useState([]);
-  let favoritesList = null;
+  // let favoritesList = null;
 
+  //makes a one time request to the database on render to retrieve favorite restaurants
   useEffect(() => {
     fetch('/favoriteForum')
       .then((res) => res.json())

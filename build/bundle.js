@@ -167,24 +167,10 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
   var restaurantData = props.restaurantData;
   var restaurantList;
 
-  //   this is the one we want to use BELOWWWW
-  //   useEffect(() => {
-  //     fetch(`${URL}${addedString}`, HEADER)
-  //       .then((res) => {
-  //         console.log(res);
-  //         return res.json();
-  //       })
-  //       .then((data) => {
-  //         console.log(data.businesses[0].name);
-  //         setData(data.businesses);
-  //       });
-  //   }, [props.userLocation]);
-
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
     restaurantList = restaurantData.businesses.map(function (restaurant) {
       var address = '';
-
       //organizes the address appropriately
       var _iterator = _createForOfIteratorHelper(restaurant.location.display_address),
         _step;
@@ -218,6 +204,19 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DisplayRestaurants);
 
+//   this is the one we want to use BELOWWWW
+//   useEffect(() => {
+//     fetch(`${URL}${addedString}`, HEADER)
+//       .then((res) => {
+//         console.log(res);
+//         return res.json();
+//       })
+//       .then((data) => {
+//         console.log(data.businesses[0].name);
+//         setData(data.businesses);
+//       });
+//   }, [props.userLocation]);
+
 /***/ }),
 
 /***/ "./client/Components/Footer.jsx":
@@ -234,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var FooterBar = function FooterBar() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "Created by Jose Andrew Copyright 2024"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "Created by Jose Andrew Copyright 2024."));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FooterBar);
 
