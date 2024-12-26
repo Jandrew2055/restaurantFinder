@@ -3,18 +3,24 @@ import { useFormStatus } from 'react-dom';
 import { useForm } from 'react-hook-form';
 
 const HeroSection = (props) => {
-  const { addToFavorites } = props; //function to add restaurant data from form to database
-  const { pending } = useFormStatus(); //keeps track of form status, pending true or false
-  const { register, reset } = useForm(); //
+  const { addToFavorites } = props; //function to add restaurant that is in the form to database
+  const { pending } = useFormStatus(); //keeps track of form status, pending true or false for submission
+  const { register, reset } = useForm(); //allows to use the reset() for fields, requires to register inputs
   // const [firstName, setFirstName] = useState('');
   // const [lastName, setLastName] = useState('');
   // const [favoriteRestaurant, setFavoriteRestaurant] = useState('');
 
   //handles submitting of form and sending favorite restaurant
   const handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //if form submision does not act, then this prevents default action from occurring (page reloading)
     // setPending(true);
-    console.log(event.target.firstName.value);
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
+    const favoriteRestaurant = event.target.favoriteRestaurant.value;
+    console.log('firstName: ', firstName);
+    console.log('lastName: ', lastName);
+    console.log('favorite restaurant: ', favoriteRestaurant);
+
     reset();
 
     // addToFavorites();
@@ -38,6 +44,7 @@ const HeroSection = (props) => {
           type='text'
           id='lastName'
           name='lastName'
+          {...register('lastName')}
           placeholder='optional'
         ></input>
         <label htmlFor='favoriteRestaurant'>Favorite Restaurant </label>
@@ -45,8 +52,8 @@ const HeroSection = (props) => {
           type='text'
           id='favoriteRestaurant'
           name='favoriteRestaurant'
+          {...register('favoriteRestaurant')}
           placeholder='required'
-          defaultValue={''}
           required
         ></input>
         <button type='submit' disabled={pending}>

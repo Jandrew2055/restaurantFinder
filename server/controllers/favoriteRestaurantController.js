@@ -21,8 +21,8 @@ favoriteRestaurantController.getFavoriteRestaurants = (req, res, next) => {
 
 //the middleware function for now will just be saving 'testing' to return to frontend
 favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
-  console.log(req.body);
-  const { name, restaurantName } = req.body;
+  // console.log(req.body);
+  const { name, restaurantName } = req.body; //grabs the name of person and restaurant name from the request body
 
   //will create a new 'favorite restaurant on the database
   db.create({ name, restaurantName })

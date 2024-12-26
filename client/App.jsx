@@ -58,7 +58,9 @@ const App = () => {
   //this will add restaurant to list of favorites in MongoDB
   const addToFavorites = () => {
     //deconstruct the name and restaurant name to send in payload
-    const { name, restaurantName } = favoriteRestaurant;
+    const { name, restaurantName } = favoriteRestaurant; //may not be needed
+    
+    //will most likely pass in arguments and use those arguments to send to the database to populate the 'favorites'
 
     //fetch request to the server to update in database favorite restaurant
     fetch('/favoriteForum', {
