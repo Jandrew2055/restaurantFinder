@@ -6,9 +6,6 @@ const HeroSection = (props) => {
   const { addToFavorites } = props; //function to add restaurant that is in the form to database
   const { pending } = useFormStatus(); //keeps track of form status, pending true or false for submission
   const { register, reset } = useForm(); //allows to use the reset() for fields, requires to register inputs
-  // const [firstName, setFirstName] = useState('');
-  // const [lastName, setLastName] = useState('');
-  // const [favoriteRestaurant, setFavoriteRestaurant] = useState('');
 
   //handles submitting of form and sending favorite restaurant
   const handleSubmit = (event) => {
@@ -20,7 +17,7 @@ const HeroSection = (props) => {
     console.log('firstName: ', firstName);
     console.log('lastName: ', lastName);
     console.log('favorite restaurant: ', favoriteRestaurant);
-
+    addToFavorites(firstName, lastName, favoriteRestaurant);
     reset();
 
     // addToFavorites();

@@ -23,7 +23,8 @@ favoriteRestaurantController.getFavoriteRestaurants = (req, res, next) => {
 favoriteRestaurantController.addFavoriteRestaurants = (req, res, next) => {
   // console.log(req.body);
   const { name, restaurantName } = req.body; //grabs the name of person and restaurant name from the request body
-
+  console.log('name :', name);
+  console.log('restauranteName: ', restaurantName);
   //will create a new 'favorite restaurant on the database
   db.create({ name, restaurantName })
     .then((restaurant) => {
