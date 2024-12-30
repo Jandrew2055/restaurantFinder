@@ -4,6 +4,7 @@ import App from './App.jsx';
 import Forum from './Components/Forum.jsx';
 import NavBar from './Components/NavBar.jsx';
 import Chatbot from './Components/chatBot.jsx';
+import Error from './Components/Error.jsx';
 import './styles/main.scss';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ root.render(
     <Routes>
       <Route path='/' element={<App />} />
       <Route path='/aiChatBot' element={<Chatbot />} />
+      <Route path='/forum' element={<Forum />} />
       <Route path='/favoriteForum' element={<Forum />} />
       <Route path='*' element={<Error />} />
     </Routes>

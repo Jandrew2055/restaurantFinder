@@ -24,6 +24,11 @@ const NavBar = () => {
             Ask AI
           </Link>
         </li>
+        <li>
+          <Link className='navLink' to='/forum' title='forum page'>
+            Forum
+          </Link>
+        </li>
       </ul>
     </div>
   );
