@@ -219,6 +219,26 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
 
 /***/ }),
 
+/***/ "./client/Components/Error.jsx":
+/*!*************************************!*\
+  !*** ./client/Components/Error.jsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var Error = function Error() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Error, this is not a valid endpoint"));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Error);
+
+/***/ }),
+
 /***/ "./client/Components/Footer.jsx":
 /*!**************************************!*\
   !*** ./client/Components/Footer.jsx ***!
@@ -233,7 +253,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var FooterBar = function FooterBar() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "Created by Jose Andrew Copyright 2024."));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h5", null, "Created by Jose Andrew Copyright 2024."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h6", null, "Contact me: Joseandrew@live.com"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FooterBar);
 
@@ -397,7 +417,11 @@ var NavBar = function NavBar() {
     className: "navLink",
     to: "/aiChatBot",
     title: "ai chat bot"
-  }, "Ask AI"))));
+  }, "Ask AI")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "navLink",
+    to: "/forum",
+    title: "forum page"
+  }, "Forum"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
 
@@ -41725,8 +41749,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_Forum_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Forum.jsx */ "./client/Components/Forum.jsx");
 /* harmony import */ var _Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/NavBar.jsx */ "./client/Components/NavBar.jsx");
 /* harmony import */ var _Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/chatBot.jsx */ "./client/Components/chatBot.jsx");
-/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./styles/main.scss */ "./client/styles/main.scss");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
+/* harmony import */ var _Components_Error_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/Error.jsx */ "./client/Components/Error.jsx");
+/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/main.scss */ "./client/styles/main.scss");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
+
 
 
 
@@ -41736,18 +41762,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root'));
-root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_NavBar_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
   path: "/",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
   path: "/aiChatBot",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  path: "/forum",
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Forum_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
   path: "/favoriteForum",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Forum_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
   path: "*",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Error, null)
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Error_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)
 }))));
 })();
 

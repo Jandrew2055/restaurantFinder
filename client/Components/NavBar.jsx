@@ -20,12 +20,12 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link className='navLink' to='/aiChatBot' title='ai chat bot'>
+          <Link className='navLink' to='/aiChatBot' title='AI Chat Bot'>
             Ask AI
           </Link>
         </li>
         <li>
-          <Link className='navLink' to='/forum' title='forum page'>
+          <Link className='navLink' to='/forum' title='Forum page'>
             Forum
           </Link>
         </li>
