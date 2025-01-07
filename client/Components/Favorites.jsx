@@ -16,15 +16,28 @@ const Favorites = () => {
       });
   }, []);
 
+  //handle's the deletion of restaurant from favorites
+  const deleteRestaurant = (id) => {
+    //just prints the restaurant's id object
+    console.log(id);
+  };
+
   return (
     <div>
       <h1>Favorite Restaurants</h1>
+      <h2>Restaurant Name</h2>
       <ul>
-        {favoriteRestaurantList.map((restaurant, index) => (
+        {favoriteRestaurantList.map((restaurant) => (
           <li key={restaurant._id}>
-            <h3>
-              {index + 1}: Restaurant Name: {restaurant.restaurantName}
-            </h3>
+            <h3>{restaurant.restaurantName}</h3>
+            <button
+              onClick={() => {
+                //when clicked, it will pass restaurant id to function
+                deleteRestaurant(restaurant._id);
+              }}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
