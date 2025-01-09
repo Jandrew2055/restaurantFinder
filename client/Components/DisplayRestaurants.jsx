@@ -28,6 +28,7 @@ const DisplayRestaurants = (props) => {
             <p>Rating: {restaurant.rating}/5</p>
             <p>Address: {address}</p>
           </div>
+          <button>Add To Favorites</button>
         </li>
       );
     });
