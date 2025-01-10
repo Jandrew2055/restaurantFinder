@@ -30,6 +30,7 @@ const Favorites = () => {
         {favoriteRestaurantList.map((restaurant) => (
           <li key={restaurant._id}>
             <h3>{restaurant.restaurantName}</h3>
+            <button>edit</button>
             <button
               onClick={() => {
                 //when clicked, it will pass restaurant id to function
