@@ -16,10 +16,17 @@ const Favorites = () => {
       });
   }, []);
 
+  //allows you to edit the comment that is left next to each restaurant
+  const editRestaurantExperience = (id) => {
+    console.log(id);
+    console.log('I will edit this restaurant information');
+  };
+
   //handle's the deletion of restaurant from favorites
   const deleteRestaurant = (id) => {
     //just prints the restaurant's id object
     console.log(id);
+    console.log('I will delete this restaurant');
   };
 
   return (
@@ -30,7 +37,9 @@ const Favorites = () => {
         {favoriteRestaurantList.map((restaurant) => (
           <li key={restaurant._id}>
             <h3>{restaurant.restaurantName}</h3>
-            <button>edit</button>
+            <button onClick={() => editRestaurantExperience(restaurant._id)}>
+              edit
+            </button>
             <button
               onClick={() => {
                 //when clicked, it will pass restaurant id to function

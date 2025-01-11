@@ -6,6 +6,10 @@ const DisplayRestaurants = (props) => {
   const { restaurantData } = props;
   let restaurantList;
 
+  //this function will allow you to add this restaurant to list of favorites
+  const addRestaurantToFavorites = (id) => {
+    console.log('adding restaurant to favorites', id);
+  };
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
     restaurantList = restaurantData.businesses.map((restaurant) => {
@@ -28,7 +32,13 @@ const DisplayRestaurants = (props) => {
             <p>Rating: {restaurant.rating}/5</p>
             <p>Address: {address}</p>
           </div>
-          <button>Add To Favorites</button>
+          <button
+            onClick={() => {
+              addRestaurantToFavorites(restaurant.id);
+            }}
+          >
+            Add To Favorites
+          </button>
         </li>
       );
     });
