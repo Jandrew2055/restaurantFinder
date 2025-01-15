@@ -7,6 +7,12 @@ const Chatbot = () => {
   return (
     <div>
       <h1>AI CHATBOT</h1>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam labore
+        voluptatum aspernatur ullam ex eum atque harum in, quod consequuntur
+        minima enim sequi, quibusdam pariatur, rem nemo error magnam
+        exercitationem.
+      </p>
       <form></form>
     </div>
   );
