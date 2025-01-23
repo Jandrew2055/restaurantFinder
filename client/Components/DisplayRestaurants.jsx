@@ -1,5 +1,4 @@
 import React from 'react';
-import { URL, API_KEY } from '../../authentication';
 import { useState, useEffect } from 'react';
 
 const DisplayRestaurants = (props) => {
