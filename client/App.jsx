@@ -36,24 +36,25 @@ const App = () => {
     }
   };
 
+  //OUTDATED YELP API
   //this function will grab restaurant info when button is clicked with proper filters (if any)
-  const grabRestaurantInfo = () => {
-    fetch('/api', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        longitude: `${userLocation.longitude}`,
-        latitude: `${userLocation.latitude}`,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setRestaurantData(data);
-        console.log(data);
-      });
-  };
+  // const grabRestaurantInfo = () => {
+  //   fetch('/api', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       longitude: `${userLocation.longitude}`,
+  //       latitude: `${userLocation.latitude}`,
+  //     }),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setRestaurantData(data);
+  //       console.log(data);
+  //     });
+  // };
 
   //this will add restaurant to list of favorites in MongoDB
   const addToFavorites = (firstName, lastName, restaurantName) => {
