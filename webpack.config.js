@@ -29,6 +29,11 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
+        test: /\.tsx?$/, // TypeScript files
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         use: {
@@ -39,6 +44,9 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.jsx', '.js', '.ts', '.tsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({

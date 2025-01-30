@@ -1,0 +1,13 @@
+{
+  "include": ["client/**/*.ts", "client/**/*.tsx"],
+  "compilerOptions": {
+    "outDir": "./build/",
+    "noImplicitAny": true,
+    "module": "NodeNext",
+    "target": "es5",
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "moduleResolution": "nodenext"
+  },
+  "exclude": ["node_modules", "build"]
+}

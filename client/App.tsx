@@ -1,4 +1,4 @@
-import React from 'react';
+// import * as React from 'react';
 import { useState, useEffect } from 'react';
 import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
 import NavBar from './Components/NavBar.jsx';
@@ -28,7 +28,7 @@ const App = () => {
         console.log('Latitude: ', latitude);
         console.log('Longitude: ', longitude);
       }),
-        (err) => {
+        (err: GeolocationPositionError) => {
           console.warn({ code: err.code, log: `ERROR: ${err}` });
         };
     } else {
@@ -84,7 +84,7 @@ const App = () => {
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}
-        grabRestaurantInfo={grabRestaurantInfo}
+        // grabRestaurantInfo={grabRestaurantInfo}
       ></DisplayRestaurants>
       <FooterBar></FooterBar>
     </div>

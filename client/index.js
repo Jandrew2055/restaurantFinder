@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
+import App from './App.tsx';
 import Favorites from './Components/Favorites.jsx';
 import Forum from './Components/Forum.jsx';
 import NavBar from './Components/NavBar.jsx';
