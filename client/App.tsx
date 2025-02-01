@@ -57,7 +57,11 @@ const App = () => {
   // };
 
   //this will add restaurant to list of favorites in MongoDB
-  const addToFavorites = (firstName, lastName, restaurantName) => {
+  const addToFavorites = (
+    firstName: string,
+    lastName: string,
+    restaurantName: string
+  ) => {
     //function takes in three arguments and we use them below
     let name = firstName; //name of user is firstName assuming no lastName was inputted
 
