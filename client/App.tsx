@@ -36,6 +36,12 @@ const App = () => {
     }
   };
 
+  //UPDATED GOOGLE PLACES API below
+  const grabRestaurantInfo = () => {
+    
+    console.log('test');
+  };
+
   //OUTDATED YELP API
   //this function will grab restaurant info when button is clicked with proper filters (if any)
   // const grabRestaurantInfo = () => {
@@ -88,7 +94,7 @@ const App = () => {
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}
-        // grabRestaurantInfo={grabRestaurantInfo}
+        grabRestaurantInfo={grabRestaurantInfo}
       ></DisplayRestaurants>
       <FooterBar></FooterBar>
     </div>
