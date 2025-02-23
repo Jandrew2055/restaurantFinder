@@ -18,7 +18,6 @@ function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 
-
 var DisplayRestaurants = function DisplayRestaurants(props) {
   var restaurantData = props.restaurantData;
   var restaurantList;
@@ -29267,6 +29266,10 @@ var App = function () {
             alert('Your browser does not support location');
         }
     };
+    //UPDATED GOOGLE PLACES API below
+    var grabRestaurantInfo = function () {
+        console.log('test');
+    };
     //OUTDATED YELP API
     //this function will grab restaurant info when button is clicked with proper filters (if any)
     // const grabRestaurantInfo = () => {
@@ -29306,7 +29309,7 @@ var App = function () {
             .then(function (res) { return res.json(); })
             .then(function (data) { return console.log(data); });
     };
-    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(Hero_jsx_1.default, { addToFavorites: addToFavorites }), (0, jsx_runtime_1.jsx)(DisplayRestaurants_jsx_1.default, { getUserLocation: getUserLocation, restaurantData: restaurantData }), (0, jsx_runtime_1.jsx)(Footer_jsx_1.default, {})] }));
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(Hero_jsx_1.default, { addToFavorites: addToFavorites }), (0, jsx_runtime_1.jsx)(DisplayRestaurants_jsx_1.default, { getUserLocation: getUserLocation, restaurantData: restaurantData, grabRestaurantInfo: grabRestaurantInfo }), (0, jsx_runtime_1.jsx)(Footer_jsx_1.default, {})] }));
 };
 exports["default"] = App;
 

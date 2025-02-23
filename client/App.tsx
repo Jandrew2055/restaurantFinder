@@ -37,8 +37,27 @@ const App = () => {
   };
 
   //UPDATED GOOGLE PLACES API below
-  const grabRestaurantInfo = () => {
-    
+  const grabRestaurantInfo = async () => {
+    try {
+      //sends a request to the backend, with user's location(if any)
+
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          longitude: `${userLocation.longitude}`,
+          latitude: `${userLocation.latitude}`,
+        }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch {
+      //otherwise throw error 
+      throw new Error('Error getting data');
+    }
+
     console.log('test');
   };
 

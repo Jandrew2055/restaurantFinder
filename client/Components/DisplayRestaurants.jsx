@@ -1,6 +1,7 @@
 import React from 'react';
 
 const DisplayRestaurants = (props) => {
+  //collect restaurant list from parent component
   const { restaurantData } = props;
   let restaurantList;
 
