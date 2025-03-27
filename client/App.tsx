@@ -21,18 +21,21 @@ const App = () => {
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        // console.log(position);
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ latitude, longitude });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // console.log(position);
+          const { latitude, longitude } = position.coords;
+          setUserLocation({ latitude, longitude });
 
-        //CAN BE DELETED BELOW, JUST TESTING
-        console.log('Latitude: ', latitude);
-        console.log('Longitude: ', longitude);
-      }),
+          //CAN BE DELETED BELOW, JUST TESTING
+          console.log('Latitude: ', latitude);
+          console.log('Longitude: ', longitude);
+        },
         (err: GeolocationPositionError) => {
           console.warn({ code: err.code, log: `ERROR: ${err}` });
-        };
+        },
+        { enableHighAccuracy: true }
+      );
     } else {
       alert('Your browser does not support location');
     }
@@ -91,26 +94,6 @@ const App = () => {
 
     console.log('test');
   };
-
-  //OUTDATED YELP API
-  //this function will grab restaurant info when button is clicked with proper filters (if any)
-  // const grabRestaurantInfo = () => {
-  //   fetch('/api', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       longitude: `${userLocation.longitude}`,
-  //       latitude: `${userLocation.latitude}`,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setRestaurantData(data);
-  //       console.log(data);
-  //     });
-  // };
 
   //this will add restaurant to list of favorites in MongoDB
   const addToFavorites = (

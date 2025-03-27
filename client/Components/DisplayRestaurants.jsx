@@ -32,6 +32,12 @@ const DisplayRestaurants = (props) => {
             <p>Pricing: {price}</p>
             <p>Rating: {restaurant.rating}/5</p>
             <p>Address: {restaurant.formattedAddress}</p>
+            <a
+              href={`${restaurant.googleMapsLinks.directionsUri}`}
+              target='_blank'
+            >
+              Directions Here
+            </a>
           </div>
           <button
             onClick={() => {
