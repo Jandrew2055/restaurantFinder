@@ -9,44 +9,24 @@ const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const restaurantController = {};
 
 restaurantController.getRestaurants = async (req, res, next) => {
-  //this successfully prints google api key
+  const { latitude, longitude } = req.body;
 
+  //body request to be sent with google places api request
   const body = {
     includedTypes: ['restaurant'],
     maxResultCount: 20,
     locationRestriction: {
       circle: {
         center: {
-          latitude: 40.7549,
-          longitude: -73.984,
+          latitude: latitude || 40.7549,
+          longitude: longitude || -73.984,
         },
         radius: 500.0,
       },
     },
   };
-  //HEADER object
-  // const Header = {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'X-Goog-Api-Key': API_KEY,
-  //     'X-Goog-FieldMask': 'places.displayName',
-  //   },
-  //   body: {
-  //     includedTypes: ['restaurant'],
-  //     maxResultCount: 10,
-  //     locationRestriction: {
-  //       circle: {
-  //         center: {
-  //           latitude: 37.7937,
-  //           longitude: -122.3965,
-  //         },
-  //         radius: 500.0,
-  //       },
-  //     },
-  //   },
-  // };
 
+  //fetches data using google places api, and returns to user
   try {
     const response = await fetch(
       'https://places.googleapis.com/v1/places:searchNearby',
@@ -77,13 +57,6 @@ restaurantController.getRestaurants = async (req, res, next) => {
     //save data received in res.locals
     res.locals.data = data;
 
-    // data.places.forEach((element) => {
-    //   console.log('restaurants:', element.displayName);
-    // });
-
-    //CAN BE DELETED BELOW JUST TO TEST
-    console.log('this is the collected data server side:', data); //log it to console
-    //continue with middleware function
     return next();
   } catch (error) {
     //if fetch call in the server-side fails, throw error

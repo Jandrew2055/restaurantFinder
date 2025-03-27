@@ -25,6 +25,8 @@ const App = () => {
         // console.log(position);
         const { latitude, longitude } = position.coords;
         setUserLocation({ latitude, longitude });
+
+        //CAN BE DELETED BELOW, JUST TESTING
         console.log('Latitude: ', latitude);
         console.log('Longitude: ', longitude);
       }),
@@ -40,7 +42,17 @@ const App = () => {
   const grabRestaurantInfo = async () => {
     try {
       //make a call to the api
-      const response = await fetch('/api');
+      const response = await fetch('/api', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          longitude: `${userLocation.longitude}`,
+          latitude: `${userLocation.latitude}`,
+        }),
+      });
+
       if (!response.ok)
         //if response received is not okay, throw error
         throw new Error(`Error sending request to api:${response}`);
