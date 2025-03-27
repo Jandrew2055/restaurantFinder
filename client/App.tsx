@@ -39,24 +39,43 @@ const App = () => {
   //UPDATED GOOGLE PLACES API below
   const grabRestaurantInfo = async () => {
     try {
-      //sends a request to the backend, with user's location(if any)
-
-      const response = await fetch('/api', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          longitude: `${userLocation.longitude}`,
-          latitude: `${userLocation.latitude}`,
-        }),
-      });
+      //make a call to the api
+      const response = await fetch('/api');
+      if (!response.ok)
+        //if response received is not okay, throw error
+        throw new Error(`Error sending request to api:${response}`);
       const data = await response.json();
-      console.log(data);
-    } catch {
-      //otherwise throw error 
-      throw new Error('Error getting data');
+
+      setRestaurantData(data.places);
+
+      //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
+      data.places.forEach((restaurant: any) => {
+        console.log('restaurant:', restaurant.displayName.text);
+      });
+    } catch (error) {
+      throw new Error(`Error sending request to api:${error}`);
     }
+
+    //BELOW is what we will send if we send over coordinates from the front end, a refactor later
+    // try {
+    //   //sends a request to the backend, with user's location(if any)
+
+    //   const response = await fetch('/api', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       longitude: `${userLocation.longitude}`,
+    //       latitude: `${userLocation.latitude}`,
+    //     }),
+    //   });
+    //   const data = await response.json();
+    //   console.log(data);
+    // } catch {
+    //   //otherwise throw error
+    //   throw new Error('Error getting data');
+    // }
 
     console.log('test');
   };

@@ -3,6 +3,7 @@ import React from 'react';
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
+  console.log(restaurantData);
   let restaurantList;
 
   //this function will allow you to add this restaurant to list of favorites
@@ -11,25 +12,26 @@ const DisplayRestaurants = (props) => {
   };
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
-    restaurantList = restaurantData.businesses.map((restaurant) => {
-      let address = '';
-      //organizes the address appropriately
-      for (let location of restaurant.location.display_address) {
-        address += ` ${location}`;
+    restaurantList = restaurantData.map((restaurant) => {
+      let price = '';
+      if (restaurant.priceRange && restaurant.priceRange.endPrice) {
+        //format the pricing for the restaurant
+        price = `Average price between $${restaurant.priceRange.startPrice.units} and $${restaurant.priceRange.endPrice.units}`;
       }
 
+      //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE
+      // <img
+      //   src={restaurant.photos[0]}
+      //   alt={restaurant.displayName.text}
+      //   className='restaurant-Image'
+      // ></img>;
       return (
         <li key={restaurant.id} className='restaurant-Card'>
-          <img
-            src={restaurant.image_url}
-            alt={restaurant.name}
-            className='restaurant-Image'
-          ></img>
           <div className='restaurant-Details'>
-            <h3>Name: {restaurant.name}</h3>
-            <p>Pricing: {restaurant.price}</p>
+            <h3>Name: {restaurant.displayName.text}</h3>
+            <p>Pricing: {price}</p>
             <p>Rating: {restaurant.rating}/5</p>
-            <p>Address: {address}</p>
+            <p>Address: {restaurant.formattedAddress}</p>
           </div>
           <button
             onClick={() => {
