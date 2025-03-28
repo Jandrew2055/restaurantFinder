@@ -24,12 +24,13 @@ const App = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           // console.log(position);
+          console.log('location data:', position);
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
 
           //CAN BE DELETED BELOW, JUST TESTING
-          console.log('Latitude: ', latitude);
-          console.log('Longitude: ', longitude);
+          // console.log('Latitude: ', latitude);
+          // console.log('Longitude: ', longitude);
         },
         (err: GeolocationPositionError) => {
           console.warn({ code: err.code, log: `ERROR: ${err}` });
