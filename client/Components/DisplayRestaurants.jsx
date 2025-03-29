@@ -12,11 +12,13 @@ const DisplayRestaurants = (props) => {
   };
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
+    //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
+      //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';
       if (restaurant.priceRange && restaurant.priceRange.endPrice) {
         //format the pricing for the restaurant
-        price = `Average price between $${restaurant.priceRange.startPrice.units} and $${restaurant.priceRange.endPrice.units}`;
+        price = `Average price between $${restaurant.priceRange.startPrice.units} and $${restaurant.priceRange.endPrice.units} per person.`;
       }
 
       //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE

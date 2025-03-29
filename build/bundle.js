@@ -14,13 +14,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 
 var DisplayRestaurants = function DisplayRestaurants(props) {
   //collect restaurant list from parent component
   var restaurantData = props.restaurantData;
+  console.log(restaurantData);
   var restaurantList;
 
   //this function will allow you to add this restaurant to list of favorites
@@ -29,31 +27,28 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
   };
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
-    restaurantList = restaurantData.businesses.map(function (restaurant) {
-      var address = '';
-      //organizes the address appropriately
-      var _iterator = _createForOfIteratorHelper(restaurant.location.display_address),
-        _step;
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var location = _step.value;
-          address += " ".concat(location);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
+    restaurantList = restaurantData.map(function (restaurant) {
+      var price = '';
+      if (restaurant.priceRange && restaurant.priceRange.endPrice) {
+        //format the pricing for the restaurant
+        price = "Average price between $".concat(restaurant.priceRange.startPrice.units, " and $").concat(restaurant.priceRange.endPrice.units);
       }
+
+      //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE
+      // <img
+      //   src={restaurant.photos[0]}
+      //   alt={restaurant.displayName.text}
+      //   className='restaurant-Image'
+      // ></img>;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         key: restaurant.id,
         className: "restaurant-Card"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: restaurant.image_url,
-        alt: restaurant.name,
-        className: "restaurant-Image"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "restaurant-Details"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Name: ", restaurant.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", restaurant.price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", address)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Name: ", restaurant.displayName.text), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Pricing: ", price), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Rating: ", restaurant.rating, "/5"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Address: ", restaurant.formattedAddress), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+        href: "".concat(restaurant.googleMapsLinks.directionsUri),
+        target: "_blank"
+      }, "Directions Here")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         onClick: function onClick() {
           addRestaurantToFavorites(restaurant.id);
         }
@@ -29290,14 +29285,15 @@ var App = function () {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 // console.log(position);
+                console.log('location data:', position);
                 var _a = position.coords, latitude = _a.latitude, longitude = _a.longitude;
                 setUserLocation({ latitude: latitude, longitude: longitude });
-                console.log('Latitude: ', latitude);
-                console.log('Longitude: ', longitude);
-            }),
-                function (err) {
-                    console.warn({ code: err.code, log: "ERROR: ".concat(err) });
-                };
+                //CAN BE DELETED BELOW, JUST TESTING
+                // console.log('Latitude: ', latitude);
+                // console.log('Longitude: ', longitude);
+            }, function (err) {
+                console.warn({ code: err.code, log: "ERROR: ".concat(err) });
+            }, { enableHighAccuracy: true });
         }
         else {
             alert('Your browser does not support location');
@@ -29310,7 +29306,16 @@ var App = function () {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, fetch('/api')];
+                    return [4 /*yield*/, fetch('/api', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                longitude: "".concat(userLocation.longitude),
+                                latitude: "".concat(userLocation.latitude),
+                            }),
+                        })];
                 case 1:
                     response = _a.sent();
                     if (!response.ok)
@@ -29319,6 +29324,8 @@ var App = function () {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     data = _a.sent();
+                    setRestaurantData(data.places);
+                    //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
                     data.places.forEach(function (restaurant) {
                         console.log('restaurant:', restaurant.displayName.text);
                     });
@@ -29351,25 +29358,6 @@ var App = function () {
             }
         });
     }); };
-    //OUTDATED YELP API
-    //this function will grab restaurant info when button is clicked with proper filters (if any)
-    // const grabRestaurantInfo = () => {
-    //   fetch('/api', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       longitude: `${userLocation.longitude}`,
-    //       latitude: `${userLocation.latitude}`,
-    //     }),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       setRestaurantData(data);
-    //       console.log(data);
-    //     });
-    // };
     //this will add restaurant to list of favorites in MongoDB
     var addToFavorites = function (firstName, lastName, restaurantName) {
         //function takes in three arguments and we use them below
