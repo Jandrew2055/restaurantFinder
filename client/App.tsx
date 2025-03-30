@@ -124,7 +124,7 @@ const App = () => {
 
   return (
     <div>
-      <HeroSection addToFavorites={addToFavorites}></HeroSection>
+      <HeroSection></HeroSection>
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}
