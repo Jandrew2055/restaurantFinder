@@ -7,7 +7,7 @@ const DisplayRestaurants = (props) => {
   let restaurantList;
 
   //this function will allow you to add this restaurant to list of favorites
-  const addRestaurantToFavorites = (id) => {
+  const addRestaurantToFavorites = async (id) => {
     console.log('adding restaurant to favorites', id);
   };
   //Here we are rendering all of the restaurant's information: name, price, address
@@ -15,7 +15,18 @@ const DisplayRestaurants = (props) => {
     //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
       //use the restaurant name and grab the image
-      
+      const grabRestaurantPhoto = async () => {
+        const restaurantPhoto = await fetch('/api/photo', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            restaurantId: restaurant.id,
+          }),
+        });
+      };
+      grabRestaurantPhoto(restaurant.id);
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';

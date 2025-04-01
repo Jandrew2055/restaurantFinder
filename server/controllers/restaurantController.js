@@ -36,7 +36,6 @@ restaurantController.getRestaurants = async (req, res, next) => {
           'Content-Type': 'application/json',
           'X-Goog-Api-Key': GOOGLE_API_KEY,
           'X-Goog-FieldMask': [
-            'places.name',
             'places.id',
             'places.displayName',
             'places.formattedAddress',
@@ -53,6 +52,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
     //CAN BE DELETED BELOW JUST TESTING
     // console.log('testing api call');
+
     //if not proceed with collecting data received
     const data = await response.json();
 
@@ -64,38 +64,49 @@ restaurantController.getRestaurants = async (req, res, next) => {
     //if fetch call in the server-side fails, throw error
     throw new Error(`Error fetching information from Google API:${error}`);
   }
+};
 
-  //EVERYTHING BELOW CAN BE DELETEDD, WILL HAVE TO BE REDONE WITH GOOGLE API
+restaurantController.getPhoto = async (_req, res, next) => {
+  try {
+    const response = await fetch(())
 
-  // This is where the header lies (blueprint)
-  // console.log(req.body);
-  // const HEADER = {
-  //   method: 'GET',
-  //   headers: {
-  //     accept: 'application/json',
-  //     Authorization: `Bearer ${API_KEY}`,
-  //   },
-  // };
 
-  // const { latitude, longitude } = req.body; // grab the coordinates of user sending request
-  // //if user has not chosen his own coordinates, the chosen coordinates will be NYC
-  // console.log('serverLatitude: ', latitude);
-  // console.log('serverLongitude: ', longitude);
-  // //This will be the added portion to the fetch request to make it more accurate
-  // const addedString = `?latitude=${latitude}&longitude=${longitude}&sort_by=best_match&limit=20`;
 
-  // fetch(`${URL}${addedString}`, HEADER)
-  //   .then((res) => {
-  //     console.log(res);
-  //     return res.json();
-  //   })
-  //   .then((data) => {
-  //     console.log(data);
-  //     res.locals.restaurants = data;
-  //   })
-  //   .then(() => {
-  //     return next();
-  //   });
+    return next();
+  } catch (err) {
+    return next(err);
+  }
 };
 
 module.exports = restaurantController;
+//EVERYTHING BELOW CAN BE DELETEDD, WILL HAVE TO BE REDONE WITH GOOGLE API
+
+// This is where the header lies (blueprint)
+// console.log(req.body);
+// const HEADER = {
+//   method: 'GET',
+//   headers: {
+//     accept: 'application/json',
+//     Authorization: `Bearer ${API_KEY}`,
+//   },
+// };
+
+// const { latitude, longitude } = req.body; // grab the coordinates of user sending request
+// //if user has not chosen his own coordinates, the chosen coordinates will be NYC
+// console.log('serverLatitude: ', latitude);
+// console.log('serverLongitude: ', longitude);
+// //This will be the added portion to the fetch request to make it more accurate
+// const addedString = `?latitude=${latitude}&longitude=${longitude}&sort_by=best_match&limit=20`;
+
+// fetch(`${URL}${addedString}`, HEADER)
+//   .then((res) => {
+//     console.log(res);
+//     return res.json();
+//   })
+//   .then((data) => {
+//     console.log(data);
+//     res.locals.restaurants = data;
+//   })
+//   .then(() => {
+//     return next();
+//   });
