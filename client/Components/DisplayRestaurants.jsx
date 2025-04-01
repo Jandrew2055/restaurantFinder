@@ -14,8 +14,10 @@ const DisplayRestaurants = (props) => {
   if (restaurantData) {
     //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
+      // console.log('restaurant:', restaurant);
       //use the restaurant name and grab the image
       const grabRestaurantPhoto = async () => {
+        //send the restaurant Id to grab the photo from the API for each restaurant
         const restaurantPhoto = await fetch('/api/photo', {
           method: 'POST',
           headers: {

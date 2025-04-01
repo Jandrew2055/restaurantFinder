@@ -37,6 +37,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
           'X-Goog-Api-Key': GOOGLE_API_KEY,
           'X-Goog-FieldMask': [
             'places.id',
+            'places.name',
             'places.displayName',
             'places.formattedAddress',
             'places.priceRange',
@@ -66,11 +67,26 @@ restaurantController.getRestaurants = async (req, res, next) => {
   }
 };
 
-restaurantController.getPhoto = async (_req, res, next) => {
+restaurantController.getPhoto = async (req, res, next) => {
+  const { restaurantId } = req.body;
+
+  console.log('TESTING ID:', restaurantId);
+
+  //make a request to the API to grab the restaurant's photo
+  const URL = `https://places.googleapis.com/v1/places/${restaurantId}`;
+
   try {
-    const response = await fetch(())
-
-
+    const response = await fetch(URL, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Goog-Api-Key': GOOGLE_API_KEY,
+        'X-Goog-FieldMask': '*',
+      },
+    });
+    const data = await response.json();
+    console.log(data);
+    res.locals.photo = response;
 
     return next();
   } catch (err) {
