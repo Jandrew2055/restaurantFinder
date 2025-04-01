@@ -3,7 +3,7 @@ import React from 'react';
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
-  console.log(restaurantData);
+  // console.log(restaurantData);
   let restaurantList;
 
   //this function will allow you to add this restaurant to list of favorites
@@ -18,17 +18,31 @@ const DisplayRestaurants = (props) => {
       //use the restaurant name and grab the image
       const grabRestaurantPhoto = async () => {
         //send the restaurant Id to grab the photo from the API for each restaurant
-        const restaurantPhoto = await fetch('/api/photo', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            restaurantId: restaurant.id,
-          }),
-        });
+        try {
+          const response = await fetch('/api/photo', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              photoResource: restaurant.photos[0].name,
+            }),
+          });
+
+          //if response from the fetching using API is not valid throw error
+          if (!response.ok) {
+            throw new Error('Error with response!');
+          }
+          const data = response.json();
+
+          return data;
+
+          console.log('logging the data on the frontend:', data);
+        } catch (err) {
+          console.log('error grabbing photos from server:', err);
+        }
       };
-      grabRestaurantPhoto(restaurant.id);
+      const photoUri = grabRestaurantPhoto(restaurant.id);
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';

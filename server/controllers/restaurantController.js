@@ -14,7 +14,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
   //body request to be sent with google places api request
   const body = {
     includedTypes: ['italian_restaurant'],
-    maxResultCount: 5,
+    maxResultCount: 1,
     locationRestriction: {
       circle: {
         center: {
@@ -43,6 +43,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
             'places.priceRange',
             'places.rating',
             'places.googleMapsLinks',
+            'places.photos',
           ],
         },
         body: JSON.stringify(body),
@@ -68,30 +69,44 @@ restaurantController.getRestaurants = async (req, res, next) => {
 };
 
 restaurantController.getPhoto = async (req, res, next) => {
-  const { restaurantId } = req.body;
+  const { photoResource } = req.body;
 
-  console.log('TESTING ID:', restaurantId);
+  console.log('TESTING photo resource:', photoResource.trim());
+
+  // media?maxHeightPx=400&maxWidthPx=400&key=API_KEY
+
+  const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
 
   //make a request to the API to grab the restaurant's photo
-  const URL = `https://places.googleapis.com/v1/places/${restaurantId}`;
+  // const URL = `https://places.googleapis.com/v1/places/${restaurantId}`;
 
   try {
-    const response = await fetch(URL, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Goog-Api-Key': GOOGLE_API_KEY,
-        'X-Goog-FieldMask': '*',
-      },
-    });
+    const response = await fetch(URL);
+    if (!response.ok) {
+      throw new Error('Failed to fetch photo');
+    }
+    //parse response using .json()
     const data = await response.json();
-    console.log(data);
-    res.locals.photo = response;
+
+    const photoUri = data.photoUri;
+
+
+    // console.log('TESTING PHOTO Results', data.photoUri);
+
+    // console.log('response from api fetching:', response);
+    // // const data = await response.json();
+    // console.log('TESTING DATA RESULTS:', data);
+
+    // console.log('photoUrl:', response);
+
+    res.locals.photo = photoUri;
 
     return next();
   } catch (err) {
+    console.log('error fetching from api:', err);
     return next(err);
   }
+  // return next();
 };
 
 module.exports = restaurantController;
