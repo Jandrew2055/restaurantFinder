@@ -14,6 +14,9 @@ const DisplayRestaurants = (props) => {
   if (restaurantData) {
     //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
+      //use the restaurant name and grab the image
+      
+
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';
       if (restaurant.priceRange && restaurant.priceRange.endPrice) {
