@@ -2,7 +2,7 @@ import React from 'react';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
-  const { restaurantData } = props;
+  const { restaurantData, photoUri } = props;
   // console.log(restaurantData);
   let restaurantList;
 
@@ -28,21 +28,21 @@ const DisplayRestaurants = (props) => {
               photoResource: restaurant.photos[0].name,
             }),
           });
-
           //if response from the fetching using API is not valid throw error
           if (!response.ok) {
             throw new Error('Error with response!');
           }
           const data = response.json();
-
           return data;
-
-          console.log('logging the data on the frontend:', data);
+          // console.log('logging the data on the frontend:', data);
         } catch (err) {
           console.log('error grabbing photos from server:', err);
         }
       };
+
+      //fetch photo for restaurant using restaurant Id
       const photoUri = grabRestaurantPhoto(restaurant.id);
+      console.log('TESING ON FRONTEND PHOTO URI:', photoUri);
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';
@@ -52,14 +52,15 @@ const DisplayRestaurants = (props) => {
       }
 
       //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE
-      // <img
-      //   src={restaurant.photos[0]}
-      //   alt={restaurant.displayName.text}
-      //   className='restaurant-Image'
-      // ></img>;
+
       return (
         <li key={restaurant.id} className='restaurant-Card'>
           <div className='restaurant-Details'>
+            <img
+              src={photoUri}
+              alt={restaurant.displayName.text}
+              className='restaurant-Image'
+            ></img>
             <h3>Name: {restaurant.displayName.text}</h3>
             <p>Pricing: {price}</p>
             <p>Rating: {restaurant.rating}/5</p>

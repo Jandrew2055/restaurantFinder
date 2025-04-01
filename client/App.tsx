@@ -12,6 +12,7 @@ const App = () => {
   }); //have predefined location set to NYC midtown
 
   const [restaurantData, setRestaurantData] = useState(null); //will hold all of the restaurant data that is retrieved from the API
+  const [photoUri, setPhotoUri] = useState('');
 
   // const [favoriteRestaurant, setFavoriteRestaurant] = useState({
   //   name: 'Jose',
