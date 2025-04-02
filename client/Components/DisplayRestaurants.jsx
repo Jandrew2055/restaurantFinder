@@ -1,48 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
-  const { restaurantData, photoUri } = props;
-  // console.log(restaurantData);
-  let restaurantList;
+  const { restaurantData } = props;
+  const [restaurantPhotos, setRestaurantPhotos] = useState({});
 
   //this function will allow you to add this restaurant to list of favorites
   const addRestaurantToFavorites = async (id) => {
     console.log('adding restaurant to favorites', id);
   };
+
+  //function to grab restaurant photos
+  const grabRestaurantPhoto = async (photoResource) => {
+    //send the restaurant Id to grab the photo from the API for each restaurant
+    try {
+      const response = await fetch('/api/photo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          photoResource,
+        }),
+      });
+      //if response from the fetching using API is not valid throw error
+      if (!response.ok) {
+        throw new Error('Error with response!');
+      }
+      const data = await response.json();
+      return data.photoUri;
+      // console.log('logging the data on the frontend:', data);
+    } catch (err) {
+      console.log('error grabbing photos from server:', err);
+    }
+  };
+
+  //saves photoURI in state to access afterwards
+  useEffect(() => {
+    // Fetch photos for all restaurants when restaurantData changes
+    if (restaurantData) {
+      restaurantData.forEach(async (restaurant) => {
+        const result = await grabRestaurantPhoto(restaurant.photos[0].name);
+
+        console.log('TESING ON FRONTEND PHOTO URI:', result);
+        // const photoUri = result ? result : '';
+
+        setRestaurantPhotos((prevPhotos) => ({
+          ...prevPhotos,
+          [restaurant.id]: result, // Set photo for this specific restaurant by its id
+        }));
+      });
+    }
+  }, [restaurantData]);
+
+  // console.log(restaurantData);
+  let restaurantList;
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
     //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
       // console.log('restaurant:', restaurant);
       //use the restaurant name and grab the image
-      const grabRestaurantPhoto = async () => {
-        //send the restaurant Id to grab the photo from the API for each restaurant
-        try {
-          const response = await fetch('/api/photo', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              photoResource: restaurant.photos[0].name,
-            }),
-          });
-          //if response from the fetching using API is not valid throw error
-          if (!response.ok) {
-            throw new Error('Error with response!');
-          }
-          const data = response.json();
-          return data;
-          // console.log('logging the data on the frontend:', data);
-        } catch (err) {
-          console.log('error grabbing photos from server:', err);
-        }
-      };
 
       //fetch photo for restaurant using restaurant Id
-      const photoUri = grabRestaurantPhoto(restaurant.id);
-      console.log('TESING ON FRONTEND PHOTO URI:', photoUri);
+      const photoUri = restaurantPhotos[restaurant.id];
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';
@@ -56,11 +77,15 @@ const DisplayRestaurants = (props) => {
       return (
         <li key={restaurant.id} className='restaurant-Card'>
           <div className='restaurant-Details'>
-            <img
-              src={photoUri}
-              alt={restaurant.displayName.text}
-              className='restaurant-Image'
-            ></img>
+            {photoUri ? (
+              <img
+                src={photoUri}
+                alt={restaurant.displayName.text}
+                className='restaurant-Image'
+              ></img>
+            ) : (
+              <p>Loading photo...</p>
+            )}
             <h3>Name: {restaurant.displayName.text}</h3>
             <p>Pricing: {price}</p>
             <p>Rating: {restaurant.rating}/5</p>

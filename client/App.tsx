@@ -12,7 +12,6 @@ const App = () => {
   }); //have predefined location set to NYC midtown
 
   const [restaurantData, setRestaurantData] = useState(null); //will hold all of the restaurant data that is retrieved from the API
-  const [photoUri, setPhotoUri] = useState('');
 
   // const [favoriteRestaurant, setFavoriteRestaurant] = useState({
   //   name: 'Jose',
@@ -28,10 +27,6 @@ const App = () => {
           console.log('location data:', position);
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
-
-          //CAN BE DELETED BELOW, JUST TESTING
-          // console.log('Latitude: ', latitude);
-          // console.log('Longitude: ', longitude);
         },
         (err: GeolocationPositionError) => {
           console.warn({ code: err.code, log: `ERROR: ${err}` });

@@ -14,7 +14,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
   //body request to be sent with google places api request
   const body = {
     includedTypes: ['italian_restaurant'],
-    maxResultCount: 1,
+    maxResultCount: 5,
     locationRestriction: {
       circle: {
         center: {
@@ -88,8 +88,7 @@ restaurantController.getPhoto = async (req, res, next) => {
     //parse response using .json()
     const data = await response.json();
 
-    const photoUri = data.photoUri;
-
+    // const photoUri = data.photoUri;
 
     // console.log('TESTING PHOTO Results', data.photoUri);
 
@@ -99,7 +98,7 @@ restaurantController.getPhoto = async (req, res, next) => {
 
     // console.log('photoUrl:', response);
 
-    res.locals.photo = photoUri;
+    res.locals.photo = data;
 
     return next();
   } catch (err) {
