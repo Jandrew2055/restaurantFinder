@@ -37,20 +37,23 @@ const DisplayRestaurants = (props) => {
 
   //saves photoURI in state to access afterwards
   useEffect(() => {
+    if (!restaurantData) return;
+
     // Fetch photos for all restaurants when restaurantData changes
-    if (restaurantData) {
-      restaurantData.forEach(async (restaurant) => {
+    restaurantData.forEach(async (restaurant, index) => {
+      setTimeout(async () => {
         const result = await grabRestaurantPhoto(restaurant.photos[0].name);
 
-        console.log('TESING ON FRONTEND PHOTO URI:', result);
+        // console.log('TESING ON FRONTEND PHOTO URI:', result);
         // const photoUri = result ? result : '';
 
         setRestaurantPhotos((prevPhotos) => ({
           ...prevPhotos,
           [restaurant.id]: result, // Set photo for this specific restaurant by its id
         }));
-      });
-    }
+        //this ensures that each request happens after every 300ms
+      }, index * 1000);
+    });
   }, [restaurantData]);
 
   // console.log(restaurantData);
@@ -76,16 +79,16 @@ const DisplayRestaurants = (props) => {
 
       return (
         <li key={restaurant.id} className='restaurant-Card'>
+          {photoUri ? (
+            <img
+              src={photoUri}
+              alt={restaurant.displayName.text}
+              className='restaurant-Image'
+            ></img>
+          ) : (
+            <p>Loading photo...</p>
+          )}
           <div className='restaurant-Details'>
-            {photoUri ? (
-              <img
-                src={photoUri}
-                alt={restaurant.displayName.text}
-                className='restaurant-Image'
-              ></img>
-            ) : (
-              <p>Loading photo...</p>
-            )}
             <h3>Name: {restaurant.displayName.text}</h3>
             <p>Pricing: {price}</p>
             <p>Rating: {restaurant.rating}/5</p>

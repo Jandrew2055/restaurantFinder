@@ -13,7 +13,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
   //body request to be sent with google places api request
   const body = {
-    includedTypes: ['italian_restaurant'],
+    includedTypes: ['restaurant'],
     maxResultCount: 5,
     locationRestriction: {
       circle: {

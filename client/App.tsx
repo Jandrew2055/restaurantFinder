@@ -24,7 +24,7 @@ const App = () => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           // console.log(position);
-          console.log('location data:', position);
+          // console.log('location data:', position);
           const { latitude, longitude } = position.coords;
           setUserLocation({ latitude, longitude });
         },
@@ -89,7 +89,7 @@ const App = () => {
     //   throw new Error('Error getting data');
     // }
 
-    console.log('test');
+    // console.log('test');
   };
 
   //this will add restaurant to list of favorites in MongoDB
