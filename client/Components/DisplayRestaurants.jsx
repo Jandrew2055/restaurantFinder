@@ -109,6 +109,8 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant List</h1>
+      {/* <input type='checkbox' id='scales' name='scales' checked />
+      <label for='scales'>Scales</label> */}
       <button onClick={props.getUserLocation}> Near Me</button>
       <button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
