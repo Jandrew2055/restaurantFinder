@@ -119,16 +119,3 @@ const DisplayRestaurants = (props) => {
 };
 
 export default DisplayRestaurants;
-
-//   this is the one we want to use BELOWWWW
-//   useEffect(() => {
-//     fetch(`${URL}${addedString}`, HEADER)
-//       .then((res) => {
-//         console.log(res);
-//         return res.json();
-//       })
-//       .then((data) => {
-//         console.log(data.businesses[0].name);
-//         setData(data.businesses);
-//       });
-//   }, [props.userLocation]);

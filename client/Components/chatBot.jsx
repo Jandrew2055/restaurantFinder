@@ -7,6 +7,7 @@ const Chatbot = () => {
   return (
     <div>
       <h1>AI CHATBOT</h1>
+      <input id='ai-chatbot' type='textbox'></input>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam labore
         voluptatum aspernatur ullam ex eum atque harum in, quod consequuntur
