@@ -29,7 +29,6 @@ const DisplayRestaurants = (props) => {
       }
       const data = await response.json();
       return data.photoUri;
-      // console.log('logging the data on the frontend:', data);
     } catch (err) {
       console.log('error grabbing photos from server:', err);
     }
@@ -44,9 +43,6 @@ const DisplayRestaurants = (props) => {
       setTimeout(async () => {
         const result = await grabRestaurantPhoto(restaurant.photos[0].name);
 
-        // console.log('TESING ON FRONTEND PHOTO URI:', result);
-        // const photoUri = result ? result : '';
-
         setRestaurantPhotos((prevPhotos) => ({
           ...prevPhotos,
           [restaurant.id]: result, // Set photo for this specific restaurant by its id
@@ -56,13 +52,11 @@ const DisplayRestaurants = (props) => {
     });
   }, [restaurantData]);
 
-  // console.log(restaurantData);
   let restaurantList;
   //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
     //grab the restaurant data from parent
     restaurantList = restaurantData.map((restaurant) => {
-      // console.log('restaurant:', restaurant);
       //use the restaurant name and grab the image
 
       //fetch photo for restaurant using restaurant Id

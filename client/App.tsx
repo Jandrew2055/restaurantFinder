@@ -67,29 +67,6 @@ const App = () => {
     } catch (error) {
       throw new Error(`Error sending request to api:${error}`);
     }
-
-    //BELOW is what we will send if we send over coordinates from the front end, a refactor later
-    // try {
-    //   //sends a request to the backend, with user's location(if any)
-
-    //   const response = await fetch('/api', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       longitude: `${userLocation.longitude}`,
-    //       latitude: `${userLocation.latitude}`,
-    //     }),
-    //   });
-    //   const data = await response.json();
-    //   console.log(data);
-    // } catch {
-    //   //otherwise throw error
-    //   throw new Error('Error getting data');
-    // }
-
-    // console.log('test');
   };
 
   //this will add restaurant to list of favorites in MongoDB
