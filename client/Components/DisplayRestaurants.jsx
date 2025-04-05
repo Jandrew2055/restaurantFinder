@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import Checkbox from './Checkbox';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
+
+  //this list will be passed down to child to be used to render checkboxes
+  const list = ['Mexican', 'Italian', 'Carribean', 'Thai'];
 
   //this function will allow you to add this restaurant to list of favorites
   const addRestaurantToFavorites = async (id) => {
@@ -34,7 +38,7 @@ const DisplayRestaurants = (props) => {
     }
   };
 
-  //saves photoURI in state to access afterwards
+  //saves photoURI in state to access afterwards (runs the function above)
   useEffect(() => {
     if (!restaurantData) return;
 
@@ -109,8 +113,9 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant List</h1>
-      {/* <input type='checkbox' id='scales' name='scales' checked />
-      <label for='scales'>Scales</label> */}
+      <Checkbox list={list} />
+      <input type='checkbox' id='spanish' name='spanish'></input>
+
       <button onClick={props.getUserLocation}> Near Me</button>
       <button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
