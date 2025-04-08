@@ -44,7 +44,7 @@ npm install
 
 ## How to Contribute
 
-### We welcome contributions to this project! To ensure a smooth contribution process, please follow these steps:
+### I welcome contributions to this project! To ensure a smooth contribution process, please follow these steps:
 
 #### 1. Fork the Repository
 ```bash
