@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Checkbox = ({ list }) => {
-  console.log(list);
+const Checkbox = () => {
+  // console.log(list);
+  const [isChecked, setIsChecked] = useState(false);
+
+  //changes status of checkbox
+  const checkHandler = () => {
+    setIsChecked(!isChecked);
+  };
 
   //will print out the list of restaurants user can select from to filter list
   return (
     <div>
-      <ul id='restaurant-filtering-list'>
-        {list.map((element) => {
-          return (
-            <li id='restaurant-'>
-              <label htmlFor={element}>{element}</label>
-              <input type='checkbox' id={element} name={element}></input>
-            </li>
-          );
-        })}
-      </ul>
+      <label htmlFor='test'>Restaurant</label>
+      <input
+        type='checkbox'
+        id='test'
+        checked={isChecked}
+        onChange={checkHandler}
+      ></input>
     </div>
   );
 };
