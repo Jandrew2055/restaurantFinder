@@ -11,9 +11,42 @@ I built this project with interests in solving the issue of finding a good resta
 - [Credits](#credits)
 - [License](#license)
 
-## Installation
+## Technologies Used
 
+- **Frontend:**
+  - React (for the user interface)
+  
+- **Backend:**
+  - Node.js (for the server-side logic)
+  - Express.js (for handling API routes)
+  
+- **Database:**
+  - MongoDB (for storing favorite restaurants)
+
+## Installation
+Follow the steps below to install and run the project locally.
+
+#### 1.Clone the Repository
+```bash
+git clone https://github.com/your-username/your-repository.git
+```
+#### 2.Navigate to the Project Directory
+```bash
+cd restaurantFinder
+```
+#### 3.Install Dependencies
+```bash
 npm install 
+```
+<!-- #### 2.Navigate to the project directory
+```bash
+cd restaurantFinder
+```
+-->
+#### 4.Run the Project
+```bash
+npm run dev
+```
 
 ## Usage
 
