@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
 
+//this list will be passed down to child to be used to render checkboxes
+const foodType = [
+  { id: 0, name: 'Mexican', state: false },
+  { id: 1, name: 'Italian', state: false },
+  { id: 2, name: 'Carribean', state: false },
+  { id: 3, name: 'Thai', state: false },
+];
+
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
-  const [isChecked, setIsChecked] = useState();
-
-  //this list will be passed down to child to be used to render checkboxes
-  const foodType = [
-    { id: 0, name: 'Mexican', state: false },
-    { id: 1, name: 'Italian', state: false },
-    { id: 2, name: 'Carribean', state: false },
-    { id: 3, name: 'Thai', state: false },
-  ];
+  const [foodTypeFilter, setFoodTypeFilter] = useState(() => foodType);
 
   //changes status of checkbox
   const checkHandler = (event) => {
-    setIsChecked(!isChecked);
-    console.log(event);
+    const { id } = event.target;
+
+    //maps through all items and updates state for the one that is clicked
+    setFoodTypeFilter((prevState) =>
+      prevState.map((item) => {
+        //creates new object with previous item and updates the state inside
+        return item.id === parseInt(id)
+          ? { ...item, state: !item.state }
+          : item;
+      })
+    );
   };
 
   //this function will allow you to add this restaurant to list of favorites
@@ -125,12 +134,20 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant List</h1>
-      <Checkbox
-        id={foodType[0].id}
-        name={foodType[0].name}
-        checked={foodType[0].state}
-        checkHandler={checkHandler}
-      />
+      <ul>
+        {foodTypeFilter.map((type) => {
+          return (
+            <li key={type.id}>
+              <Checkbox
+                id={type.id}
+                name={type.name}
+                checked={type.state}
+                checkHandler={checkHandler}
+              />
+            </li>
+          );
+        })}
+      </ul>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
       <button onClick={props.getUserLocation}> Near Me</button>
       <button onClick={props.grabRestaurantInfo}>
