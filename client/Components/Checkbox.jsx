@@ -1,16 +1,9 @@
 import React, { useState } from 'react';
 
-const Checkbox = (props) => {
+const Checkbox = (id, checkHandler, name, checked) => {
   // console.log(list);
 
   //LOGIC TO BE MOVED TO CHECKBOX LIST COMPONENT
-  const [isChecked, setIsChecked] = useState(false);
-
-  //changes status of checkbox
-  const checkHandler = (event) => {
-    setIsChecked(!isChecked);
-    console.log(event);
-  };
 
   //will print out the list of restaurants user can select from to filter list
   return (
@@ -18,11 +11,11 @@ const Checkbox = (props) => {
       <label>
         <input
           type='checkbox'
-          id={props.restaurant}
-          checked={isChecked}
+          id={id}
+          checked={checked}
           onChange={checkHandler}
         ></input>
-        {props.restaurant}
+        {name}
       </label>
     </div>
   );
