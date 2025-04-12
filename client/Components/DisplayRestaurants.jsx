@@ -15,7 +15,7 @@ const DisplayRestaurants = (props) => {
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
   const [foodTypeFilter, setFoodTypeFilter] = useState(() => foodType);
 
-  //changes status of checkbox
+  //changes status of checkbox for state
   const checkHandler = (event) => {
     const { id } = event.target;
 

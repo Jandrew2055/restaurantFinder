@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import Favorites from './Components/Favorites.jsx';
-import Forum from './Components/Forum.jsx';
-import NavBar from './Components/NavBar.jsx';
+import Favorites from './Pages/Favorites.jsx';
+import Forum from './Pages/Forum.jsx';
+import NavBar from './Navigation/NavBar.jsx';
 import Chatbot from './Components/chatBot.jsx';
 import Error from './Components/Error.jsx';
 import './styles/main.scss';

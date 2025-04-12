@@ -1,7 +1,7 @@
 // import * as React from 'react';
 import { useState, useEffect } from 'react';
 import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
-import NavBar from './Components/NavBar.jsx';
+import NavBar from './Navigation/NavBar.jsx';
 import FooterBar from './Components/Footer.jsx';
 import HeroSection from './Components/Hero.jsx';
 
