@@ -35,6 +35,7 @@ const DisplayRestaurants = (props) => {
     console.log('adding restaurant to favorites', id);
   };
 
+  //CHANGE FUNCTION TO INSTEAD SEND ALL CURRENT RESTAURANT'S NAMES 
   //function to grab restaurant photos
   const grabRestaurantPhoto = async (photoResource) => {
     //send the restaurant Id to grab the photo from the API for each restaurant
