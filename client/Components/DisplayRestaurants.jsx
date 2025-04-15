@@ -35,7 +35,7 @@ const DisplayRestaurants = (props) => {
     console.log('adding restaurant to favorites', id);
   };
 
-  //CHANGE FUNCTION TO INSTEAD SEND ALL CURRENT RESTAURANT'S NAMES 
+  //CHANGE FUNCTION TO INSTEAD SEND ALL CURRENT RESTAURANT'S IDs AS ARRAY IN THE BODY
   //function to grab restaurant photos
   const grabRestaurantPhoto = async (photoResource) => {
     //send the restaurant Id to grab the photo from the API for each restaurant
@@ -60,9 +60,20 @@ const DisplayRestaurants = (props) => {
     }
   };
 
+  /* 
+    REVAMP THIS USE EFFECT TO INSTEAD SEND AN ARRAY OF RESTAURANT IDS
+    TO THE BACKEND, THE SERVER WOULD HANDLE RATE LIMITING
+    */
+
   //saves photoURI in state to access afterwards (runs the function above)
   useEffect(() => {
     if (!restaurantData) return;
+
+     /* 
+      THIS WILL RUN THE GRAB RESTAURANT PHOTO FUNCTION JUST ONCE, THE RESULTS
+      WOULD BE AN OBJECT CONTAINING multiple [RESTAURANTID] = PHOTO-URIs
+    */
+
 
     // Fetch photos for all restaurants when restaurantData changes
     restaurantData.forEach(async (restaurant, index) => {

@@ -69,7 +69,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 };
 
 restaurantController.getPhoto = async (req, res, next) => {
-  const { photoResource } = req.body;
+  const { photoResource } = req.body; //grab photoresource array of id's
 
   console.log('TESTING photo resource:', photoResource.trim());
 
