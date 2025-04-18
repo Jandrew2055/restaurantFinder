@@ -35,7 +35,6 @@ const DisplayRestaurants = (props) => {
     console.log('adding restaurant to favorites', id);
   };
 
-  //CHANGE FUNCTION TO INSTEAD SEND ALL CURRENT RESTAURANT'S IDs AS ARRAY IN THE BODY
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
     //send the restaurant Id to grab the photo from the API for each restaurant
@@ -55,16 +54,12 @@ const DisplayRestaurants = (props) => {
       }
       const data = await response.json();
 
-      return data; //will return the data (all photos in object) from the server
+      return data;
+      // return data; //will return the data (all photos in object) from the server
     } catch (err) {
       console.log('error grabbing photos from server:', err);
     }
   };
-
-  /* 
-    REVAMP THIS USE EFFECT TO INSTEAD SEND AN ARRAY OF RESTAURANT IDS
-    TO THE BACKEND, THE SERVER WOULD HANDLE RATE LIMITING
-    */
 
   //saves photoURI in state to access afterwards (runs the function above)
   useEffect(() => {
@@ -73,31 +68,44 @@ const DisplayRestaurants = (props) => {
       THIS WILL RUN THE GRAB RESTAURANT PHOTO FUNCTION JUST ONCE, THE RESULTS
       WOULD BE AN OBJECT CONTAINING multiple [RESTAURANTID] = PHOTO-URIs
     */
-    const restaurantPhotosObj = {};
-    restaurantData.forEach((restaurant) => {
-      restaurantPhotosObj[restaurant.id] = restaurant.photos[0].name;
-    });
+    const fetchPhotos = async () => {
+      const restaurantPhotosObj = {};
+      restaurantData.forEach((restaurant) => {
+        restaurantPhotosObj[restaurant.id] = restaurant.photos[0].name;
+      });
 
-    grabRestaurantPhotos(restaurantPhotosObj);
+      try {
+        const result = await grabRestaurantPhotos(restaurantPhotosObj);
 
-    // console.log(
-    //   'object holding each restaurant id along with photo:',
-    //   restaurantPhotosObj
-    // );
+        if (result) {
+          console.log('the object containing restaurants and photos:', result);
+          setRestaurantPhotos(result);
+        }
+      } catch (err) {
+        console.log('Error fetching photos:', err);
+      }
 
-    //DELETE BELOW ONCE ABOVE HAS BEEN IMPLEMENTED
-    // Fetch photos for all restaurants when restaurantData changes
-    // restaurantData.forEach(async (restaurant, index) => {
-    //   setTimeout(async () => {
-    //     const result = await grabRestaurantPhoto(restaurant.photos[0].name);
+      // console.log(
+      //   'object holding each restaurant id along with photo:',
+      //   restaurantPhotosObj
+      // );
 
-    //     setRestaurantPhotos((prevPhotos) => ({
-    //       ...prevPhotos,
-    //       [restaurant.id]: result, // Set photo for this specific restaurant by its id
-    //     }));
-    //     //this ensures that each request happens after every 300ms
-    //   }, index * 1000);
-    // });
+      //DELETE BELOW ONCE ABOVE HAS BEEN IMPLEMENTED
+      // Fetch photos for all restaurants when restaurantData changes
+      // restaurantData.forEach(async (restaurant, index) => {
+      //   setTimeout(async () => {
+      //     const result = await grabRestaurantPhoto(restaurant.photos[0].name);
+
+      //     setRestaurantPhotos((prevPhotos) => ({
+      //       ...prevPhotos,
+      //       [restaurant.id]: result, // Set photo for this specific restaurant by its id
+      //     }));
+      //     //this ensures that each request happens after every 300ms
+      //   }, index * 1000);
+      // });
+    };
+
+    fetchPhotos();
   }, [restaurantData]);
 
   let restaurantList;

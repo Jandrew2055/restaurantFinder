@@ -7,8 +7,8 @@ router.post('/', restaurantController.getRestaurants, (req, res) => {
   return res.status(200).json(res.locals.data);
 });
 
-router.post('/photo', restaurantController.getPhoto, (req, res) => {
-  return res.status(200).json(res.locals.photo);
+router.post('/photo', restaurantController.getPhotos, (req, res) => {
+  return res.status(200).json(res.locals.photos);
 });
 
 module.exports = router;

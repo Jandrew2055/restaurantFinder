@@ -68,44 +68,47 @@ restaurantController.getRestaurants = async (req, res, next) => {
   }
 };
 
-restaurantController.getPhoto = async (req, res, next) => {
-  const { photoResource } = req.body; //grab photoresource array of id's
-
-  console.log('TESTING photo resource:', photoResource.trim());
+restaurantController.getPhotos = async (req, res, next) => {
+  const { photoObject } = req.body; //grab object containing all restaurant ids and photoResource
 
   // media?maxHeightPx=400&maxWidthPx=400&key=API_KEY
-
-  const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
 
   //make a request to the API to grab the restaurant's photo
   // const URL = `https://places.googleapis.com/v1/places/${restaurantId}`;
 
-  try {
-    const response = await fetch(URL);
-    if (!response.ok) {
-      throw new Error('Failed to fetch photo');
+  for (const [restaurantId, photoResource] of Object.entries(photoObject)) {
+    console.log('restaurantId:', restaurantId);
+    // console.log('photoResource:', photoResource);
+
+    const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
+
+    try {
+      const response = await fetch(URL);
+      if (!response.ok) {
+        throw new Error('Failed to fetch photo');
+      }
+      //parse response using .json()
+      const data = await response.json();
+      //update object now with photoURI in the value for each restaurant
+      photoObject[restaurantId] = data.photoUri;
+      // const photoUri = data.photoUri;
+
+      // console.log('TESTING PHOTO Results', data.photoUri);
+
+      // console.log('response from api fetching:', response);
+      // // const data = await response.json();
+      // console.log('TESTING DATA RESULTS:', data);
+
+      // console.log('photoUrl:', response);
+    } catch (err) {
+      console.log('error fetching from api:', err);
+      // return next(err);
     }
-    //parse response using .json()
-    const data = await response.json();
-
-    // const photoUri = data.photoUri;
-
-    // console.log('TESTING PHOTO Results', data.photoUri);
-
-    // console.log('response from api fetching:', response);
-    // // const data = await response.json();
-    // console.log('TESTING DATA RESULTS:', data);
-
-    // console.log('photoUrl:', response);
-
-    res.locals.photo = data;
-
-    return next();
-  } catch (err) {
-    console.log('error fetching from api:', err);
-    return next(err);
   }
-  // return next();
+  console.log('testing photo object result:', photoObject);
+  //return modified photoObject, now containing all restaurants and photos
+  res.locals.photos = photoObject;
+  return next();
 };
 
 module.exports = restaurantController;
