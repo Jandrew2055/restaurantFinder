@@ -52,9 +52,6 @@ restaurantController.getRestaurants = async (req, res, next) => {
     //if response received is not properly collected, throw error
     if (!response.ok) throw new Error(`Error with response:${response}`);
 
-    //CAN BE DELETED BELOW JUST TESTING
-    // console.log('testing api call');
-
     //if not proceed with collecting data received
     const data = await response.json();
 
@@ -71,11 +68,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 restaurantController.getPhotos = async (req, res, next) => {
   const { photoObject } = req.body; //grab object containing all restaurant ids and photoResource
 
-  // media?maxHeightPx=400&maxWidthPx=400&key=API_KEY
-
   //make a request to the API to grab the restaurant's photo
-  // const URL = `https://places.googleapis.com/v1/places/${restaurantId}`;
-
   for (const [restaurantId, photoResource] of Object.entries(photoObject)) {
     console.log('restaurantId:', restaurantId);
     // console.log('photoResource:', photoResource);
@@ -93,13 +86,6 @@ restaurantController.getPhotos = async (req, res, next) => {
       photoObject[restaurantId] = data.photoUri;
       // const photoUri = data.photoUri;
 
-      // console.log('TESTING PHOTO Results', data.photoUri);
-
-      // console.log('response from api fetching:', response);
-      // // const data = await response.json();
-      // console.log('TESTING DATA RESULTS:', data);
-
-      // console.log('photoUrl:', response);
     } catch (err) {
       console.log('error fetching from api:', err);
       // return next(err);

@@ -64,10 +64,8 @@ const DisplayRestaurants = (props) => {
   //saves photoURI in state to access afterwards (runs the function above)
   useEffect(() => {
     if (!restaurantData) return;
-    /* 
-      THIS WILL RUN THE GRAB RESTAURANT PHOTO FUNCTION JUST ONCE, THE RESULTS
-      WOULD BE AN OBJECT CONTAINING multiple [RESTAURANTID] = PHOTO-URIs
-    */
+
+    //this is to make the fetching of photos asynchronous
     const fetchPhotos = async () => {
       const restaurantPhotosObj = {};
       restaurantData.forEach((restaurant) => {
