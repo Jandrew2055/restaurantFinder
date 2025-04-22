@@ -14,7 +14,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
   //body request to be sent with google places api request
   const body = {
     includedTypes: ['mexican_restaurant'],
-    maxResultCount: 10,
+    maxResultCount: 20,
     locationRestriction: {
       circle: {
         center: {
@@ -92,7 +92,7 @@ restaurantController.getPhotos = async (req, res, next) => {
         // return next(err);
       }
     }, 0 + delay);
-    delay += 1000;
+    delay += 500;
   }
 
   //ensures this gets calledd afterlast delay and not right away
