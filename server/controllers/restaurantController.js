@@ -13,7 +13,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
   //body request to be sent with google places api request
   const body = {
-    includedTypes: ['restaurant'],
+    includedTypes: ['mexican_restaurant'],
     maxResultCount: 10,
     locationRestriction: {
       circle: {
@@ -67,34 +67,45 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
 restaurantController.getPhotos = async (req, res, next) => {
   const { photoObject } = req.body; //grab object containing all restaurant ids and photoResource
+  let delay = 0;
 
   //make a request to the API to grab the restaurant's photo
   for (const [restaurantId, photoResource] of Object.entries(photoObject)) {
-    console.log('restaurantId:', restaurantId);
+    // console.log('restaurantId:', restaurantId);
     // console.log('photoResource:', photoResource);
 
-    const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
+    setTimeout(async () => {
+      const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
 
-    try {
-      const response = await fetch(URL);
-      if (!response.ok) {
-        throw new Error('Failed to fetch photo');
+      try {
+        const response = await fetch(URL);
+        if (!response.ok) {
+          throw new Error('Failed to fetch photo');
+        }
+        //parse response using .json()
+        const data = await response.json();
+        //update object now with photoURI in the value for each restaurant
+        photoObject[restaurantId] = data.photoUri;
+        // const photoUri = data.photoUri;
+      } catch (err) {
+        console.log('error fetching from api:', err);
+        // return next(err);
       }
-      //parse response using .json()
-      const data = await response.json();
-      //update object now with photoURI in the value for each restaurant
-      photoObject[restaurantId] = data.photoUri;
-      // const photoUri = data.photoUri;
-
-    } catch (err) {
-      console.log('error fetching from api:', err);
-      // return next(err);
-    }
+    }, 0 + delay);
+    delay += 1000;
   }
-  console.log('testing photo object result:', photoObject);
-  //return modified photoObject, now containing all restaurants and photos
-  res.locals.photos = photoObject;
-  return next();
+
+  //ensures this gets calledd afterlast delay and not right away
+  setTimeout(() => {
+    console.log('Testing photo object result:', photoObject);
+    res.locals.photos = photoObject;
+    return next();
+  }, delay);
+
+  // console.log('testing photo object result:', photoObject);
+  // //return modified photoObject, now containing all restaurants and photos
+  // res.locals.photos = photoObject;
+  // return next();
 };
 
 module.exports = restaurantController;
