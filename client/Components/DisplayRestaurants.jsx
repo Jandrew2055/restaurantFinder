@@ -7,8 +7,8 @@ const DisplayRestaurants = (props) => {
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
 
   //allow us to change state living in parent component
-  const { setFoodTypeFilter } = props;
-  
+  const { foodTypeFilter, setFoodTypeFilter } = props;
+
   //changes status of checkbox for state
   const checkHandler = (event) => {
     const { id } = event.target;

@@ -9,8 +9,11 @@ import HeroSection from './Components/Hero.jsx';
 const foodType = [
   { id: 0, name: 'Mexican', state: false },
   { id: 1, name: 'Italian', state: false },
-  { id: 2, name: 'Carribean', state: false },
-  { id: 3, name: 'Thai', state: false },
+  { id: 2, name: 'Ramen', state: false },
+  { id: 3, name: 'Korean', state: false },
+  { id: 4, name: 'Asian', state: false },
+  { id: 5, name: 'Vietnamese', state: false },
+  { id: 6, name: 'Middle_Eastern', state: false },
 ];
 
 const App = () => {
@@ -52,6 +55,15 @@ const App = () => {
   //UPDATED GOOGLE PLACES API below
   const grabRestaurantInfo = async (event: FormEvent) => {
     event.preventDefault();
+
+    //array containing the checked boxes of restaurants
+    const typesOfRestaurants: string[] = [];
+
+    foodTypeFilter.forEach((type) => {
+      //if checkbox is checked off, add this type to array above
+      if (type.state === true) typesOfRestaurants.push(type.name);
+    });
+
     try {
       //make a call to the api
       const response = await fetch('/api', {
@@ -62,6 +74,7 @@ const App = () => {
         body: JSON.stringify({
           longitude: `${userLocation.longitude}`,
           latitude: `${userLocation.latitude}`,
+          typesOfRestaurants: typesOfRestaurants,
         }),
       });
 
@@ -113,7 +126,7 @@ const App = () => {
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}
-        foodType={foodType}
+        foodTypeFilter={foodTypeFilter}
         setFoodTypeFilter={setFoodTypeFilter}
         grabRestaurantInfo={grabRestaurantInfo}
       ></DisplayRestaurants>

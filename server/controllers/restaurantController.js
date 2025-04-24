@@ -9,7 +9,15 @@ const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
 const restaurantController = {};
 
 restaurantController.getRestaurants = async (req, res, next) => {
-  const { latitude, longitude } = req.body;
+  const { latitude, longitude, typesOfRestaurants } = req.body;
+
+  //makes all restaurants types lowercase and appends the information required
+  const types = typesOfRestaurants.map(
+    (type) => type.toLowerCase() + '_restaurant'
+  );
+
+  console.log('testing retrieval:', typesOfRestaurants);
+  console.log('testing new array:', types);
   /*
   object will hold pairs of what is received from the client
   obj = {
@@ -20,7 +28,7 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
   //body request to be sent with google places api request
   const body = {
-    includedTypes: ['mexican_restaurant'],
+    includedTypes: types,
     maxResultCount: 20,
     locationRestriction: {
       circle: {
@@ -101,7 +109,7 @@ restaurantController.getPhotos = async (req, res, next) => {
 
   //ensures this gets calledd afterlast delay and not right away
   setTimeout(() => {
-    console.log('Testing photo object result:', photoObject);
+    // console.log('Testing photo object result:', photoObject);
     res.locals.photos = photoObject;
     return next();
   }, delay);
