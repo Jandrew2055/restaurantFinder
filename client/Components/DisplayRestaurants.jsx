@@ -160,23 +160,32 @@ const DisplayRestaurants = (props) => {
     });
   }
 
+  /*
+  SET UP THE FORM SUBMIT BUTTON TO ALLOW TO SUBMIT THE FORM WITH CHECKBOX LIST ITEMS
+
+  THE LIST ITEMS WILL BE SUBMITTED AND ORGANIZED BY THE SERVER TO THEN FETCH RELATED RESTAURANTS
+
+*/
   return (
     <div>
       <h1>Restaurant List</h1>
-      <ul>
-        {foodTypeFilter.map((type) => {
-          return (
-            <li key={type.id}>
-              <Checkbox
-                id={type.id}
-                name={type.name}
-                checked={type.state}
-                checkHandler={checkHandler}
-              />
-            </li>
-          );
-        })}
-      </ul>
+      <form>
+        <ul>
+          {foodTypeFilter.map((type) => {
+            return (
+              <li key={type.id}>
+                <Checkbox
+                  id={type.id}
+                  name={type.name}
+                  checked={type.state}
+                  checkHandler={checkHandler}
+                />
+              </li>
+            );
+          })}
+        </ul>
+        <button type='submit'>Submit Testing button</button>
+      </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
       <button onClick={props.getUserLocation}> Near Me</button>
       <button onClick={props.grabRestaurantInfo}>
