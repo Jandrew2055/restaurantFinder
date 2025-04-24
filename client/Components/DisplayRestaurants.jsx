@@ -1,20 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
 
-//this list will be passed down to child to be used to render checkboxes
-const foodType = [
-  { id: 0, name: 'Mexican', state: false },
-  { id: 1, name: 'Italian', state: false },
-  { id: 2, name: 'Carribean', state: false },
-  { id: 3, name: 'Thai', state: false },
-];
-
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
-  const [foodTypeFilter, setFoodTypeFilter] = useState(() => foodType);
 
+  //allow us to change state living in parent component
+  const { setFoodTypeFilter } = props;
+  
   //changes status of checkbox for state
   const checkHandler = (event) => {
     const { id } = event.target;
@@ -169,7 +163,7 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant List</h1>
-      <form>
+      <form onSubmit={props.grabRestaurantInfo}>
         <ul>
           {foodTypeFilter.map((type) => {
             return (

@@ -1,17 +1,28 @@
 // import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
 import NavBar from './Navigation/NavBar.jsx';
 import FooterBar from './Components/Footer.jsx';
 import HeroSection from './Components/Hero.jsx';
 
+//this list will be passed down to child to be used to render checkboxes
+const foodType = [
+  { id: 0, name: 'Mexican', state: false },
+  { id: 1, name: 'Italian', state: false },
+  { id: 2, name: 'Carribean', state: false },
+  { id: 3, name: 'Thai', state: false },
+];
+
 const App = () => {
+  //have predefined location set to NYC midtown
   const [userLocation, setUserLocation] = useState({
     latitude: 40.7549,
     longitude: -73.984,
-  }); //have predefined location set to NYC midtown
+  });
 
-  const [restaurantData, setRestaurantData] = useState(null); //will hold all of the restaurant data that is retrieved from the API
+  //will hold all of the restaurant data that is retrieved from the API
+  const [restaurantData, setRestaurantData] = useState(null);
+  const [foodTypeFilter, setFoodTypeFilter] = useState(() => foodType);
 
   // const [favoriteRestaurant, setFavoriteRestaurant] = useState({
   //   name: 'Jose',
@@ -39,7 +50,8 @@ const App = () => {
   };
 
   //UPDATED GOOGLE PLACES API below
-  const grabRestaurantInfo = async () => {
+  const grabRestaurantInfo = async (event: FormEvent) => {
+    event.preventDefault();
     try {
       //make a call to the api
       const response = await fetch('/api', {
@@ -101,6 +113,8 @@ const App = () => {
       <DisplayRestaurants
         getUserLocation={getUserLocation}
         restaurantData={restaurantData}
+        foodType={foodType}
+        setFoodTypeFilter={setFoodTypeFilter}
         grabRestaurantInfo={grabRestaurantInfo}
       ></DisplayRestaurants>
       <FooterBar></FooterBar>

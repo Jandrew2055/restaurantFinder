@@ -10,6 +10,13 @@ const restaurantController = {};
 
 restaurantController.getRestaurants = async (req, res, next) => {
   const { latitude, longitude } = req.body;
+  /*
+  object will hold pairs of what is received from the client
+  obj = {
+    mexican: 'mexican_restaurant'
+  }
+    this allows to send the appropriate types to Google API
+  */
 
   //body request to be sent with google places api request
   const body = {
@@ -71,9 +78,6 @@ restaurantController.getPhotos = async (req, res, next) => {
 
   //make a request to the API to grab the restaurant's photo
   for (const [restaurantId, photoResource] of Object.entries(photoObject)) {
-    // console.log('restaurantId:', restaurantId);
-    // console.log('photoResource:', photoResource);
-
     setTimeout(async () => {
       const URL = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
 
@@ -101,11 +105,6 @@ restaurantController.getPhotos = async (req, res, next) => {
     res.locals.photos = photoObject;
     return next();
   }, delay);
-
-  // console.log('testing photo object result:', photoObject);
-  // //return modified photoObject, now containing all restaurants and photos
-  // res.locals.photos = photoObject;
-  // return next();
 };
 
 module.exports = restaurantController;
