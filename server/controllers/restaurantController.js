@@ -11,12 +11,15 @@ const restaurantController = {};
 restaurantController.getRestaurants = async (req, res, next) => {
   const { latitude, longitude, typesOfRestaurants } = req.body;
 
+  let types = ['american_restaurant'];
   //makes all restaurants types lowercase and appends the information required
-  const types = typesOfRestaurants.map(
-    (type) => type.toLowerCase() + '_restaurant'
-  );
+  if (typesOfRestaurants.length !== 0) {
+    types = typesOfRestaurants.map(
+      (type) => type.toLowerCase() + '_restaurant'
+    );
+  }
 
-  console.log('testing retrieval:', typesOfRestaurants);
+  // console.log('testing retrieval:', typesOfRestaurants);
   console.log('testing new array:', types);
   /*
   object will hold pairs of what is received from the client
@@ -65,7 +68,9 @@ restaurantController.getRestaurants = async (req, res, next) => {
       }
     );
     //if response received is not properly collected, throw error
-    if (!response.ok) throw new Error(`Error with response:${response}`);
+    if (!response.ok) {
+      throw new Error(`Error with response:${response}`);
+    }
 
     //if not proceed with collecting data received
     const data = await response.json();
