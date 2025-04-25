@@ -163,6 +163,7 @@ const DisplayRestaurants = (props) => {
   return (
     <div>
       <h1>Restaurant List</h1>
+      <h3>Select the type of food you crave!</h3>
       <form onSubmit={props.grabRestaurantInfo}>
         <ul>
           {foodTypeFilter.map((type) => {
@@ -179,7 +180,7 @@ const DisplayRestaurants = (props) => {
           })}
         </ul>
         <button onClick={props.getUserLocation}> Near Me</button>
-        <button type='submit'>Refresh List of Restaurants</button>
+        <button type='submit'>Find some Restaurants</button>
       </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
 
