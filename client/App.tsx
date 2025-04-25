@@ -33,7 +33,8 @@ const App = () => {
   // }); //Holds the data for favorite restaurant chosen
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
-  const getUserLocation = () => {
+  const getUserLocation = (e: FormEvent) => {
+    e.preventDefault();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {

@@ -178,10 +178,11 @@ const DisplayRestaurants = (props) => {
             );
           })}
         </ul>
+        <button onClick={props.getUserLocation}> Near Me</button>
         <button type='submit'>Refresh List of Restaurants</button>
       </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
-      <button onClick={props.getUserLocation}> Near Me</button>
+
       {/* <button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
       </button> */}

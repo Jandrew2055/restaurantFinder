@@ -11,23 +11,17 @@ const restaurantController = {};
 restaurantController.getRestaurants = async (req, res, next) => {
   const { latitude, longitude, typesOfRestaurants } = req.body;
 
-  let types = ['american_restaurant'];
+  const types = ['american_restaurant'];
   //makes all restaurants types lowercase and appends the information required
   if (typesOfRestaurants.length !== 0) {
-    types = typesOfRestaurants.map(
-      (type) => type.toLowerCase() + '_restaurant'
+    types.pop();
+    types.push(
+      ...typesOfRestaurants.map((type) => type.toLowerCase() + '_restaurant')
     );
   }
 
-  // console.log('testing retrieval:', typesOfRestaurants);
-  console.log('testing new array:', types);
-  /*
-  object will hold pairs of what is received from the client
-  obj = {
-    mexican: 'mexican_restaurant'
-  }
-    this allows to send the appropriate types to Google API
-  */
+  //testing can be deleted
+  // console.log('testing new array:', types);
 
   //body request to be sent with google places api request
   const body = {
