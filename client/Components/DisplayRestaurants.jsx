@@ -162,7 +162,6 @@ const DisplayRestaurants = (props) => {
 */
   return (
     <div>
-      <h1>Restaurant List</h1>
       <h3>Select the type of food you crave!</h3>
       <form onSubmit={props.grabRestaurantInfo}>
         <ul>
@@ -187,6 +186,7 @@ const DisplayRestaurants = (props) => {
       {/* <button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
       </button> */}
+      <h3>Restaurant List</h3>
       <ul>{restaurantList}</ul>
     </div>
   );
