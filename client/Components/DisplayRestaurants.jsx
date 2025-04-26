@@ -26,6 +26,11 @@ const DisplayRestaurants = (props) => {
 
   //this function will allow you to add this restaurant to list of favorites
   const addRestaurantToFavorites = async (id) => {
+    //make a request to the server (POST) sending the id in the body along with relevant info
+    //like the restaurant name, address and so on.
+
+    
+
     console.log('adding restaurant to favorites', id);
   };
 
