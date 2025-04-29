@@ -29,6 +29,11 @@ const NavBar = () => {
             Forum
           </Link>
         </li>
+        <li>
+          <Link className='navLink' to='/' title='LoginPage'>
+            Sign Out
+          </Link>
+        </li>
       </ul>
     </div>
   );
