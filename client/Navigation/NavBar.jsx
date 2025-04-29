@@ -30,8 +30,8 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link className='navLink' to='/' title='LoginPage'>
-            Sign Out
+          <Link className='navLink' to='/login' title='LoginPage'>
+            Sign in
           </Link>
         </li>
       </ul>

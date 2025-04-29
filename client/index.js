@@ -17,9 +17,9 @@ root.render(
   <BrowserRouter>
     <Layout>
       <Routes>
-        <Route path='/' element={<Login />} />
+        <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
-        <Route path='/home' element={<App />} />
+        <Route path='/' element={<App />} />
         <Route path='/aiChatBot' element={<Chatbot />} />
         <Route path='/forum' element={<Forum />} />
         <Route path='/favoriteForum' element={<Favorites />} />

@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 const Layout = ({ children }) => {
   const location = useLocation();
   const hideNavigationBar =
-    location.pathname === '/' || location.pathname === '/signup';
+    location.pathname === '/login' || location.pathname === '/signup';
 
   return (
     <>
