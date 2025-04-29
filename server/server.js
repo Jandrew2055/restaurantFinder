@@ -18,6 +18,7 @@ const PORT = 8080;
 //parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
 
+// app.use(express.static(path.join(__dirname, 'build')));
 mongoose
   .connect(MONGO_URI)
   .then(() => {
@@ -38,7 +39,10 @@ app.get('/', (req, res) => {
   return res.sendStatus(200);
 });
 
-//take care of unknown routes, always to be presented right before global error handler
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'build', 'index.html')); // or 'build' instead of 'dist'
+// });
+// //take care of unknown routes, always to be presented right before global error handler
 app.use((req, res) => res.sendStatus(404));
 
 //global error handler

@@ -50,7 +50,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Parking App',
+      title: 'Jose Eats',
       filename: 'index.html',
       template: 'index.html',
     }),
