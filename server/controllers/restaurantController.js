@@ -10,6 +10,8 @@ const restaurantController = {};
 
 restaurantController.getRestaurants = async (req, res, next) => {
   const { latitude, longitude, typesOfRestaurants } = req.body;
+  console.log('longitude:', longitude);
+  console.log('latitude:', latitude);
 
   const types = ['american_restaurant'];
   //makes all restaurants types lowercase and appends the information required

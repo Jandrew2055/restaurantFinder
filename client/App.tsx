@@ -4,6 +4,7 @@ import DisplayRestaurants from './Components/DisplayRestaurants.jsx';
 import NavBar from './Navigation/NavBar.jsx';
 import FooterBar from './Components/Footer.jsx';
 import HeroSection from './Components/Hero.jsx';
+import { get } from 'mongoose';
 
 //this list will be passed down to child to be used to render checkboxes
 const foodType = [
@@ -17,11 +18,12 @@ const foodType = [
 ];
 
 const App = () => {
+  //DELETE below after verifying new outline of grabbing location
   //have predefined location set to NYC midtown
-  const [userLocation, setUserLocation] = useState({
-    latitude: 40.7549,
-    longitude: -73.984,
-  });
+  // const [userLocation, setUserLocation] = useState({
+  //   latitude: 40.7549,
+  //   longitude: -73.984,
+  // });
 
   //will hold all of the restaurant data that is retrieved from the API
   const [restaurantData, setRestaurantData] = useState(null);
@@ -33,39 +35,53 @@ const App = () => {
   // }); //Holds the data for favorite restaurant chosen
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
-  const getUserLocation = (e: FormEvent) => {
-    e.preventDefault();
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          // console.log(position);
-          // console.log('location data:', position);
-          const { latitude, longitude } = position.coords;
-          setUserLocation({ latitude, longitude });
-        },
-        (err: GeolocationPositionError) => {
-          console.warn({ code: err.code, log: `ERROR: ${err}` });
-        },
-        { enableHighAccuracy: true }
-      );
-    } else {
-      alert('Your browser does not support location');
-    }
+  const getUserLocation = async () => {
+    return new Promise<{ latitude: number; longitude: number }>(
+      (resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error('Geolocation not supported'));
+          return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const { latitude, longitude } = pos.coords;
+            resolve({ latitude, longitude });
+          },
+          (err) => reject(err),
+          { enableHighAccuracy: true }
+        );
+      }
+    );
   };
 
   //UPDATED GOOGLE PLACES API below
   const grabRestaurantInfo = async (event: FormEvent) => {
     event.preventDefault();
 
+    //REFACTOR BELOW TO USE FILTER AND MAP
     //array containing the checked boxes of restaurants
     const typesOfRestaurants: string[] = [];
-
+    //iterates through checkbox list
     foodTypeFilter.forEach((type) => {
       //if checkbox is checked off, add this type to array above
       if (type.state === true) typesOfRestaurants.push(type.name);
     });
 
+    let latitude = 40.7549;
+    let longitude = -73.984;
     try {
+      //grabbing the latitude and longitude from getUserLocation function
+      const location = await getUserLocation();
+      latitude = location.latitude;
+      longitude = location.longitude;
+    } catch (err) {
+      console.log('error fetching coordinates:', err);
+    }
+
+    try {
+      //grabs the userLocation before proceeding to fetch restaurants as default
+
       //make a call to the api
       const response = await fetch('/api', {
         method: 'POST',
@@ -73,8 +89,8 @@ const App = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          longitude: `${userLocation.longitude}`,
-          latitude: `${userLocation.latitude}`,
+          longitude,
+          latitude,
           typesOfRestaurants: typesOfRestaurants,
         }),
       });
