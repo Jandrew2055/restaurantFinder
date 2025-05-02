@@ -29,8 +29,6 @@ const DisplayRestaurants = (props) => {
     //make a request to the server (POST) sending the id in the body along with relevant info
     //like the restaurant name, address and so on.
 
-    
-
     console.log('adding restaurant to favorites', id);
   };
 
@@ -183,7 +181,6 @@ const DisplayRestaurants = (props) => {
             );
           })}
         </ul>
-        <button onClick={props.getUserLocation}> Near Me</button>
         <button type='submit'>Find some Restaurants</button>
       </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}

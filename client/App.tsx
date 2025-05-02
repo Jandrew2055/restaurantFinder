@@ -141,7 +141,6 @@ const App = () => {
     <div>
       <HeroSection></HeroSection>
       <DisplayRestaurants
-        getUserLocation={getUserLocation}
         restaurantData={restaurantData}
         foodTypeFilter={foodTypeFilter}
         setFoodTypeFilter={setFoodTypeFilter}
