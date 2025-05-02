@@ -1,4 +1,4 @@
-# Restaurant Finder
+# Jose Eats
 
 ## Description
 I built this project with interests in solving the issue of finding a good restaurant to eat when out and about in NYC. Since there is always a new trending restaurant on tiktok, this application would set out to implement the option to allow the user to favorite restaurants and they can then access a forum where users will be able to discuss restaurants they have been to and why they recommend. 
@@ -22,6 +22,9 @@ I built this project with interests in solving the issue of finding a good resta
   
 - **Database:**
   - MongoDB (for storing favorite restaurants)
+ 
+  - **API:**
+  - Google Places
 
 ## Installation
 Follow the steps below to install and run the project locally.
