@@ -18,21 +18,9 @@ const foodType = [
 ];
 
 const App = () => {
-  //DELETE below after verifying new outline of grabbing location
-  //have predefined location set to NYC midtown
-  // const [userLocation, setUserLocation] = useState({
-  //   latitude: 40.7549,
-  //   longitude: -73.984,
-  // });
-
   //will hold all of the restaurant data that is retrieved from the API
   const [restaurantData, setRestaurantData] = useState(null);
   const [foodTypeFilter, setFoodTypeFilter] = useState(() => foodType);
-
-  // const [favoriteRestaurant, setFavoriteRestaurant] = useState({
-  //   name: 'Jose',
-  //   restaurantName: 'Tao',
-  // }); //Holds the data for favorite restaurant chosen
 
   //grabs the user's location to then utilize the coordinates to get the restaurants near them
   const getUserLocation = async () => {
@@ -59,14 +47,10 @@ const App = () => {
   const grabRestaurantInfo = async (event: FormEvent) => {
     event.preventDefault();
 
-    //REFACTOR BELOW TO USE FILTER AND MAP
     //array containing the checked boxes of restaurants
-    const typesOfRestaurants: string[] = [];
-    //iterates through checkbox list
-    foodTypeFilter.forEach((type) => {
-      //if checkbox is checked off, add this type to array above
-      if (type.state === true) typesOfRestaurants.push(type.name);
-    });
+    const typesOfRestaurants = foodTypeFilter
+      .filter((type) => type.state === true)
+      .map((type) => type.name);
 
     let latitude = 40.7549;
     let longitude = -73.984;

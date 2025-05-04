@@ -84,6 +84,7 @@ restaurantController.getPhotos = async (req, res, next) => {
 
   const result = {};
 
+  //fetches photos using the photo-resource and stores in object with ID
   const fetchPhoto = async (restaurantId, photoResource) => {
     const url = `https://places.googleapis.com/v1/${photoResource}/media?maxHeightPx=400&maxWidthPx=400&key=${GOOGLE_API_KEY}&skipHttpRedirect=true`;
 
@@ -92,6 +93,7 @@ restaurantController.getPhotos = async (req, res, next) => {
       if (!response.ok) throw new Error('Failed to fetch photo');
 
       const data = await response.json();
+      //store each entry with photoUri and respective ID
       result[restaurantId] = data.photoUri;
     } catch (err) {
       console.log(`Error fetching photo for ${restaurantId}:`, err);
@@ -104,6 +106,7 @@ restaurantController.getPhotos = async (req, res, next) => {
     fetchPhoto(id, photoResource)
   );
 
+  //once all has been completed we can send to the client the result
   await Promise.all(fetchPromises);
 
   res.locals.photos = result;

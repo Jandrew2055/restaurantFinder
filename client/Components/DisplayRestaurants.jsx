@@ -34,6 +34,7 @@ const DisplayRestaurants = (props) => {
 
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
+    //DO NOT DELETE
     //UNCOMMENT BELOW WHEN WANTING TO START FETCHING PHOTOS AGAIN (COST-SAVING)
     //send the restaurant Id to grab the photo from the API for each restaurant
     // try {
@@ -79,40 +80,23 @@ const DisplayRestaurants = (props) => {
       } catch (err) {
         console.log('Error fetching photos:', err);
       }
-
-      // console.log(
-      //   'object holding each restaurant id along with photo:',
-      //   restaurantPhotosObj
-      // );
-
-      //DELETE BELOW ONCE ABOVE HAS BEEN IMPLEMENTED
-      // Fetch photos for all restaurants when restaurantData changes
-      // restaurantData.forEach(async (restaurant, index) => {
-      //   setTimeout(async () => {
-      //     const result = await grabRestaurantPhoto(restaurant.photos[0].name);
-
-      //     setRestaurantPhotos((prevPhotos) => ({
-      //       ...prevPhotos,
-      //       [restaurant.id]: result, // Set photo for this specific restaurant by its id
-      //     }));
-      //     //this ensures that each request happens after every 300ms
-      //   }, index * 1000);
-      // });
     };
 
     fetchPhotos();
   }, [restaurantData]);
 
   let restaurantList;
-  //Here we are rendering all of the restaurant's information: name, price, address
+
   if (restaurantData) {
-    //grab the restaurant data from parent
+    //Here we are rendering all of the restaurant's information: name, price, address
+    //creates the card component we want to see with restaurant details
     restaurantList = restaurantData.map((restaurant) => {
       //use the restaurant name and grab the image
 
       //temporary to save cost
       const photoUri = 'https://placehold.co/200';
 
+      //DO NOT DELETE
       //UNCOMMENT BELOW WITH FUNCTION ABOVE TO GRAB ACTUAL PHOTO
       //fetch photo for restaurant using restaurant Id
       // const photoUri = restaurantPhotos[restaurant.id];
@@ -123,8 +107,6 @@ const DisplayRestaurants = (props) => {
         //format the pricing for the restaurant
         price = `Average price between $${restaurant.priceRange.startPrice.units} and $${restaurant.priceRange.endPrice.units} per person.`;
       }
-
-      //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE
 
       return (
         <li key={restaurant.id} className='restaurant-Card'>
