@@ -34,28 +34,28 @@ const DisplayRestaurants = (props) => {
 
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
+    //UNCOMMENT BELOW WHEN WANTING TO START FETCHING PHOTOS AGAIN (COST-SAVING)
     //send the restaurant Id to grab the photo from the API for each restaurant
-    try {
-      const response = await fetch('/api/photo', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          photoObject,
-        }),
-      });
-      //if response from the fetching using API is not valid throw error
-      if (!response.ok) {
-        throw new Error('Error with response!');
-      }
-      const data = await response.json();
-
-      return data;
-      // return data; //will return the data (all photos in object) from the server
-    } catch (err) {
-      console.log('error grabbing photos from server:', err);
-    }
+    // try {
+    //   const response = await fetch('/api/photo', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       photoObject,
+    //     }),
+    //   });
+    //   //if response from the fetching using API is not valid throw error
+    //   if (!response.ok) {
+    //     throw new Error('Error with response!');
+    //   }
+    //   const data = await response.json();
+    //   return data;
+    //   // return data; //will return the data (all photos in object) from the server
+    // } catch (err) {
+    //   console.log('error grabbing photos from server:', err);
+    // }
   };
 
   //saves photoURI in state to access afterwards (runs the function above)
@@ -110,8 +110,12 @@ const DisplayRestaurants = (props) => {
     restaurantList = restaurantData.map((restaurant) => {
       //use the restaurant name and grab the image
 
+      //temporary to save cost
+      const photoUri = 'https://placehold.co/200';
+
+      //UNCOMMENT BELOW WITH FUNCTION ABOVE TO GRAB ACTUAL PHOTO
       //fetch photo for restaurant using restaurant Id
-      const photoUri = restaurantPhotos[restaurant.id];
+      // const photoUri = restaurantPhotos[restaurant.id];
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       let price = '';
