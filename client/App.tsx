@@ -47,25 +47,28 @@ const App = () => {
   const grabRestaurantInfo = async (event: FormEvent) => {
     event.preventDefault();
 
-    //array containing the checked boxes of restaurants
+    //array containing the checked boxes of restaurants, filters the ones that are checked off
     const typesOfRestaurants = foodTypeFilter
       .filter((type) => type.state === true)
       .map((type) => type.name);
 
+    //default location values for NYC incase geolocation does not function
     let latitude = 40.7549;
     let longitude = -73.984;
     try {
       //grabbing the latitude and longitude from getUserLocation function
       const location = await getUserLocation();
-      latitude = location.latitude;
-      longitude = location.longitude;
+      //destructuring and assigning to existing variables 
+      ({latitude,longitude} = location)
+
+      //CAN DELETE, SAME AS ABOVE
+      // latitude = location.latitude;
+      // longitude = location.longitude;
     } catch (err) {
       console.log('error fetching coordinates:', err);
     }
 
     try {
-      //grabs the userLocation before proceeding to fetch restaurants as default
-
       //make a call to the api
       const response = await fetch('/api', {
         method: 'POST',

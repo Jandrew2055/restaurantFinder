@@ -66,11 +66,14 @@ const DisplayRestaurants = (props) => {
     //this is to make the fetching of photos asynchronous
     const fetchPhotos = async () => {
       const restaurantPhotosObj = {};
+
+      //will populate obj where key is restaurant id and value is the resource name
       restaurantData.forEach((restaurant) => {
         restaurantPhotosObj[restaurant.id] = restaurant.photos[0].name;
       });
 
       try {
+        //fetch photos for the restaurants using the ids of each place
         const result = await grabRestaurantPhotos(restaurantPhotosObj);
 
         if (result) {
@@ -88,6 +91,8 @@ const DisplayRestaurants = (props) => {
   let restaurantList;
 
   if (restaurantData) {
+    console.log('TESTING DATA RETURNED FROM API:', restaurantData);
+
     //Here we are rendering all of the restaurant's information: name, price, address
     //creates the card component we want to see with restaurant details
     restaurantList = restaurantData.map((restaurant) => {

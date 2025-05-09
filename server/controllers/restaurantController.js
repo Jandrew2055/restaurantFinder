@@ -42,6 +42,10 @@ restaurantController.getRestaurants = async (req, res, next) => {
 
   //fetches data using google places api, and returns to user
   try {
+    /*
+    add [priceRange, rating] back into the array but be cautious of limts, already implemented
+    add [currentOpeningHours] but this would have to be implemented, not there yet
+    */
     const response = await fetch(
       'https://places.googleapis.com/v1/places:searchNearby',
       {
