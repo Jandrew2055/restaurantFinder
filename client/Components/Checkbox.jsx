@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const Checkbox = ({ id, checkHandler, name, checked }) => {
-  // console.log(list);
 
   //LOGIC TO BE MOVED TO CHECKBOX LIST COMPONENT
 

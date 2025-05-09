@@ -171,9 +171,9 @@ const DisplayRestaurants = (props) => {
       </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
 
-      {/* <button onClick={props.grabRestaurantInfo}>
+      {/*<button onClick={props.grabRestaurantInfo}>
         Refresh List of Restaurants
-      </button> */}
+      </button>*/}
       <h3>Restaurant List</h3>
       <ul>{restaurantList}</ul>
     </div>

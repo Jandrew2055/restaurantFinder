@@ -20,8 +20,6 @@ var Checkbox = function Checkbox(_ref) {
     checkHandler = _ref.checkHandler,
     name = _ref.name,
     checked = _ref.checked;
-  // console.log(list);
-
   //LOGIC TO BE MOVED TO CHECKBOX LIST COMPONENT
 
   //will print out the list of restaurants user can select from to filter list
@@ -119,43 +117,13 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
   //function to grab restaurant photos
   var grabRestaurantPhotos = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(photoObject) {
-      var response, data;
       return _regeneratorRuntime().wrap(function _callee2$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            _context2.prev = 0;
-            _context2.next = 3;
-            return fetch('/api/photo', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({
-                photoObject: photoObject
-              })
-            });
-          case 3:
-            response = _context2.sent;
-            if (response.ok) {
-              _context2.next = 6;
-              break;
-            }
-            throw new Error('Error with response!');
-          case 6:
-            _context2.next = 8;
-            return response.json();
-          case 8:
-            data = _context2.sent;
-            return _context2.abrupt("return", data);
-          case 12:
-            _context2.prev = 12;
-            _context2.t0 = _context2["catch"](0);
-            console.log('error grabbing photos from server:', _context2.t0);
-          case 15:
           case "end":
             return _context2.stop();
         }
-      }, _callee2, null, [[0, 12]]);
+      }, _callee2);
     }));
     return function grabRestaurantPhotos(_x2) {
       return _ref2.apply(this, arguments);
@@ -205,14 +173,19 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
     fetchPhotos();
   }, [restaurantData]);
   var restaurantList;
-  //Here we are rendering all of the restaurant's information: name, price, address
   if (restaurantData) {
-    //grab the restaurant data from parent
+    //Here we are rendering all of the restaurant's information: name, price, address
+    //creates the card component we want to see with restaurant details
     restaurantList = restaurantData.map(function (restaurant) {
       //use the restaurant name and grab the image
 
+      //temporary to save cost
+      var photoUri = 'https://placehold.co/200';
+
+      //DO NOT DELETE
+      //UNCOMMENT BELOW WITH FUNCTION ABOVE TO GRAB ACTUAL PHOTO
       //fetch photo for restaurant using restaurant Id
-      var photoUri = restaurantPhotos[restaurant.id];
+      // const photoUri = restaurantPhotos[restaurant.id];
 
       //for each restaurant, grab the Name, Pricing, Rating, Address & Directions
       var price = '';
@@ -220,9 +193,6 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
         //format the pricing for the restaurant
         price = "Average price between $".concat(restaurant.priceRange.startPrice.units, " and $").concat(restaurant.priceRange.endPrice.units, " per person.");
       }
-
-      //ONCE WE HAVE THE PLACES DETAILS API SET UP, WE CAN REQUEST IMAGE
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", {
         key: restaurant.id,
         className: "restaurant-Card"
@@ -259,8 +229,6 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
       checkHandler: checkHandler
     }));
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: props.getUserLocation
-  }, " Near Me"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "submit"
   }, "Find some Restaurants")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Restaurant List"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, restaurantList));
 };
@@ -356,6 +324,33 @@ var Chatbot = function Chatbot() {
 
 /***/ }),
 
+/***/ "./client/Navigation/Layout.jsx":
+/*!**************************************!*\
+  !*** ./client/Navigation/Layout.jsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
+/* harmony import */ var _NavBar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavBar */ "./client/Navigation/NavBar.jsx");
+
+
+
+var Layout = function Layout(_ref) {
+  var children = _ref.children;
+  var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useLocation)();
+  var hideNavigationBar = location.pathname === '/login' || location.pathname === '/signup';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, !hideNavigationBar && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NavBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), children);
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);
+
+/***/ }),
+
 /***/ "./client/Navigation/NavBar.jsx":
 /*!**************************************!*\
   !*** ./client/Navigation/NavBar.jsx ***!
@@ -392,9 +387,67 @@ var NavBar = function NavBar() {
     className: "navLink",
     to: "/forum",
     title: "Forum page"
-  }, "Forum"))));
+  }, "Forum")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    className: "navLink",
+    to: "/login",
+    title: "LoginPage"
+  }, "Sign in"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NavBar);
+
+/***/ }),
+
+/***/ "./client/Pages/Auth/Login.jsx":
+/*!*************************************!*\
+  !*** ./client/Pages/Auth/Login.jsx ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
+
+
+var Login = function Login() {
+  var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_1__.useNavigate)();
+
+  //redirects to signup component
+  var signUp = function signUp() {
+    navigate('/signup');
+  };
+
+  //after successful login, goes to home page
+  var goHome = function goHome(e) {
+    e.preventDefault();
+    console.log('testing');
+    navigate('/');
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Jose Eats"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "If it is your first time here, sign up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: signUp
+  }, "HERE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Otherwise, sign in below!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: goHome
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "email"
+  }, "Email"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "email",
+    id: "email",
+    name: "email",
+    required: true
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    htmlFor: "password"
+  }, "Password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "password",
+    id: "password",
+    name: "password"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit"
+  }, "Sign in")));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
 
 /***/ }),
 
@@ -485,26 +538,6 @@ var Forum = function Forum() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "This will be where the forum page lies."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias voluptates quia, ratione optio quod doloremque asperiores iste libero ad inventore distinctio, nisi sunt maiores reprehenderit modi accusamus reiciendis corporis sit?e"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Forum);
-
-/***/ }),
-
-/***/ "./client/Pages/Login.jsx":
-/*!********************************!*\
-  !*** ./client/Pages/Login.jsx ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var Login = function Login() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Login Below");
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
 
 /***/ }),
 
@@ -29439,80 +29472,80 @@ var foodType = [
     { id: 6, name: 'Middle_Eastern', state: false },
 ];
 var App = function () {
-    //have predefined location set to NYC midtown
-    var _a = (0, react_1.useState)({
-        latitude: 40.7549,
-        longitude: -73.984,
-    }), userLocation = _a[0], setUserLocation = _a[1];
     //will hold all of the restaurant data that is retrieved from the API
-    var _b = (0, react_1.useState)(null), restaurantData = _b[0], setRestaurantData = _b[1];
-    var _c = (0, react_1.useState)(function () { return foodType; }), foodTypeFilter = _c[0], setFoodTypeFilter = _c[1];
-    // const [favoriteRestaurant, setFavoriteRestaurant] = useState({
-    //   name: 'Jose',
-    //   restaurantName: 'Tao',
-    // }); //Holds the data for favorite restaurant chosen
+    var _a = (0, react_1.useState)(null), restaurantData = _a[0], setRestaurantData = _a[1];
+    var _b = (0, react_1.useState)(function () { return foodType; }), foodTypeFilter = _b[0], setFoodTypeFilter = _b[1];
     //grabs the user's location to then utilize the coordinates to get the restaurants near them
-    var getUserLocation = function (e) {
-        e.preventDefault();
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-                // console.log(position);
-                // console.log('location data:', position);
-                var _a = position.coords, latitude = _a.latitude, longitude = _a.longitude;
-                setUserLocation({ latitude: latitude, longitude: longitude });
-            }, function (err) {
-                console.warn({ code: err.code, log: "ERROR: ".concat(err) });
-            }, { enableHighAccuracy: true });
-        }
-        else {
-            alert('Your browser does not support location');
-        }
-    };
+    var getUserLocation = function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    if (!navigator.geolocation) {
+                        reject(new Error('Geolocation not supported'));
+                        return;
+                    }
+                    navigator.geolocation.getCurrentPosition(function (pos) {
+                        var _a = pos.coords, latitude = _a.latitude, longitude = _a.longitude;
+                        resolve({ latitude: latitude, longitude: longitude });
+                    }, function (err) { return reject(err); }, { enableHighAccuracy: true });
+                })];
+        });
+    }); };
     //UPDATED GOOGLE PLACES API below
     var grabRestaurantInfo = function (event) { return __awaiter(void 0, void 0, void 0, function () {
-        var typesOfRestaurants, response, data, error_1;
+        var typesOfRestaurants, latitude, longitude, location_1, err_1, response, data, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     event.preventDefault();
-                    typesOfRestaurants = [];
-                    foodTypeFilter.forEach(function (type) {
-                        //if checkbox is checked off, add this type to array above
-                        if (type.state === true)
-                            typesOfRestaurants.push(type.name);
-                    });
+                    typesOfRestaurants = foodTypeFilter
+                        .filter(function (type) { return type.state === true; })
+                        .map(function (type) { return type.name; });
+                    latitude = 40.7549;
+                    longitude = -73.984;
                     _a.label = 1;
                 case 1:
-                    _a.trys.push([1, 4, , 5]);
+                    _a.trys.push([1, 3, , 4]);
+                    return [4 /*yield*/, getUserLocation()];
+                case 2:
+                    location_1 = _a.sent();
+                    latitude = location_1.latitude;
+                    longitude = location_1.longitude;
+                    return [3 /*break*/, 4];
+                case 3:
+                    err_1 = _a.sent();
+                    console.log('error fetching coordinates:', err_1);
+                    return [3 /*break*/, 4];
+                case 4:
+                    _a.trys.push([4, 7, , 8]);
                     return [4 /*yield*/, fetch('/api', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                longitude: "".concat(userLocation.longitude),
-                                latitude: "".concat(userLocation.latitude),
+                                longitude: longitude,
+                                latitude: latitude,
                                 typesOfRestaurants: typesOfRestaurants,
                             }),
                         })];
-                case 2:
+                case 5:
                     response = _a.sent();
                     if (!response.ok)
                         //if response received is not okay, throw error
                         throw new Error("Error sending request to api:".concat(response));
                     return [4 /*yield*/, response.json()];
-                case 3:
+                case 6:
                     data = _a.sent();
                     setRestaurantData(data.places);
                     //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
                     data.places.forEach(function (restaurant) {
                         console.log('restaurant:', restaurant.displayName.text);
                     });
-                    return [3 /*break*/, 5];
-                case 4:
+                    return [3 /*break*/, 8];
+                case 7:
                     error_1 = _a.sent();
                     throw new Error("Error sending request to api:".concat(error_1));
-                case 5: return [2 /*return*/];
+                case 8: return [2 /*return*/];
             }
         });
     }); };
@@ -29536,9 +29569,34 @@ var App = function () {
             .then(function (res) { return res.json(); })
             .then(function (data) { return console.log(data); });
     };
-    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(Hero_jsx_1.default, {}), (0, jsx_runtime_1.jsx)(DisplayRestaurants_jsx_1.default, { getUserLocation: getUserLocation, restaurantData: restaurantData, foodTypeFilter: foodTypeFilter, setFoodTypeFilter: setFoodTypeFilter, grabRestaurantInfo: grabRestaurantInfo }), (0, jsx_runtime_1.jsx)(Footer_jsx_1.default, {})] }));
+    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(Hero_jsx_1.default, {}), (0, jsx_runtime_1.jsx)(DisplayRestaurants_jsx_1.default, { restaurantData: restaurantData, foodTypeFilter: foodTypeFilter, setFoodTypeFilter: setFoodTypeFilter, grabRestaurantInfo: grabRestaurantInfo }), (0, jsx_runtime_1.jsx)(Footer_jsx_1.default, {})] }));
 };
 exports["default"] = App;
+
+
+/***/ }),
+
+/***/ "./client/Pages/Auth/Signup.tsx":
+/*!**************************************!*\
+  !*** ./client/Pages/Auth/Signup.tsx ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+var Signup = function () {
+    //   const navigate = useNavigate();
+    //   const goHome = (e: FormEvent) => {
+    //     e.preventDefault();
+    //     console.log('testing');
+    //     navigate('/home');
+    //   };
+    //add below to form when ready
+    //onSubmit={goHome}
+    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", { className: 'signup-form', "aria-label": 'sign up form', children: [(0, jsx_runtime_1.jsx)("label", { htmlFor: 'name', children: "Name" }), (0, jsx_runtime_1.jsx)("input", { type: 'text', name: 'name', id: 'name' }), (0, jsx_runtime_1.jsx)("label", { htmlFor: 'email', children: "Email" }), (0, jsx_runtime_1.jsx)("input", { type: 'email', id: 'email', name: 'email', required: true }), (0, jsx_runtime_1.jsx)("label", { htmlFor: 'password', children: "Password" }), (0, jsx_runtime_1.jsx)("input", { type: 'password', id: 'password', name: 'password', required: true }), (0, jsx_runtime_1.jsx)("button", { type: 'submit', children: "Go to Home Page" })] }) }));
+};
+exports["default"] = Signup;
 
 
 /***/ }),
@@ -39961,12 +40019,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_tsx__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_App_tsx__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Pages_Favorites_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pages/Favorites.jsx */ "./client/Pages/Favorites.jsx");
 /* harmony import */ var _Pages_Forum_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Pages/Forum.jsx */ "./client/Pages/Forum.jsx");
-/* harmony import */ var _Navigation_NavBar_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Navigation/NavBar.jsx */ "./client/Navigation/NavBar.jsx");
-/* harmony import */ var _Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/chatBot.jsx */ "./client/Components/chatBot.jsx");
-/* harmony import */ var _Components_Error_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Components/Error.jsx */ "./client/Components/Error.jsx");
-/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./styles/main.scss */ "./client/styles/main.scss");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
-/* harmony import */ var _Pages_Login_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Pages/Login.jsx */ "./client/Pages/Login.jsx");
+/* harmony import */ var _Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/chatBot.jsx */ "./client/Components/chatBot.jsx");
+/* harmony import */ var _Components_Error_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Components/Error.jsx */ "./client/Components/Error.jsx");
+/* harmony import */ var _styles_main_scss__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./styles/main.scss */ "./client/styles/main.scss");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
+/* harmony import */ var _Pages_Auth_Login_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/Auth/Login.jsx */ "./client/Pages/Auth/Login.jsx");
+/* harmony import */ var _Navigation_Layout_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Navigation/Layout.jsx */ "./client/Navigation/Layout.jsx");
+/* harmony import */ var _Pages_Auth_Signup_tsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Pages/Auth/Signup.tsx */ "./client/Pages/Auth/Signup.tsx");
+
 
 
 
@@ -39979,25 +40039,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root'));
-root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navigation_NavBar_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navigation_Layout_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/login",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Login_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Auth_Login_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+  path: "/signup",
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Auth_Signup_tsx__WEBPACK_IMPORTED_MODULE_10__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_App_tsx__WEBPACK_IMPORTED_MODULE_2___default()), null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/aiChatBot",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/forum",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Forum_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/favoriteForum",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Favorites_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null)
-}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+}), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "*",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Error_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], null)
-}))));
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_Error_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null)
+})))));
 })();
 
 /******/ })()

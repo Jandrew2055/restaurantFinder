@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html')); // or 'build' instead of 'dist'
 // });
 // //take care of unknown routes, always to be presented right before global error handler
-app.use((req, res) => res.sendStatus(404));
+// app.use((req, res) => res.sendStatus(404));
 
 //global error handler
 app.use((err, req, res, next) => {
