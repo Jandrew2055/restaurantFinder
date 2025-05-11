@@ -20,11 +20,7 @@ const Login = () => {
   return (
     <div>
       <h1>Welcome to Jose Eats</h1>
-      <h3>
-        If it is your first time here, sign up <br />
-        <button onClick={signUp}>HERE</button>
-      </h3>
-      <h3>Otherwise, sign in below!</h3>
+      <h2>Sign in</h2>
       <form onSubmit={goHome}>
         <label htmlFor='email'>Email</label>
         <input type='email' id='email' name='email' required></input>
@@ -32,6 +28,10 @@ const Login = () => {
         <input type='password' id='password' name='password'></input>
         <button type='submit'>Sign in</button>
       </form>
+      <h4>
+        If it is your first time here, sign up <br />
+        <button onClick={signUp}>HERE</button>
+      </h4>
     </div>
   );
 };
