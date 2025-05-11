@@ -3,19 +3,44 @@ import { useNavigate } from 'react-router-dom';
 
 const Signup = (): JSX.Element => {
   const [formData, setFormData] = useState({
-    email: 'test',
-    password: 'test',
+    email: '',
+    password: '',
   });
+
+  //handle changes to form
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    //update form data accordingly
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  //handling submission of form
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    //DELETE, NOT NEEDED
+    console.log('testing submission of form');
+  };
 
   return (
     <div>
-      <form className='signup-form' aria-label='sign up form'>
+      <h1>Sign up to start favoriting restaurants!</h1>
+      <form
+        className='signup-form'
+        aria-label='sign up form'
+        onSubmit={handleSubmit}
+      >
         <label htmlFor='email'>Email</label>
         <input
           type='email'
           id='email'
           name='email'
           value={formData.email}
+          onChange={handleInputChange}
           required
         ></input>
         <label htmlFor='password'>Password</label>
@@ -24,6 +49,7 @@ const Signup = (): JSX.Element => {
           id='password'
           name='password'
           value={formData.password}
+          onChange={handleInputChange}
           required
         ></input>
         <button type='submit'>Go to Home Page</button>
