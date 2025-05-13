@@ -29429,15 +29429,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/DisplayRestaurants.jsx */ "./client/Components/DisplayRestaurants.jsx");
 /* harmony import */ var _Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Footer.jsx */ "./client/Components/Footer.jsx");
 /* harmony import */ var _Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Hero.jsx */ "./client/Components/Hero.jsx");
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 
 // import * as React from 'react';
 
@@ -29459,7 +29450,7 @@ const App = () => {
     const [restaurantData, setRestaurantData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
     const [foodTypeFilter, setFoodTypeFilter] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(() => foodType);
     //grabs the user's location to then utilize the coordinates to get the restaurants near them
-    const getUserLocation = () => __awaiter(void 0, void 0, void 0, function* () {
+    const getUserLocation = async () => {
         return new Promise((resolve, reject) => {
             if (!navigator.geolocation) {
                 reject(new Error('Geolocation not supported'));
@@ -29470,9 +29461,9 @@ const App = () => {
                 resolve({ latitude, longitude });
             }, (err) => reject(err), { enableHighAccuracy: true });
         });
-    });
+    };
     //UPDATED GOOGLE PLACES API below
-    const grabRestaurantInfo = (event) => __awaiter(void 0, void 0, void 0, function* () {
+    const grabRestaurantInfo = async (event) => {
         event.preventDefault();
         //array containing the checked boxes of restaurants, filters the ones that are checked off
         const typesOfRestaurants = foodTypeFilter
@@ -29483,7 +29474,7 @@ const App = () => {
         let longitude = -73.984;
         try {
             //grabbing the latitude and longitude from getUserLocation function
-            const location = yield getUserLocation();
+            const location = await getUserLocation();
             //destructuring and assigning to existing variables 
             ({ latitude, longitude } = location);
             //CAN DELETE, SAME AS ABOVE
@@ -29495,7 +29486,7 @@ const App = () => {
         }
         try {
             //make a call to the api
-            const response = yield fetch('/api', {
+            const response = await fetch('/api', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29509,7 +29500,7 @@ const App = () => {
             if (!response.ok)
                 //if response received is not okay, throw error
                 throw new Error(`Error sending request to api:${response}`);
-            const data = yield response.json();
+            const data = await response.json();
             setRestaurantData(data.places);
             //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
             data.places.forEach((restaurant) => {
@@ -29519,7 +29510,7 @@ const App = () => {
         catch (error) {
             throw new Error(`Error sending request to api:${error}`);
         }
-    });
+    };
     //this will add restaurant to list of favorites in MongoDB
     const addToFavorites = (firstName, lastName, restaurantName) => {
         //function takes in three arguments and we use them below

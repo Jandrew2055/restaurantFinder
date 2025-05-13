@@ -10,8 +10,7 @@ const favoritesRouter = require('./routes/favoritesRouter');
 const restaurantRouter = require('./routes/restaurantRouter');
 // const PORT = process.env.NODE_env === 'development' ? 8080 : 3000;
 
-const PORT = 8080;
-//To be used for supporting extended features during development procedure
+const PORT = process.env.PORT || 8080; //To be used for supporting extended features during development procedure
 // if (process.env.NODE_env === 'development') {
 // }
 
@@ -34,9 +33,12 @@ app.use('/favoriteForum', favoritesRouter);
 //if requests are made to api, route them here
 app.use('/api', restaurantRouter);
 
-//simple get request to the page return 200 status code
-app.get('/', (req, res) => {
-  return res.sendStatus(200);
+// Serve static files from React build folder
+app.use(express.static(path.join(__dirname, 'build')));
+
+// Serve React index.html for all other routes (client-side routing)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // app.get('*', (req, res) => {
