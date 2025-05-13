@@ -29,26 +29,18 @@ mongoose
 app.use('/favoriteForum', favoritesRouter); //used for favoritePage
 app.use('/api', restaurantRouter); //used for all api calls
 
+//dynamically handle production or development
 if (NODE_ENV === 'production') {
   // Serve static files from React build folder (located in the root directory)
   app.use(express.static(path.join(__dirname, '..', 'build'))); // Going up one level from the server directory
 
-  // Serve React index.html for all other routes (client-side routing)
+  // Serve index.html for all other routes (client-side routing)
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'build', 'index.html')); // Same here, adjust to the root directory
-  });
-
-  // Start server only for production
-  app.listen(PORT, () => {
-    console.log(`Production server running on port ${PORT}`);
   });
 } else {
   app.get('/', (req, res) => {
     res.send('Development mode');
-  });
-
-  app.listen(PORT, () => {
-    console.log(`Development server listening at http://localhost:${PORT}`);
   });
 }
 
@@ -66,8 +58,12 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-// app.listen(PORT, () => {
-//   console.log(`Server listening on port: ${PORT}`);
-// });
+app.listen(PORT, () => {
+  console.log(
+    `${
+      NODE_ENV === 'production' ? 'Production' : 'Development'
+    } server running on port ${PORT}`
+  );
+});
 
 module.exports = app;
