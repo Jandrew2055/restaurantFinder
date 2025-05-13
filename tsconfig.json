@@ -3,11 +3,12 @@
   "compilerOptions": {
     "outDir": "./build/",
     "noImplicitAny": true,
-    "module": "NodeNext",
-    "target": "es5",
+    "module": "esnext",
+    "target": "es6",
     "jsx": "react-jsx",
     "allowJs": true,
-    "moduleResolution": "nodenext"
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "exclude": ["node_modules", "build"]
 }

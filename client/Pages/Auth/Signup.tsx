@@ -1,8 +1,8 @@
-import React, { FormEvent, JSX, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FormEvent, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const Signup = (): JSX.Element => {
-  // const navigate = useNavigate();
+const Signup = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -20,13 +20,13 @@ const Signup = (): JSX.Element => {
   };
 
   //handling submission of form
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     //DELETE, NOT NEEDED
     console.log('testing submission of form');
 
-    // navigate('/');
+    navigate('/login');
   };
 
   return (

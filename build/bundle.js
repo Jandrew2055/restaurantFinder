@@ -141,7 +141,7 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
-              restaurantPhotosObj = {};
+              restaurantPhotosObj = {}; //will populate obj where key is restaurant id and value is the resource name
               restaurantData.forEach(function (restaurant) {
                 restaurantPhotosObj[restaurant.id] = restaurant.photos[0].name;
               });
@@ -174,6 +174,8 @@ var DisplayRestaurants = function DisplayRestaurants(props) {
   }, [restaurantData]);
   var restaurantList;
   if (restaurantData) {
+    console.log('TESTING DATA RETURNED FROM API:', restaurantData);
+
     //Here we are rendering all of the restaurant's information: name, price, address
     //creates the card component we want to see with restaurant details
     restaurantList = restaurantData.map(function (restaurant) {
@@ -341,11 +343,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var Layout = function Layout(_ref) {
-  var children = _ref.children;
+var Layout = function Layout() {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useLocation)();
   var hideNavigationBar = location.pathname === '/login' || location.pathname === '/signup';
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, !hideNavigationBar && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NavBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), children);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, !hideNavigationBar && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_NavBar__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Outlet, null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Layout);
 
@@ -417,18 +418,20 @@ var Login = function Login() {
 
   //redirects to signup component
   var signUp = function signUp() {
+    console.log('Navigating to signup...');
     navigate('/signup');
+    return;
   };
 
   //after successful login, goes to home page
   var goHome = function goHome(e) {
     e.preventDefault();
+    console.log('Navigating to signup...');
     console.log('testing');
     navigate('/');
+    return;
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Jose Eats"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "If it is your first time here, sign up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: signUp
-  }, "HERE")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Otherwise, sign in below!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Welcome to Jose Eats"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Sign in"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: goHome
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
     htmlFor: "email"
@@ -445,7 +448,9 @@ var Login = function Login() {
     name: "password"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     type: "submit"
-  }, "Sign in")));
+  }, "Sign in")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h4", null, "If it is your first time here, sign up ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: signUp
+  }, "HERE")));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Login);
 
@@ -29412,10 +29417,19 @@ module.exports = styleTagTransform;
 /*!************************!*\
   !*** ./client/App.tsx ***!
   \************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Components/DisplayRestaurants.jsx */ "./client/Components/DisplayRestaurants.jsx");
+/* harmony import */ var _Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Components/Footer.jsx */ "./client/Components/Footer.jsx");
+/* harmony import */ var _Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Components/Hero.jsx */ "./client/Components/Hero.jsx");
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -29424,45 +29438,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
-    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 // import * as React from 'react';
-var react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-var DisplayRestaurants_jsx_1 = __importDefault(__webpack_require__(/*! ./Components/DisplayRestaurants.jsx */ "./client/Components/DisplayRestaurants.jsx"));
-var Footer_jsx_1 = __importDefault(__webpack_require__(/*! ./Components/Footer.jsx */ "./client/Components/Footer.jsx"));
-var Hero_jsx_1 = __importDefault(__webpack_require__(/*! ./Components/Hero.jsx */ "./client/Components/Hero.jsx"));
+
+
+
+
 //this list will be passed down to child to be used to render checkboxes
-var foodType = [
+const foodType = [
     { id: 0, name: 'Mexican', state: false },
     { id: 1, name: 'Italian', state: false },
     { id: 2, name: 'Ramen', state: false },
@@ -29471,90 +29454,78 @@ var foodType = [
     { id: 5, name: 'Vietnamese', state: false },
     { id: 6, name: 'Middle_Eastern', state: false },
 ];
-var App = function () {
+const App = () => {
     //will hold all of the restaurant data that is retrieved from the API
-    var _a = (0, react_1.useState)(null), restaurantData = _a[0], setRestaurantData = _a[1];
-    var _b = (0, react_1.useState)(function () { return foodType; }), foodTypeFilter = _b[0], setFoodTypeFilter = _b[1];
+    const [restaurantData, setRestaurantData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+    const [foodTypeFilter, setFoodTypeFilter] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(() => foodType);
     //grabs the user's location to then utilize the coordinates to get the restaurants near them
-    var getUserLocation = function () { return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            return [2 /*return*/, new Promise(function (resolve, reject) {
-                    if (!navigator.geolocation) {
-                        reject(new Error('Geolocation not supported'));
-                        return;
-                    }
-                    navigator.geolocation.getCurrentPosition(function (pos) {
-                        var _a = pos.coords, latitude = _a.latitude, longitude = _a.longitude;
-                        resolve({ latitude: latitude, longitude: longitude });
-                    }, function (err) { return reject(err); }, { enableHighAccuracy: true });
-                })];
-        });
-    }); };
-    //UPDATED GOOGLE PLACES API below
-    var grabRestaurantInfo = function (event) { return __awaiter(void 0, void 0, void 0, function () {
-        var typesOfRestaurants, latitude, longitude, location_1, err_1, response, data, error_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    event.preventDefault();
-                    typesOfRestaurants = foodTypeFilter
-                        .filter(function (type) { return type.state === true; })
-                        .map(function (type) { return type.name; });
-                    latitude = 40.7549;
-                    longitude = -73.984;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, getUserLocation()];
-                case 2:
-                    location_1 = _a.sent();
-                    latitude = location_1.latitude;
-                    longitude = location_1.longitude;
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_1 = _a.sent();
-                    console.log('error fetching coordinates:', err_1);
-                    return [3 /*break*/, 4];
-                case 4:
-                    _a.trys.push([4, 7, , 8]);
-                    return [4 /*yield*/, fetch('/api', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify({
-                                longitude: longitude,
-                                latitude: latitude,
-                                typesOfRestaurants: typesOfRestaurants,
-                            }),
-                        })];
-                case 5:
-                    response = _a.sent();
-                    if (!response.ok)
-                        //if response received is not okay, throw error
-                        throw new Error("Error sending request to api:".concat(response));
-                    return [4 /*yield*/, response.json()];
-                case 6:
-                    data = _a.sent();
-                    setRestaurantData(data.places);
-                    //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
-                    data.places.forEach(function (restaurant) {
-                        console.log('restaurant:', restaurant.displayName.text);
-                    });
-                    return [3 /*break*/, 8];
-                case 7:
-                    error_1 = _a.sent();
-                    throw new Error("Error sending request to api:".concat(error_1));
-                case 8: return [2 /*return*/];
+    const getUserLocation = () => __awaiter(void 0, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+                reject(new Error('Geolocation not supported'));
+                return;
             }
+            navigator.geolocation.getCurrentPosition((pos) => {
+                const { latitude, longitude } = pos.coords;
+                resolve({ latitude, longitude });
+            }, (err) => reject(err), { enableHighAccuracy: true });
         });
-    }); };
+    });
+    //UPDATED GOOGLE PLACES API below
+    const grabRestaurantInfo = (event) => __awaiter(void 0, void 0, void 0, function* () {
+        event.preventDefault();
+        //array containing the checked boxes of restaurants, filters the ones that are checked off
+        const typesOfRestaurants = foodTypeFilter
+            .filter((type) => type.state === true)
+            .map((type) => type.name);
+        //default location values for NYC incase geolocation does not function
+        let latitude = 40.7549;
+        let longitude = -73.984;
+        try {
+            //grabbing the latitude and longitude from getUserLocation function
+            const location = yield getUserLocation();
+            //destructuring and assigning to existing variables 
+            ({ latitude, longitude } = location);
+            //CAN DELETE, SAME AS ABOVE
+            // latitude = location.latitude;
+            // longitude = location.longitude;
+        }
+        catch (err) {
+            console.log('error fetching coordinates:', err);
+        }
+        try {
+            //make a call to the api
+            const response = yield fetch('/api', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    longitude,
+                    latitude,
+                    typesOfRestaurants: typesOfRestaurants,
+                }),
+            });
+            if (!response.ok)
+                //if response received is not okay, throw error
+                throw new Error(`Error sending request to api:${response}`);
+            const data = yield response.json();
+            setRestaurantData(data.places);
+            //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
+            data.places.forEach((restaurant) => {
+                console.log('restaurant:', restaurant.displayName.text);
+            });
+        }
+        catch (error) {
+            throw new Error(`Error sending request to api:${error}`);
+        }
+    });
     //this will add restaurant to list of favorites in MongoDB
-    var addToFavorites = function (firstName, lastName, restaurantName) {
+    const addToFavorites = (firstName, lastName, restaurantName) => {
         //function takes in three arguments and we use them below
-        var name = firstName; //name of user is firstName assuming no lastName was inputted
+        let name = firstName; //name of user is firstName assuming no lastName was inputted
         if (lastName)
-            name += " ".concat(lastName); //otherwise append lastName here
+            name += ` ${lastName}`; //otherwise append lastName here
         //fetch request to the server to update in database favorite restaurant
         fetch('/favoriteForum', {
             method: 'POST',
@@ -29562,16 +29533,16 @@ var App = function () {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                name: "".concat(name),
-                restaurantName: "".concat(restaurantName),
+                name: `${name}`,
+                restaurantName: `${restaurantName}`,
             }),
         })
-            .then(function (res) { return res.json(); })
-            .then(function (data) { return console.log(data); });
+            .then((res) => res.json())
+            .then((data) => console.log(data));
     };
-    return ((0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)(Hero_jsx_1.default, {}), (0, jsx_runtime_1.jsx)(DisplayRestaurants_jsx_1.default, { restaurantData: restaurantData, foodTypeFilter: foodTypeFilter, setFoodTypeFilter: setFoodTypeFilter, grabRestaurantInfo: grabRestaurantInfo }), (0, jsx_runtime_1.jsx)(Footer_jsx_1.default, {})] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Components_Hero_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {}), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Components_DisplayRestaurants_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], { restaurantData: restaurantData, foodTypeFilter: foodTypeFilter, setFoodTypeFilter: setFoodTypeFilter, grabRestaurantInfo: grabRestaurantInfo }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Components_Footer_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {})] }));
 };
-exports["default"] = App;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
 
 
 /***/ }),
@@ -29580,23 +29551,41 @@ exports["default"] = App;
 /*!**************************************!*\
   !*** ./client/Pages/Auth/Signup.tsx ***!
   \**************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/development/chunk-D52XG6IA.mjs");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-var jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var Signup = function () {
-    //   const navigate = useNavigate();
-    //   const goHome = (e: FormEvent) => {
-    //     e.preventDefault();
-    //     console.log('testing');
-    //     navigate('/home');
-    //   };
-    //add below to form when ready
-    //onSubmit={goHome}
-    return ((0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsxs)("form", { className: 'signup-form', "aria-label": 'sign up form', children: [(0, jsx_runtime_1.jsx)("label", { htmlFor: 'name', children: "Name" }), (0, jsx_runtime_1.jsx)("input", { type: 'text', name: 'name', id: 'name' }), (0, jsx_runtime_1.jsx)("label", { htmlFor: 'email', children: "Email" }), (0, jsx_runtime_1.jsx)("input", { type: 'email', id: 'email', name: 'email', required: true }), (0, jsx_runtime_1.jsx)("label", { htmlFor: 'password', children: "Password" }), (0, jsx_runtime_1.jsx)("input", { type: 'password', id: 'password', name: 'password', required: true }), (0, jsx_runtime_1.jsx)("button", { type: 'submit', children: "Go to Home Page" })] }) }));
+
+const Signup = () => {
+    const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_2__.useNavigate)();
+    const [formData, setFormData] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+        email: '',
+        password: '',
+    });
+    //handle changes to form
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        //update form data accordingly
+        setFormData(Object.assign(Object.assign({}, formData), { [name]: value }));
+    };
+    //handling submission of form
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //DELETE, NOT NEEDED
+        console.log('testing submission of form');
+        navigate('/login');
+    };
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h1", { children: "Sign up to start favoriting restaurants!" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", { className: 'signup-form', "aria-label": 'sign up form', onSubmit: handleSubmit, children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: 'email', children: "Email" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'email', id: 'email', name: 'email', value: formData.email, onChange: handleInputChange, required: true }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", { htmlFor: 'password', children: "Password" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'password', id: 'password', name: 'password', value: formData.password, onChange: handleInputChange, required: true }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", { type: 'submit', children: "Go to Home Page" })] })] }));
 };
-exports["default"] = Signup;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Signup);
 
 
 /***/ }),
@@ -39940,7 +39929,7 @@ function raceSignal(promise, signal) {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
@@ -40016,7 +40005,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 /* harmony import */ var _App_tsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.tsx */ "./client/App.tsx");
-/* harmony import */ var _App_tsx__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_App_tsx__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Pages_Favorites_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pages/Favorites.jsx */ "./client/Pages/Favorites.jsx");
 /* harmony import */ var _Pages_Forum_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Pages/Forum.jsx */ "./client/Pages/Forum.jsx");
 /* harmony import */ var _Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Components/chatBot.jsx */ "./client/Components/chatBot.jsx");
@@ -40039,7 +40027,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var root = (0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root'));
-root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navigation_Layout_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Navigation_Layout_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null)
+}, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/login",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Auth_Login_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
@@ -40047,7 +40037,7 @@ root.render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElem
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Pages_Auth_Signup_tsx__WEBPACK_IMPORTED_MODULE_10__["default"], null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/",
-  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((_App_tsx__WEBPACK_IMPORTED_MODULE_2___default()), null)
+  element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_App_tsx__WEBPACK_IMPORTED_MODULE_2__["default"], null)
 }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
   path: "/aiChatBot",
   element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Components_chatBot_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], null)

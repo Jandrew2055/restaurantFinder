@@ -6,15 +6,18 @@ const Login = () => {
 
   //redirects to signup component
   const signUp = () => {
+    console.log('Navigating to signup...');
     navigate('/signup');
+    return 
   };
 
   //after successful login, goes to home page
   const goHome = (e) => {
     e.preventDefault();
-
+    console.log('Navigating to signup...');
     console.log('testing');
     navigate('/');
+    return 
   };
 
   return (
