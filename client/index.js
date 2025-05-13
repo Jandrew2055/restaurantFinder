@@ -15,8 +15,8 @@ const root = createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/' element={<App />} />
@@ -24,7 +24,7 @@ root.render(
         <Route path='/forum' element={<Forum />} />
         <Route path='/favoriteForum' element={<Favorites />} />
         <Route path='*' element={<Error />} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   </BrowserRouter>
 );

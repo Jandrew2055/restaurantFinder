@@ -1,8 +1,8 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import NavBar from './NavBar';
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const location = useLocation();
   const hideNavigationBar =
     location.pathname === '/login' || location.pathname === '/signup';
@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
   return (
     <>
       {!hideNavigationBar && <NavBar />}
-      {children}
+      <Outlet />
     </>
   );
 };

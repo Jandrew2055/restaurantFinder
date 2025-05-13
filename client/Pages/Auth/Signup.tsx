@@ -2,6 +2,7 @@ import React, { FormEvent, JSX, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Signup = (): JSX.Element => {
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,6 +25,8 @@ const Signup = (): JSX.Element => {
 
     //DELETE, NOT NEEDED
     console.log('testing submission of form');
+
+    // navigate('/');
   };
 
   return (
