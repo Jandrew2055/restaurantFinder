@@ -33,14 +33,13 @@ app.use('/favoriteForum', favoritesRouter);
 //if requests are made to api, route them here
 app.use('/api', restaurantRouter);
 
-// Serve static files from React build folder
-app.use(express.static(path.join(__dirname, 'build')));
+// Serve static files from React build folder (located in the root directory)
+app.use(express.static(path.join(__dirname, '..', 'build'))); // Going up one level from the server directory
 
 // Serve React index.html for all other routes (client-side routing)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, '..', 'build', 'index.html')); // Same here, adjust to the root directory
 });
-
 // app.get('*', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'build', 'index.html')); // or 'build' instead of 'dist'
 // });

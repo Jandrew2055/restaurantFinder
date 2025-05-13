@@ -2,26 +2,26 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: path.resolve(__dirname, 'client/index.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
   },
   devtool: 'source-map',
-  devServer: {
-    static: {
-      directory: path.resolve(__dirname, 'build'),
-    },
-    port: 3000,
-    open: true,
-    proxy: [
-      {
-        context: ['/'],
-        target: 'http://localhost:8080',
-      },
-    ],
-  },
+  // devServer: {
+  //   static: {
+  //     directory: path.resolve(__dirname, 'build'),
+  //   },
+  //   port: 3000,
+  //   open: true,
+  //   proxy: [
+  //     {
+  //       context: ['/'],
+  //       target: 'http://localhost:8080',
+  //     },
+  //   ],
+  // },
   module: {
     rules: [
       {

@@ -1,7 +1,8 @@
 {
   "include": ["client/**/*.ts", "client/**/*.tsx"],
   "compilerOptions": {
-    "outDir": "./build/",
+    // "outDir": "./build/",
+    "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "esnext",
     "target": "es2017",
@@ -10,5 +11,5 @@
     "moduleResolution": "node",
     "esModuleInterop": true
   },
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build", "dist"]
 }
