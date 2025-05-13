@@ -9,19 +9,19 @@ module.exports = {
     filename: 'bundle.js',
   },
   devtool: 'source-map',
-  // devServer: {
-  //   static: {
-  //     directory: path.resolve(__dirname, 'build'),
-  //   },
-  //   port: 3000,
-  //   open: true,
-  //   proxy: [
-  //     {
-  //       context: ['/'],
-  //       target: 'http://localhost:8080',
-  //     },
-  //   ],
-  // },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, 'build'),
+    },
+    port: 3000,
+    open: true,
+    proxy: [
+      {
+        context: ['/'],
+        target: 'http://localhost:8080',
+      },
+    ],
+  },
   module: {
     rules: [
       {
