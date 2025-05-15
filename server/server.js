@@ -12,6 +12,7 @@ console.log('testing env variable:', NODE_ENV);
 const app = express();
 const favoritesRouter = require('./routes/favoritesRouter');
 const restaurantRouter = require('./routes/restaurantRouter');
+const authRouter = require('./routes/authRouter');
 
 //parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
@@ -27,6 +28,7 @@ mongoose
   });
 
 app.use('/favoriteForum', favoritesRouter); //used for favoritePage
+app.use('/api/auth', authRouter);
 app.use('/api', restaurantRouter); //used for all api calls
 
 //dynamically handle production or development

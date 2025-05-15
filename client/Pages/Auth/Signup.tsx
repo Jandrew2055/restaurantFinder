@@ -22,6 +22,7 @@ const Signup = () => {
   //handling submission of form
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
 
     //DELETE, NOT NEEDED
     console.log('testing submission of form');
