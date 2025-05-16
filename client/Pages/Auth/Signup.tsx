@@ -20,14 +20,32 @@ const Signup = () => {
   };
 
   //handling submission of form
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    //will go inside the fetch request below
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    };
+    try {
+      //make a request to the signup endpoint, send formdata
+      const response = await fetch('/api/auth/signup', options);
+      const data = await response.json();
+
+      //DELETE BELOW, JUST TESTING
+      console.log('testing data received from server:', data);
+    } catch (error) {
+      console.log('error:', error);
+    }
 
     //DELETE, NOT NEEDED
     console.log('testing submission of form');
 
-    navigate('/login');
+    navigate('/');
   };
 
   return (
