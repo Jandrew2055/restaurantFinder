@@ -14,9 +14,6 @@ const favoritesRouter = require('./routes/favoritesRouter');
 const restaurantRouter = require('./routes/restaurantRouter');
 const authRouter = require('./routes/authRouter');
 
-//used for form submissions
-app.use(express.urlencoded({ extended: true }));
-
 //parses through any incoming request if they contain a payload(in json format)
 app.use(express.json());
 
