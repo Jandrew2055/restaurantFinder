@@ -20,7 +20,7 @@ const Signup = () => {
   };
 
   //handling submission of form
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     //will go inside the fetch request below
@@ -54,7 +54,7 @@ const Signup = () => {
       <form
         className='signup-form'
         aria-label='sign up form'
-        onSubmit={handleSubmit}
+        onSubmit={handleSignup}
       >
         <label htmlFor='email'>Email</label>
         <input

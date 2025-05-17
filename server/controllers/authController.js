@@ -12,6 +12,12 @@ authController.signup = (req, res, next) => {
 };
 
 authController.login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  //handle the logic using supabase here
+  console.log('email:', email);
+  console.log('password:', password);
+
   return next();
 };
 
