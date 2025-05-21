@@ -9,7 +9,7 @@ router.post('/login', authController.login, (req, res) => {
 
 //handles users signing up
 router.post('/signup', authController.signup, (req, res) => {
-  return res.status(200).json('FORM SUBMITTED AND USER SIGNED UP');
+  return res.status(200).json(res.locals.user);
 });
 
 module.exports = router;

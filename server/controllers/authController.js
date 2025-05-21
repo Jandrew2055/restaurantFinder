@@ -5,24 +5,28 @@ const authController = {};
 
 authController.signup = async (req, res, next) => {
   const { email, password } = req.body;
+  console.log('email:', email); //DELETE
+  console.log('password:', password); //DELETE
 
-  //REVAMP TO TRY CATCH FORM
-  //handle the logic using supabase here
-  console.log('email:', email);
-  console.log('password:', password);
-
-  const signupNewUser = async () => {
+  //procedure below for signing up user (sends confirmation email to user)
+  try {
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
-    console.log('testing data received:', data);
-    console.log('error received:', error);
-  };
-  signupNewUser();
-
-  //in following middleware let client know there was a successful signup
-  return next();
+    if (error) {
+      console.log('error signing up user Supabase:', error);
+      return next(error);
+    }
+    res.locals.user = data.user;
+    return next();
+    //TESTING COULD BE DELETED
+    // console.log('testing data received:', data);
+    // console.log('error received:', error);
+  } catch (err) {
+    console.log('error encountered signing up user:', err);
+    return next(err);
+  }
 };
 
 authController.login = (req, res, next) => {
