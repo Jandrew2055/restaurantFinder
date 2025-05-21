@@ -32,6 +32,16 @@ const DisplayRestaurants = (props) => {
     console.log('adding restaurant to favorites', id);
   };
 
+  const grabCurrentUser = async () => {
+    //REVAMP to make call to server and get current user instead
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    console.log('user currently signed in:', user);
+    console.log('data from user currently signed in:', data);
+  };
+
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
     //DO NOT DELETE
@@ -90,6 +100,7 @@ const DisplayRestaurants = (props) => {
 
   let restaurantList;
 
+  //if restaurant data exists, compile the list of restaurants with information
   if (restaurantData) {
     console.log('TESTING DATA RETURNED FROM API:', restaurantData);
 
@@ -176,9 +187,7 @@ const DisplayRestaurants = (props) => {
       </form>
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
 
-      {/*<button onClick={props.grabRestaurantInfo}>
-        Refresh List of Restaurants
-      </button>*/}
+      <button onClick={grabCurrentUser}>Grab current user</button>
       <h3>Restaurant List</h3>
       <ul>{restaurantList}</ul>
     </div>

@@ -29,14 +29,29 @@ authController.signup = async (req, res, next) => {
   }
 };
 
-authController.login = (req, res, next) => {
+authController.login = async (req, res, next) => {
   const { email, password } = req.body;
 
-  //handle the logic using supabase here
-  console.log('email:', email);
-  console.log('password:', password);
+  try {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
 
-  return next();
+    if (error) {
+      console.log('error signing in with Supabase:', error);
+      return next(error);
+    }
+    console.log('testing data received:', data);
+    return next();
+  } catch (err) {
+    console.log('error encountered signing in:', err);
+    return next(err);
+  }
+
+  //handle the logic using supabase here
+  // console.log('email:', email);
+  // console.log('password:', password);
 };
 
 module.exports = authController;
