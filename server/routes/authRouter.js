@@ -12,4 +12,8 @@ router.post('/signup', authController.signup, (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
+router.get('/user', authController.getCurrentUser, (req, res) => {
+  return res.status(200).json('this is the current user');
+});
+
 module.exports = router;

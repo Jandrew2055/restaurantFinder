@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
+import { supabase } from '@supabase/auth-ui-shared';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
@@ -34,12 +35,11 @@ const DisplayRestaurants = (props) => {
 
   const grabCurrentUser = async () => {
     //REVAMP to make call to server and get current user instead
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
+    const response = await fetch('/api/auth/user');
+    const data = await response.json();
 
-    console.log('user currently signed in:', user);
-    console.log('data from user currently signed in:', data);
+    console.log('testing out data:', data);
+
   };
 
   //function to grab restaurant photos
