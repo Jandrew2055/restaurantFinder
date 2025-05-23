@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import supabase from '../../Models/supabaseClient';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -23,27 +24,30 @@ const Signup = () => {
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //will go inside the fetch request below
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    };
+    // //will go inside the fetch request below
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formData),
+    // };
     try {
-      //make a request to the signup endpoint, send formdata
-      const response = await fetch('/api/auth/signup', options);
-      const data = await response.json();
+      //signs up user using Supabase
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password,
+      });
+      //if error is encountered, notify the user
+      if (error) {
+        console.log('error signing up user Supabase:', error);
+      }
 
-      //DELETE BELOW, JUST TESTING
-      console.log('testing data received from server:', data);
+      //DELETE BELOW, JUST TESTING if user is signed up
+      console.log('testing user data:', data.user);
     } catch (error) {
       console.log('error:', error);
     }
-
-    //DELETE, NOT NEEDED
-    console.log('testing submission of form');
 
     navigate('/');
   };

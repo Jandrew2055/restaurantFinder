@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import supabase from './../../Models/supabaseClient';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,21 +32,25 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    //will go inside the fetch request below
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    };
+    // //will go inside the fetch request below
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formData),
+    // };
     try {
-      //make a request to the signup endpoint, send formdata
-      const response = await fetch('/api/auth/login', options);
-      const data = await response.json();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email,
+        password: formData.password,
+      });
 
-      //DELETE BELOW, JUST TESTING
-      console.log('testing data received from server:', data);
+      if (error) {
+        console.log('error signing in with Supabase:', error);
+        return;
+      }
+      console.log('testing data received:', data);
     } catch (error) {
       console.log('error:', error);
     }
