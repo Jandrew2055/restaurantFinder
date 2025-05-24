@@ -56,5 +56,10 @@ module.exports = {
       template: 'index.html',
     }),
     new Dotenv(),
+    new webpack.DefinePlugin({
+      'process.env.SUPABASE_API_KEY': JSON.stringify(
+        process.env.SUPABASE_API_KEY
+      ),
+    }),
   ],
 };
