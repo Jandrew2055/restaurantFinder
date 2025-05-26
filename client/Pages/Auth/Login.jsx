@@ -32,6 +32,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    //DELETE  below, not needee
     // //will go inside the fetch request below
     // const options = {
     //   method: 'POST',

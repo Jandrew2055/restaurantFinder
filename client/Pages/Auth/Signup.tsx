@@ -24,6 +24,7 @@ const Signup = () => {
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    //DELETE below not needed
     // //will go inside the fetch request below
     // const options = {
     //   method: 'POST',
