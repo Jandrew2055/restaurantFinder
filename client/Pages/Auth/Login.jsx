@@ -1,10 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import supabase from './../../Models/supabaseClient';
+// import supabase from './../../Models/supabaseClient';
+import { useAuth } from '../../Contexts/authContext';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -32,6 +34,13 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
+    //use the login from custom hook
+    const { error, data } = await login(formData.email, formData.password);
+    if (error) {
+      alert('Login failed: ' + error.message);
+    }
+
+    console.log('testing data:', data);
     //DELETE  below, not needee
     // //will go inside the fetch request below
     // const options = {
@@ -41,22 +50,22 @@ const Login = () => {
     //   },
     //   body: JSON.stringify(formData),
     // };
-    try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: formData.email,
-        password: formData.password,
-      });
+    // try {
+    //   const { data, error } = await supabase.auth.signInWithPassword({
+    //     email: formData.email,
+    //     password: formData.password,
+    //   });
 
-      if (error) {
-        console.log('error signing in with Supabase:', error);
-        return;
-      }
-      console.log('testing data received:', data);
-    } catch (error) {
-      console.log('error:', error);
-    }
+    //   if (error) {
+    //     console.log('error signing in with Supabase:', error);
+    //     return;
+    //   }
+    //   console.log('testing data received:', data);
+    // } catch (error) {
+    //   console.log('error:', error);
+    // }
 
-    navigate('/');
+    // navigate('/');
   };
 
   return (

@@ -10,21 +10,24 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Pages/Auth/Login.jsx';
 import Layout from './Navigation/Layout.jsx';
 import Signup from './Pages/Auth/Signup.tsx';
+import AuthProvider from './Contexts/authContext.tsx';
 
 const root = createRoot(document.getElementById('root'));
 
 root.render(
   <BrowserRouter>
-    <Routes>
-      <Route element={<Layout />}>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/' element={<App />} />
-        <Route path='/aiChatBot' element={<Chatbot />} />
-        <Route path='/forum' element={<Forum />} />
-        <Route path='/favoriteForum' element={<Favorites />} />
-        <Route path='*' element={<Error />} />
-      </Route>
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route path='/login' element={<Login />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/' element={<App />} />
+          <Route path='/aiChatBot' element={<Chatbot />} />
+          <Route path='/forum' element={<Forum />} />
+          <Route path='/favoriteForum' element={<Favorites />} />
+          <Route path='*' element={<Error />} />
+        </Route>
+      </Routes>
+    </AuthProvider>
   </BrowserRouter>
 );
