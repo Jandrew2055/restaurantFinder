@@ -16,8 +16,11 @@ interface AuthContextType {
   login: (
     email: string,
     password: string
-  ) => Promise<{ error?: any; data?: any } | void>;
-  //   signup: (email: string, password: string) => Promise<{ error: any } | void>;
+  ) => Promise<{ error?: any; data?: any }>;
+  signup: (
+    email: string,
+    password: string
+  ) => Promise<{ error?: any; data?: any }>;
   //   logout: () => Promise<void>;
 }
 
@@ -48,7 +51,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     getUserSession();
   }, []);
 
-  //handles login with supabase, form data provided later
+  //HANDLE LOGIN with supabase, form data provided later
   const login = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
@@ -69,8 +72,30 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     return { data };
   };
 
+  const signup = async (email: string, password: string) => {
+    try {
+      //signs up user using Supabase
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      //if error is encountered, notify the user
+      if (error) {
+        console.log('error signing up user Supabase:', error);
+        return { error };
+      }
+
+      //DELETE BELOW, JUST TESTING if user is signed up
+      console.log('testing user data:', data.user);
+      navigate('/');
+      return { data };
+    } catch (error) {
+      console.log('error:', error);
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ loading, login }}>
+    <AuthContext.Provider value={{ loading, login, signup }}>
       {children}
     </AuthContext.Provider>
   );

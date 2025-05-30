@@ -1,9 +1,11 @@
 import React, { FormEvent, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import supabase from '../../Models/supabaseClient';
+// import supabase from '../../Models/supabaseClient';
+import { useAuth } from '../../Contexts/authContext';
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const { signup } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -24,33 +26,32 @@ const Signup = () => {
   const handleSignup = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    //DELETE below not needed
-    // //will go inside the fetch request below
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // };
-    try {
-      //signs up user using Supabase
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-      });
-      //if error is encountered, notify the user
-      if (error) {
-        console.log('error signing up user Supabase:', error);
-      }
+    const { error, data } = await signup(formData.email, formData.password);
 
-      //DELETE BELOW, JUST TESTING if user is signed up
-      console.log('testing user data:', data.user);
-    } catch (error) {
-      console.log('error:', error);
+    if (error) {
+      alert('Sign up failed' + error.message);
     }
+    console.log('testing data:', data);
 
-    navigate('/');
+    //DELETE BELOW AFTER REFACTORING
+    // try {
+    //   //signs up user using Supabase
+    //   const { data, error } = await supabase.auth.signUp({
+    //     email: formData.email,
+    //     password: formData.password,
+    //   });
+    //   //if error is encountered, notify the user
+    //   if (error) {
+    //     console.log('error signing up user Supabase:', error);
+    //   }
+
+    //   //DELETE BELOW, JUST TESTING if user is signed up
+    //   console.log('testing user data:', data.user);
+    // } catch (error) {
+    //   console.log('error:', error);
+    // }
+
+    // navigate('/');
   };
 
   return (
