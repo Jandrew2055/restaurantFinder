@@ -41,6 +41,10 @@ const DisplayRestaurants = (props) => {
     console.log('testing out current SESSION:', session);
   };
 
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+  };
+
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
     //DO NOT DELETE
@@ -187,6 +191,7 @@ const DisplayRestaurants = (props) => {
       {/* <Checkbox id={foodType[1].id} name={foodType[1].name} /> */}
 
       <button onClick={grabCurrentUser}>Grab current user</button>
+      <button onClick={signOut}>Signout</button>
       <h3>Restaurant List</h3>
       <ul>{restaurantList}</ul>
     </div>

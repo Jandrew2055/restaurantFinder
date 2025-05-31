@@ -33,24 +33,6 @@ const Signup = () => {
     }
     console.log('testing data:', data);
 
-    //DELETE BELOW AFTER REFACTORING
-    // try {
-    //   //signs up user using Supabase
-    //   const { data, error } = await supabase.auth.signUp({
-    //     email: formData.email,
-    //     password: formData.password,
-    //   });
-    //   //if error is encountered, notify the user
-    //   if (error) {
-    //     console.log('error signing up user Supabase:', error);
-    //   }
-
-    //   //DELETE BELOW, JUST TESTING if user is signed up
-    //   console.log('testing user data:', data.user);
-    // } catch (error) {
-    //   console.log('error:', error);
-    // }
-
     // navigate('/');
   };
 

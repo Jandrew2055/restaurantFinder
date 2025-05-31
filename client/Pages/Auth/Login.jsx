@@ -41,31 +41,6 @@ const Login = () => {
     }
 
     console.log('testing data:', data);
-    //DELETE  below, not needee
-    // //will go inside the fetch request below
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(formData),
-    // };
-    // try {
-    //   const { data, error } = await supabase.auth.signInWithPassword({
-    //     email: formData.email,
-    //     password: formData.password,
-    //   });
-
-    //   if (error) {
-    //     console.log('error signing in with Supabase:', error);
-    //     return;
-    //   }
-    //   console.log('testing data received:', data);
-    // } catch (error) {
-    //   console.log('error:', error);
-    // }
-
-    // navigate('/');
   };
 
   return (
