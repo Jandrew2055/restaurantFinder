@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const webpack = require('webpack');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: path.resolve(__dirname, 'client/index.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -57,11 +57,11 @@ module.exports = {
       template: 'index.html',
     }),
     new Dotenv(),
-    //uncomment when pushing
-    new webpack.DefinePlugin({
-      'process.env.SUPABASE_API_KEY': JSON.stringify(
-        process.env.SUPABASE_API_KEY
-      ),
-    }),
+    //UNCOMMENT when pushing
+    // new webpack.DefinePlugin({
+    //   'process.env.SUPABASE_API_KEY': JSON.stringify(
+    //     process.env.SUPABASE_API_KEY
+    //   ),
+    // }),
   ],
 };
