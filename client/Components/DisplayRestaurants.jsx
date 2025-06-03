@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
 import supabase from '../Models/supabaseClient.js';
+import { useAuth } from '../Contexts/authContext';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
+  const {signOut} = useAuth();
 
   //allow us to change state living in parent component
   const { foodTypeFilter, setFoodTypeFilter } = props;
@@ -41,9 +43,9 @@ const DisplayRestaurants = (props) => {
     console.log('testing out current SESSION:', session);
   };
 
-  const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-  };
+  // const signOut = async () => {
+  //   const { error } = await supabase.auth.signOut();
+  // };
 
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {

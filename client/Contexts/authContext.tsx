@@ -21,6 +21,7 @@ interface AuthContextType {
     email: string,
     password: string
   ) => Promise<{ error?: any; data?: any }>;
+  signOut: () => void;
   //   logout: () => Promise<void>;
 }
 
@@ -94,8 +95,13 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    console.log('successful signout');
+  };
+
   return (
-    <AuthContext.Provider value={{ loading, login, signup }}>
+    <AuthContext.Provider value={{ loading, login, signup, signOut }}>
       {children}
     </AuthContext.Provider>
   );
