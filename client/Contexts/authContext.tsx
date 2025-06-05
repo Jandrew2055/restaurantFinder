@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Define the shape of your context
 interface AuthContextType {
-  //   user: User | null;
+  user: any;
   loading: boolean;
   login: (
     email: string,
@@ -50,6 +50,17 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
     };
 
     getUserSession();
+
+    // Subscribe to auth changes
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null); // Set or clear user on event
+      }
+    );
+
+    return () => {
+      authListener.subscription.unsubscribe(); // Clean up on unmount
+    };
   }, []);
 
   //HANDLE LOGIN with supabase, form data provided later
@@ -102,7 +113,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loading, login, signup, signOut }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, signOut }}>
       {children}
     </AuthContext.Provider>
   );

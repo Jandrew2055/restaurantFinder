@@ -11,6 +11,7 @@ import Login from './Pages/Auth/Login.jsx';
 import Layout from './Navigation/Layout.jsx';
 import Signup from './Pages/Auth/Signup.tsx';
 import AuthProvider from './Contexts/authContext.tsx';
+import ProtectedRoute from './Components/ProtectedRoute.tsx';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -22,9 +23,31 @@ root.render(
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/' element={<App />} />
-          <Route path='/aiChatBot' element={<Chatbot />} />
-          <Route path='/forum' element={<Forum />} />
-          <Route path='/favoriteForum' element={<Favorites />} />
+          <Route
+            path='/aiChatBot'
+            element={
+              <ProtectedRoute>
+                <Chatbot />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/forum'
+            element={
+              <ProtectedRoute>
+                <Forum />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path='/favoriteForum'
+            element={
+              <Favorites />
+              // <ProtectedRoute>
+              //   <Favorites />
+              // </ProtectedRoute>
+            }
+          />
           <Route path='*' element={<Error />} />
         </Route>
       </Routes>
