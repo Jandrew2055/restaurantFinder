@@ -7,7 +7,7 @@ const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
-  const {signOut} = useAuth();
+  const { signOut } = useAuth();
 
   //allow us to change state living in parent component
   const { foodTypeFilter, setFoodTypeFilter } = props;
