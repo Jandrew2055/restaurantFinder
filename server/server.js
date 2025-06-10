@@ -27,7 +27,7 @@ mongoose
     console.log('Error connecting to MongoDB: ', err);
   });
 
-app.use('/favoriteForum', favoritesRouter); //used for favoritePage
+app.use('/favorites', favoritesRouter); //used for favoritePage
 app.use('/api/auth', authRouter);
 app.use('/api', restaurantRouter); //used for all api calls
 

@@ -13,7 +13,7 @@ const NavBar = () => {
         <li>
           <Link
             className='navLink'
-            to='/favoriteForum'
+            to='/favorites'
             title='Favorite Restaurants'
           >
             Favorites

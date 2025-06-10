@@ -9,22 +9,30 @@ const Favorites = () => {
 
   //makes a one time request to the database on render to retrieve favorite restaurants
   useEffect(() => {
-    fetch('/favoriteForum')
+    /*
+    Will refactor to store placeId from restaurants in database, and then use this 
+    with Google's Place Details API to fetch these restaurants again and just
+    show restaurant name along with address 
+    */
+
+    fetch('/favorites')
       .then((res) => res.json())
       .then((data) => {
         setFavoriteRestaurantList(data);
       });
   }, []);
 
+  //WILL DELETE SINCE THIS FAVORITES PAGE WILL NOT BE USED FOR COMMENTING
   //allows you to edit the comment that is left next to each restaurant
   const editRestaurantExperience = (id) => {
     console.log(id);
     console.log('I will edit this restaurant information');
   };
 
+  //THIS WILL BE REFACTORED TO DELETE PLACES ID FROM DATABASE instead
   //handle's the deletion of restaurant from favorites
   const deleteRestaurant = (id) => {
-    //just prints the restaurant's id object
+    //currently just prints the restaurant's id object
     console.log(id);
     console.log('I will delete this restaurant');
   };

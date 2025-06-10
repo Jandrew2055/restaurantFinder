@@ -40,12 +40,12 @@ root.render(
             }
           />
           <Route
-            path='/favoriteForum'
+            path='/favorites'
             element={
-              <Favorites />
-              // <ProtectedRoute>
-              //   <Favorites />
-              // </ProtectedRoute>
+              // <Favorites />
+              <ProtectedRoute>
+                <Favorites />
+              </ProtectedRoute>
             }
           />
           <Route path='*' element={<Error />} />

@@ -11,6 +11,7 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
+  //DELETE might not be necessary 
   //   useEffect(() => {
   //     if (!user) {
   //       navigate('/login');

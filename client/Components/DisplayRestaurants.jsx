@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Checkbox from './Checkbox';
 import supabase from '../Models/supabaseClient.js';
 import { useAuth } from '../Contexts/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const DisplayRestaurants = (props) => {
   //collect restaurant list from parent component
   const { restaurantData } = props;
   const [restaurantPhotos, setRestaurantPhotos] = useState({});
-  const { signOut } = useAuth();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   //allow us to change state living in parent component
   const { foodTypeFilter, setFoodTypeFilter } = props;
@@ -29,6 +31,10 @@ const DisplayRestaurants = (props) => {
 
   //this function will allow you to add this restaurant to list of favorites
   const addRestaurantToFavorites = async (id) => {
+    //if user is not signed in, head to login page
+    if (!user) navigate('/login');
+
+    //OTHERWISE PROCEED WITH adding restaurant ID to database pertaining to user
     //make a request to the server (POST) sending the id in the body along with relevant info
     //like the restaurant name, address and so on.
 
@@ -37,15 +43,9 @@ const DisplayRestaurants = (props) => {
 
   const grabCurrentUser = async () => {
     //REVAMP to make call to server and get current user instead
-    // const response = await fetch('/api/auth/user');
-    // const data = await response.json();
     const session = await supabase.auth.getSession();
     console.log('testing out current SESSION:', session);
   };
-
-  // const signOut = async () => {
-  //   const { error } = await supabase.auth.signOut();
-  // };
 
   //function to grab restaurant photos
   const grabRestaurantPhotos = async (photoObject) => {
