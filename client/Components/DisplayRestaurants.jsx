@@ -162,6 +162,8 @@ const DisplayRestaurants = (props) => {
         </li>
       );
     });
+  } else {
+    restaurantList = <li>No Restaurant Matching Criteria</li>;
   }
 
   /*

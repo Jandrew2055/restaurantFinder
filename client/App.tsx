@@ -58,8 +58,8 @@ const App = () => {
     try {
       //grabbing the latitude and longitude from getUserLocation function
       const location = await getUserLocation();
-      //destructuring and assigning to existing variables 
-      ({latitude,longitude} = location)
+      //destructuring and assigning to existing variables
+      ({ latitude, longitude } = location);
 
       //CAN DELETE, SAME AS ABOVE
       // latitude = location.latitude;
@@ -82,17 +82,20 @@ const App = () => {
         }),
       });
 
+      //if response received is not okay, throw error
       if (!response.ok)
-        //if response received is not okay, throw error
         throw new Error(`Error sending request to api:${response}`);
+
       const data = await response.json();
-
-      setRestaurantData(data.places);
-
-      //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
-      data.places.forEach((restaurant: any) => {
-        console.log('restaurant:', restaurant.displayName.text);
-      });
+      if (Object.keys(data).length === 0) return;
+      // console.log('checking the data received:', data);
+      else {
+        setRestaurantData(data.places);
+        //THIS IS JUST TO TEST WHAT WE GET BACK, CAN BE DELETED
+        data.places.forEach((restaurant: any) => {
+          console.log('restaurant:', restaurant.displayName.text);
+        });
+      }
     } catch (error) {
       throw new Error(`Error sending request to api:${error}`);
     }

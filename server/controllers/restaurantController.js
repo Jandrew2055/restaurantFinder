@@ -69,10 +69,11 @@ restaurantController.getRestaurants = async (req, res, next) => {
     if (!response.ok) {
       throw new Error(`Error with response:${response}`);
     }
+    //can be deleted just testing
+    // console.log('this is the response received:', response);
 
     //if not proceed with collecting data received
     const data = await response.json();
-
     //save data received in res.locals
     res.locals.data = data;
 
